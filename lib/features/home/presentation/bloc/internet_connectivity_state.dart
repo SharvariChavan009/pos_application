@@ -1,0 +1,7 @@
+class InternetConnectivityState{}
+
+class InternetConnectivityInitialState extends InternetConnectivityState{}
+
+class InternetConnectivityGainedState extends InternetConnectivityState{}
+
+class InternetConnectivityLostState extends InternetConnectivityState{}
