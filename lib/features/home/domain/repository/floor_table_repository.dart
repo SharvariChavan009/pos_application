@@ -108,31 +108,17 @@ class FloorTableSortBloc extends Bloc<FloorTableSortEvent, FloorTableState> {
           order.status == "Reserved").toList();
           emit(FloorTableSortSuccess(placedOrders));
           break;
+       case "Serving":
+         List<FloorTable> placedOrders = floorTables!.where((order) =>
+         order.status == "Serving").toList();
+         emit(FloorTableSortSuccess(placedOrders));
+         break;
+         case "All Tables":
+           emit(FloorTableSortSuccess(floorTables!));
+           break;
         default:
           emit(FloorTableSortSuccess(floorTables!));
       }
     });
   }
 }
-
-// void sortFloorTables(List<FloorTable> floor , String sortBy){
-//   switch(sortBy){
-//     case "Available":
-//       List<FloorTable> placedOrders = floor!.where((order) =>
-//       order.status == "Available").toList();
-//       emit(placedOrders);
-//       break;
-//     case "Reserved":
-//       List<FloorTable> placedOrders = floor!.where((order) =>
-//       order.status == "Reserved").toList();
-//       emit(placedOrders);
-//       break;
-//     case "All Tables":
-//       emit(floor);
-//       break;
-//       default:List<FloorTable> placedOrders = floor!.where((order) =>
-//       order.status == "Available").toList();
-//       emit(placedOrders);
-//   }
-//
-// }

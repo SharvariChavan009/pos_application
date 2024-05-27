@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_application/core/common/c_text_field.dart';
@@ -164,7 +166,17 @@ class MainBodyTableState extends State<MainBodyTable> {
           floorTables.clear();
           tables.clear();
           AllTableStatus.tableCount = 0;
-
+          // for (int i = 0; i < floorWiseTables.length; i++) {
+          //   floorTables.add(floorWiseTables[i]);
+          //   if (tables.isEmpty || tables.last.length >= 5) {
+          //     tables.add([floorWiseTables[i]]);
+          //   } else {
+          //     tables.last.add(floorWiseTables[i]);
+          //   }
+          //   AllTableStatus.tableCount++;
+          //   tableCounter++;
+          //   availableTables++;
+          // }
           return BlocBuilder<FloorTableSortBloc, FloorTableState>(
             builder: (context, state) {
               if(state is FloorTableSortSuccess){
@@ -172,17 +184,19 @@ class MainBodyTableState extends State<MainBodyTable> {
                 print("floorwise tbales =${floorWiseTables.length}");
                 print("original table =${tables.length}");
                 print("sorted tables=${state.floors.length}");
-                for (int i = 0; i < floorWiseTables.length; i++) {
-                  floorTables.add(floorWiseTables[i]);
+                tables.clear();
+                for (int i = 0; i < state.floors.length; i++) {
+                  floorTables.add(state.floors[i]);
                   if (tables.isEmpty || tables.last.length >= 5) {
-                    tables.add([floorWiseTables[i]]);
+                    tables.add([state.floors[i]]);
                   } else {
-                    tables.last.add(floorWiseTables[i]);
+                    tables.last.add(state.floors[i]);
                   }
                   AllTableStatus.tableCount++;
                   tableCounter++;
                   availableTables++;
-                } }else {
+                }
+              }else {
                 for (int i = 0; i < floorWiseTables.length; i++) {
                   floorTables.add(floorWiseTables[i]);
                   if (tables.isEmpty || tables.last.length >= 5) {
@@ -194,6 +208,7 @@ class MainBodyTableState extends State<MainBodyTable> {
                   tableCounter++;
                   availableTables++;
                 }
+                print("floorTables tbales else =${tables.length}");
               }
               return ListView.builder(
                 scrollDirection: Axis.vertical,
