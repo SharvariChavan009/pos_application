@@ -23,11 +23,14 @@ class _RotatingSvgIconState extends State<RotatingSvgIcon> {
       child: Transform.rotate(
         angle: _rotationAngle *
             (3.141592653589793 / 180),
-        child: SvgPicture.asset(
+        child: Visibility (
+          visible: false,
+          child:SvgPicture.asset(
           AllIcons.setting,
           width: 35,
           height: 35,
         ),
+      ),
       ),
     );
   }

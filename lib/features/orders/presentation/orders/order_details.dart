@@ -272,9 +272,9 @@ class _OrderDetailsState extends State<OrderDetails> {
                                         }
                                       },
                                     ),
-                                       const Text(
-                                        "Paid",
-                                        style: TextStyle(
+                                        Text(
+                                         '${viewOrder!.status! == "Completed" ? "Paid" : "Unpaid"}',
+                                        style: const TextStyle(
                                             fontSize: 14,
                                             fontWeight:
                                                 CustomLabels.mediumFontWeight,
@@ -349,12 +349,6 @@ class _OrderDetailsState extends State<OrderDetails> {
                                             color: AppColors.iconColor,
                                             fontFamily: CustomLabels.primaryFont),
                                       ),
-                                      Text(
-                                        'Payment Mode:',
-                                        style: TextStyle(
-                                            color: AppColors.iconColor,
-                                            fontFamily: CustomLabels.primaryFont),
-                                      ),
                                       SizedBox(
                                         height: 0,
                                       ),
@@ -389,7 +383,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                             color: AppColors.secondaryColor),
                                       ),
                                        Text(
-                                        viewOrder!.customer.isEmpty ? "customer":'${viewOrder!.customer[0]!.name}',
+                                        viewOrder!.customer!.name!.isEmpty ? "customer":'${viewOrder!.customer!.name}',
                                         style: const TextStyle(
                                             fontSize: 14,
                                             fontWeight:
@@ -415,15 +409,6 @@ class _OrderDetailsState extends State<OrderDetails> {
                                               color: viewOrder!.status == "Cancelled" ? CupertinoColors.destructiveRed:CupertinoColors.systemGreen,
                                               fontFamily:
                                                   CustomLabels.primaryFont)),
-                                      const Text(
-                                        'Paid',
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight:
-                                                CustomLabels.mediumFontWeight,
-                                            color: AppColors.whiteColor,
-                                            fontFamily: CustomLabels.primaryFont),
-                                      ),
                                       const SizedBox(
                                         height: 0,
                                       ),
