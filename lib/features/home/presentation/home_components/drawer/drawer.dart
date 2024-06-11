@@ -71,16 +71,16 @@ class SidebarPageState extends State<SidebarPage> {
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text("Face"))),
       ),
-      CollapsibleItem(
-        text: 'Users',
-        iconImage: AllIcons.olOrder,
-        onPressed: () {
-          BlocProvider.of<MenuNameBloc>(context).add(
-              MenuNameSelected(context: context, menuName: "Online Orders"));
-        },
-        onHold: () => ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("Face"))),
-      ),
+      // CollapsibleItem(
+      //   text: 'Users',
+      //   iconImage: AllIcons.olOrder,
+      //   onPressed: () {
+      //     BlocProvider.of<MenuNameBloc>(context).add(
+      //         MenuNameSelected(context: context, menuName: "Online Orders"));
+      //   },
+      //   onHold: () => ScaffoldMessenger.of(context)
+      //       .showSnackBar(const SnackBar(content: Text("Face"))),
+      // ),
       CollapsibleItem(
         text: 'Staff Attendance',
         iconImage: AllIcons.table_check,

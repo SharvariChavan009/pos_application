@@ -8,7 +8,7 @@ class OrderDetailsData {
   final int? diners;
   final String? code;
   final Summary? summary;
-  final List<Customer> customer;
+  final Customer? customer;
   final String? address;
   final String? shipping;
   final dynamic meta;
@@ -30,7 +30,7 @@ class OrderDetailsData {
     this.diners,
     this.code,
     this.summary,
-    required this.customer,
+    this.customer,
     this.address,
     this.shipping,
     this.meta,
@@ -54,9 +54,7 @@ class OrderDetailsData {
       diners: json['diners'],
       code: json['code'],
       summary: json['summary'] != null ? Summary.fromJson(json['summary']) : null,
-      customer: (json['customer'] as List<dynamic>)
-          .map((customerJson) => Customer.fromJson(customerJson))
-          .toList(),
+      customer: json['customer'] != null ? Customer.fromJson(json['customer']) : null,
       address: json['address'],
       shipping: json['shipping'],
       meta: json['meta'],

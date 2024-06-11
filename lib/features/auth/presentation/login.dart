@@ -246,8 +246,8 @@ class LoginPage extends StatelessWidget {
                                                           return Container(
                                                             alignment: Alignment
                                                                 .centerRight,
-                                                            child:
-                                                                const ResetPasswordScreen(),
+                                                            child: LoginColumn(
+                                                                context),
                                                           );
                                                       }
                                                     } else {

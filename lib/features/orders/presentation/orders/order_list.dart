@@ -47,9 +47,22 @@ class OrderListState extends State<OrderList> {
               );
             case OrderListSuccessState:
               final successState = state as OrderListSuccessState;
-              print(state.orderList!.length);
               orders = successState.orderList!;
-              resultOrders = orders;
+              if(orders.isEmpty){
+                return const Center(
+                  child: Text(
+                    'No orders found',
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      color: AppColors.whiteColor,
+                      fontFamily: CustomLabels.primaryFont,
+                    ),
+                  ),
+                );
+              }else{
+                resultOrders = orders;
+              }
+
               break;
             case OrderListSortSuccessState:
               final sortSuccessState = state as OrderListSortSuccessState;
@@ -239,6 +252,28 @@ class OrderListState extends State<OrderList> {
                         ),
                         DataColumn2(
                           label: const Text(
+                            'Placed By',
+                            style: TextStyle(
+                                color: AppColors.iconColor,
+                                fontFamily: CustomLabels.primaryFont),
+                          ),
+                          onSort: (columnIndex, ascending) {
+                            // No need to sort the Action column
+                          },
+                        ),
+                        DataColumn2(
+                          label: const Text(
+                            'Payment Type',
+                            style: TextStyle(
+                                color: AppColors.iconColor,
+                                fontFamily: CustomLabels.primaryFont),
+                          ),
+                          onSort: (columnIndex, ascending) {
+                            // No need to sort the Action column
+                          },
+                        ),
+                        DataColumn2(
+                          label: const Text(
                             'Action',
                             style: TextStyle(
                                 color: AppColors.iconColor,
@@ -259,6 +294,7 @@ class OrderListState extends State<OrderList> {
                             // No need to sort the Action column
                           },
                         ),
+
                       ],
                       source: OrderDataSource(resultOrders, context),
                     ),
@@ -309,8 +345,7 @@ class OrderDataSource extends DataTableSource {
       ))
       ),
       DataCell(Text(
-        // order.customer[0].name.toString(),
-        order.customer!.isEmpty ? "customer name": order.customer[0]!.name!,
+        order.customer!.name!.isEmpty ? "customer name": order.customer!.name!,
         style: const TextStyle(
             fontFamily: CustomLabels.primaryFont, color: AppColors.whiteColor),
       )),
@@ -322,6 +357,22 @@ class OrderDataSource extends DataTableSource {
               fontFamily: CustomLabels.primaryFont,
         color: changeColor(order.status.toString())
                ),),)),
+      DataCell(
+          Center(
+            child:Text(
+              order.user!.name!,
+              style: const TextStyle(
+                  fontFamily: CustomLabels.primaryFont,
+                  color: Colors.white,
+              ),),)),
+      DataCell(
+          Center(
+            child:Text(
+              order.meta!.type!,
+              style: const TextStyle(
+                fontFamily: CustomLabels.primaryFont,
+                color: Colors.white,
+              ),),)),
       DataCell(InkWell(
         onTap: () {
           BlocProvider.of<MenuNameBloc>(context)

@@ -39,9 +39,6 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListDisplayState> {
         );
         if (response.statusCode == 200) {
           final responseData = response.data;
-          // print(responseData);
-          // OrderData orders = OrderData.fromJson(response.data['data']);
-
           final data = response.data['data'] as List;
           final orders = data.map((json) => Order.fromJson(json)).toList();
 

@@ -30,11 +30,11 @@ class PlaceOrderBloc extends Bloc<PlaceOrderEvent, PlaceOrderState> {
           data: {
               "key": cartKey,
               "floor_table_id": event.tableId,
-              "customer" : [{
+              "customer" : {
                 "name" : "Swapnil Nandgave",
                 "email": "swap@example.com",
                 "phone": "7057121459"
-              }]
+              }
           },
           options: Options(
             headers: {'Content-Type': 'application/json',
