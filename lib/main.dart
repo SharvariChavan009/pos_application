@@ -20,6 +20,7 @@ import 'package:pos_application/features/home/presentation/bloc/menu_name_bloc.d
 import 'package:pos_application/features/home/presentation/bloc/search_bar/search_value_bloc.dart';
 import 'package:pos_application/features/home/presentation/bloc/table_bloc/set_selected_floor_table_bloc.dart';
 import 'package:pos_application/features/orders/domain/repository/order_list_repository.dart';
+import 'package:pos_application/features/payment/domain/repository/payment_list_bloc.dart';
 import 'core/common/colors.dart';
 import 'core/routes/custom_router.dart';
 import 'features/home/presentation/bloc/menu_categories/menu_categories_bloc.dart';
@@ -57,6 +58,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => CancelOrderBloc()),
         BlocProvider(create: (context) => OrderListBloc()),
         BlocProvider(create: (context) => FloorTableSortBloc()),
+        BlocProvider(create: (context) => PaymentListBloc()),
         BlocProvider<ConnectivityBloc>(
           create: (BuildContext context) => ConnectivityBloc(),
         ),

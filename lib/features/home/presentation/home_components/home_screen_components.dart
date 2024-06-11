@@ -8,6 +8,7 @@ import 'package:pos_application/features/home/presentation/home_components/home_
 import 'package:pos_application/features/menu/presentation/menu/menu_body.dart';
 import 'package:pos_application/features/orders/presentation/orders/order_details.dart';
 import 'package:pos_application/features/orders/presentation/orders/order_list.dart';
+import 'package:pos_application/features/payment/presentation/payment_list.dart';
 import 'package:pos_application/features/setting/presentation/menu_setting/menu_setting_screen.dart';
 import 'package:pos_application/features/setting/presentation/setting_screen.dart';
 
@@ -56,6 +57,19 @@ Widget buildContentColumn(context, TabController tabController) {
                       const Expanded(
                         flex: 11,
                         child: OrderList(),
+                      ),
+                    ],
+                  ),
+                );
+                case "Payment":
+                  return SizedBox(
+                  height: DeviceUtils.getDeviceDimension(context).height,
+                  child: Column(
+                    children: [
+                      headerPart(context),
+                      const Expanded(
+                        flex: 11,
+                        child: PaymentList(),
                       ),
                     ],
                   ),
