@@ -8,6 +8,8 @@ import 'package:pos_application/features/payment/domain/repository/payment_list_
 import 'package:pos_application/features/payment/presentation/bloc/payment_list_bloc_state.dart';
 import '../../home/presentation/bloc/menu_name_bloc.dart';
 import '../../home/presentation/bloc/menu_name_event.dart';
+import '../../orders/domain/repository/order_list_repository.dart';
+import '../../orders/presentation/bloc/order_list/order_list_event.dart';
 
 
 class PaymentList extends StatefulWidget {
@@ -350,7 +352,7 @@ class PaymentDataSource extends DataTableSource {
         onTap: () {
           BlocProvider.of<MenuNameBloc>(context)
               .add(MenuNameSelected(context: context, menuName: "View Order"));
-          // BlocProvider.of<OrderListBloc>(context).add(OrderListShowDetailsEvent(order.id));
+          BlocProvider.of<OrderListBloc>(context).add(OrderListShowDetailsEvent(payment.orderId));
         },
         child: const Text(
           'View Order',

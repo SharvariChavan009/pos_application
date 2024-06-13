@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:pos_application/features/auth/domain/repository/forgot_password_repository.dart';
 import 'package:pos_application/features/auth/domain/repository/login_repository.dart';
@@ -32,10 +33,119 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+mixin AppLocale {
+  static const String title = 'title';
+  static const String thisIs = 'thisIs';
+
+  static const Map<String, dynamic> EN = {
+    title: 'Home',
+    thisIs: 'This is %a package, version %a.',
+  };
+  static const Map<String, dynamic> KM = {
+    title: 'ការធ្វើមូលដ្ឋានីយកម្ម',
+    thisIs: 'នេះគឺជាកញ្ចប់%a កំណែ%a.',
+  };
+  static const Map<String, dynamic> JA = {
+    title: 'ローカリゼーション',
+    thisIs: 'これは%aパッケージ、バージョン%aです。',
+  };
+}
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+//
+//   // This widget is the root of your application.
+//   @override
+//   Widget build(BuildContext context) {
+//     return MultiBlocProvider(
+//       providers: [
+//         BlocProvider(create: (context) => LoginBloc()),
+//         BlocProvider(create: (context) => ForgotPasswordBloc()),
+//         BlocProvider(create: (context) => ResetPasswordBloc()),
+//         BlocProvider(create: (context) => LogoutBloc()),
+//         BlocProvider(create: (context) => ProfileBloc()),
+//         BlocProvider(create: (context) => MenuListBloc()),
+//         BlocProvider(create: (context) => FloorTableBloc()),
+//         BlocProvider(create: (context) => MenuNameBloc()),
+//         BlocProvider(create: (context) => SearchValueBloc()),
+//         BlocProvider(create: (context) => CommonSearchValueBloc()),
+//         BlocProvider(create: (context) => UpdateTimerBloc()),
+//         BlocProvider(create: (context) => AddMenuToCartBloc()),
+//         BlocProvider(create: (context) => SetTableBloc()),
+//         BlocProvider(create: (context) => SetSelectedFloorTableBloc()),
+//         BlocProvider(create: (context) => PlaceOrderBloc()),
+//         BlocProvider(create: (context) => CancelOrderBloc()),
+//         BlocProvider(create: (context) => OrderListBloc()),
+//         BlocProvider(create: (context) => FloorTableSortBloc()),
+//         BlocProvider(create: (context) => PaymentListBloc()),
+//         BlocProvider<ConnectivityBloc>(
+//           create: (BuildContext context) => ConnectivityBloc(),
+//         ),
+//         BlocProvider<TextFieldValidationBloc>(
+//           create: (context) =>
+//               TextFieldValidationBloc(borderColor: AppColors.secondaryColor),
+//         ),
+//         BlocProvider<PasswordValidationBloc>(
+//           create: (context) =>
+//               PasswordValidationBloc(borderColor: AppColors.secondaryColor),
+//         ),
+//         BlocProvider(create: (context) => FloorTableStatus(floorTables: [])),
+//         BlocProvider(create: (context) => MenuCategoriesBloc([])),
+//       ],
+//       child: MaterialApp.router(
+//         debugShowCheckedModeBanner: false,
+//         title: 'POS Applications',
+//         theme: ThemeData(
+//           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+//           useMaterial3: true,
+//         ),
+//         routerConfig: customRouter,
+//       ),
+//     );
+//   }
+// }
+
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final FlutterLocalization _localization = FlutterLocalization.instance;
+
+  @override
+  void initState() {
+    _localization.init(
+      mapLocales: [
+        const MapLocale(
+          'en',
+          AppLocale.EN,
+          countryCode: 'US',
+          fontFamily: 'Font EN',
+        ),
+        const MapLocale(
+          'km',
+          AppLocale.KM,
+          countryCode: 'KH',
+          fontFamily: 'Font KM',
+        ),
+        const MapLocale(
+          'ja',
+          AppLocale.JA,
+          countryCode: 'JP',
+          fontFamily: 'Font JA',
+        ),
+      ],
+      initLanguageCode: 'en',
+    );
+    _localization.onTranslatedLanguage = _onTranslatedLanguage;
+    super.initState();
+  }
+
+  void _onTranslatedLanguage(Locale? locale) {
+    setState(() {});
+  }
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -74,9 +184,12 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => MenuCategoriesBloc([])),
       ],
       child: MaterialApp.router(
+        supportedLocales: _localization.supportedLocales,
+        localizationsDelegates: _localization.localizationsDelegates,
         debugShowCheckedModeBanner: false,
         title: 'POS Applications',
         theme: ThemeData(
+          fontFamily: _localization.fontFamily,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
