@@ -16,8 +16,8 @@ import '../../bloc/common_search_bar/common_search_bar_state.dart';
 import '../../bloc/menu_list_state.dart';
 
 final List<String> imgList = [
-  'with ItemCode',
-  'with ItemName',
+  ' with ItemCode',
+  ' with ItemName',
 ];
 final List<Widget> imageSliders = imgList
     .map((item) => Text(
@@ -57,7 +57,7 @@ class AddItem extends StatelessWidget {
 
             return Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(
                   width: 10,
@@ -69,18 +69,19 @@ class AddItem extends StatelessWidget {
                     size: 10,
                   ),
                 ),
-                const SizedBox(
-                  width: 10,
-                ),
+                // const SizedBox(
+                //   width: 10,
+                // ),
                 SizedBox(
                   width: 50,
-                  height: 18,
+                  height: 17,
                   child: isCart!
                       ? BlocBuilder<SearchValueBloc, SearchValueState>(
                           builder: (context, state) {
                             return TextField(
                                 // controller: searchValue,
                                 decoration: const InputDecoration(
+                                  contentPadding: EdgeInsets.only(top: 5,bottom:15),
                                   enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
                                         color: Colors
@@ -108,7 +109,9 @@ class AddItem extends StatelessWidget {
                           builder: (context, state) {
                             return TextField(
                                 controller: CommonSearchValue,
+                                textAlign: TextAlign.center,
                                 decoration: const InputDecoration(
+                                  contentPadding: EdgeInsets.only(top: 5,bottom:15),
                                   enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
                                         color: Colors
@@ -119,12 +122,12 @@ class AddItem extends StatelessWidget {
                                         color: Colors
                                             .transparent), // Hide underline color
                                   ),
-                                  hintText: 'Search',
+                                  hintText: 'search',
                                   hintStyle: TextStyle(
                                       fontSize: 13, color: AppColors.iconColor),
                                 ),
                                 style: const TextStyle(
-                                    fontSize: 13, color: AppColors.iconColor),
+                                    fontSize: 14, color: AppColors.iconColor),
                                 cursorColor:
                                     AppColors.iconColor, // Set cursor color
                                 onChanged: (value) {
