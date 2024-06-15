@@ -1,6 +1,5 @@
 import 'package:collapsible_sidebar/collapsible_sidebar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localization/flutter_localization.dart';
 import 'package:pos_application/core/common/colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_application/core/images/image.dart';
@@ -11,6 +10,7 @@ import 'package:pos_application/features/payment/presentation/bloc/payment_list_
 import '../../../../orders/domain/repository/order_list_repository.dart';
 import '../../../../orders/presentation/bloc/order_list/order_list_event.dart';
 import '../../bloc/menu_name_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 
 class SidebarPage extends StatefulWidget {
@@ -23,25 +23,23 @@ class SidebarPage extends StatefulWidget {
 class SidebarPageState extends State<SidebarPage> {
   late List<CollapsibleItem> _items;
   final AssetImage _avatarImg = const AssetImage(AppImage.appLogo3);
-  final FlutterLocalization _localization = FlutterLocalization.instance;
-
 
   @override
   void initState() {
     super.initState();
     _items = _generateItems;
+    // print("AppLocalizations.of(context)!.home=${AppLocalizations.of(context)!.home}");
   }
 
   List<CollapsibleItem> get _generateItems {
     return [
       CollapsibleItem(
-        text: 'Home',
+        text: "home",
         iconImage: AllIcons.home,
         isSelected: true,
         onPressed: () {
           BlocProvider.of<MenuNameBloc>(context)
               .add(MenuNameSelected(context: context, menuName: "Home"));
-          _localization.translate('km');
         },
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text("Face"))),

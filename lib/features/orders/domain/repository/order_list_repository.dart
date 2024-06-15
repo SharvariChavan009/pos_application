@@ -92,29 +92,29 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListDisplayState> {
       List<Order>? orders = event.orders;
 
       switch (orderBy!) {
-        case "All":
+        case "All" || "الجميع":
           emit(OrderListSortSuccessState(event.orders!));
           break;
-        case "Ready":
+        case "Ready" || "مستعد":
           List<Order> placedOrders = orders!.where((order) =>
           order.status == "Ready").toList();
           emit(OrderListSortSuccessState(placedOrders));
           break;
-        case "Preparing":
+        case "Preparing" || "خطة":
           List<Order> placedOrders = orders!.where((order) =>
           order.status == "Preparing").toList();
           emit(OrderListSortSuccessState(placedOrders));
           break;
-        case "Cancelled":
+        case "Cancelled" || "ألغيت":
           List<Order> placedOrders = orders!.where((order) =>
           order.status == "Cancelled").toList();
           emit(OrderListSortSuccessState(placedOrders));
           break;
-        case "Placed":
+        case "Placed" || "وضعت":
           List<Order> placedOrders = orders!.where((order) =>
           order.status == "Placed").toList();
           emit(OrderListSortSuccessState(placedOrders));
-        case "Completed":
+        case "Completed" || "مكتمل":
           List<Order> placedOrders = orders!.where((order) =>
           order.status == "Completed").toList();
           emit(OrderListSortSuccessState(placedOrders));

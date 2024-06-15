@@ -27,7 +27,8 @@ Widget buildContentColumn(context, TabController tabController) {
             if (state is MenuNameFetchedSuccess) {
               String name = state.name;
               switch (name) {
-                case "Home": return SizedBox(
+                case "Home":
+                  return SizedBox(
                   height: DeviceUtils.getDeviceDimension(context).height,
                   child: Column(
                     children: [
@@ -79,7 +80,7 @@ Widget buildContentColumn(context, TabController tabController) {
                   child: Column(
                     children: [
                       headerPart(context),
-                      const Expanded(
+                       Expanded(
                         flex: 11,
                         child: SettingScreen(),
                       ),

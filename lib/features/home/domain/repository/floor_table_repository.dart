@@ -6,6 +6,7 @@ import 'package:pos_application/features/home/presentation/bloc/floor_table_stat
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../../../../core/common/api_constants.dart';
 import '../../data/floor_tables.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class FloorTableBloc extends Bloc<FloorTableEvent, FloorTableState> {
   final Dio _dio = Dio();
@@ -88,29 +89,30 @@ class FloorTableSortBloc extends Bloc<FloorTableSortEvent, FloorTableState> {
       String? sortBy = event.sortBy;
       List<FloorTable>? floorTables = event.floorTableList;
       switch (sortBy) {
-        case "Available":
+        case "Avaliable" || "متاح":
           List<FloorTable> placedOrders = floorTables!
               .where((order) => order.status == "Available")
               .toList();
           emit(FloorTableSortSuccess(placedOrders));
           break;
-        case "Reserved":
+        case "Reserved" || "محجوز":
           List<FloorTable> placedOrders = floorTables!
-              .where((order) => order.status == "Reserved")
+              .where((order) => order.status == "Reserved" || order.status == "محجوز")
               .toList();
           emit(FloorTableSortSuccess(placedOrders));
           break;
-        case "Serving":
+        case "Serving" || "خدمة":
           List<FloorTable> placedOrders =
               floorTables!.where((order) => order.status == "Serving").toList();
           emit(FloorTableSortSuccess(placedOrders));
           break;
-        case "All Tables":
+        case "All Tables" || "جميع الجداول":
           emit(FloorTableSortSuccess(floorTables!));
           break;
         default:
           emit(FloorTableSortSuccess(floorTables!));
       }
+
     });
   }
 }

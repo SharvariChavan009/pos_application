@@ -17,6 +17,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 import '../../../home/presentation/bloc/common_search_bar/common_search_bar_bloc.dart';
 import '../../../home/presentation/bloc/common_search_bar/common_search_bar_state.dart';
 import '../../../home/presentation/home_components/side_order/add_item.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 bool enabled = true;
 
@@ -27,6 +28,7 @@ class ListOfMenus extends StatelessWidget {
   Widget build(BuildContext context) {
     List<MenuItem> menuItems = [];
     List<MenuItem> tempMenuItems = [];
+    var optionName = AppLocalizations.of(context);
 
     return BlocBuilder<MenuNameBloc, MenuNameState>(builder: (context, state) {
       if (state is MenuNameFetchedSuccess && state.name == 'Menu') {
@@ -86,21 +88,21 @@ class ListOfMenus extends StatelessWidget {
                                 color: AppColors.iconColor, width: .5),
                           ),
                         ),
-                        child: const Row(
+                        child:  Row(
                           children: [
                             Text(
-                              'Menu List',
-                              style: TextStyle(
+                              optionName!.menuList,
+                              style: const TextStyle(
                                   letterSpacing: .8,
                                   color: AppColors.whiteColor,
                                   fontFamily: CustomLabels.primaryFont,
                                   fontWeight: CustomLabels.mediumFontWeight,
                                   fontSize: 18),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 20,
                             ),
-                            FittedBox(
+                            const FittedBox(
                                 child: AddItem(
                               isCart: false,
                             ))
