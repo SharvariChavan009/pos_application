@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pos_application/controller/change_language_bloc.dart';
+import 'package:pos_application/controller/change_language_state.dart';
+import 'package:pos_application/controller/language_change_controller.dart';
 import 'package:pos_application/core/common/colors.dart';
 import 'package:pos_application/core/common/label.dart';
 import 'package:pos_application/core/images/image.dart';
 import 'package:pos_application/features/home/presentation/bloc/menu_name_bloc.dart';
 import 'package:pos_application/features/home/presentation/bloc/menu_name_event.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
+import '../../../controller/change_language_event.dart';
 
+enum Language{english,arabic}
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
 
@@ -17,7 +23,7 @@ class SettingScreen extends StatefulWidget {
 class SettingScreenState extends State<SettingScreen> {
   bool light0 = true;
   bool light1 = true;
-
+  String? selectedLanguage = "English";
   Widget _buildMenuItem({
     required String iconPath,
     required String title,
@@ -96,6 +102,7 @@ class SettingScreenState extends State<SettingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var optionName = AppLocalizations.of(context);
     return Container(
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -114,15 +121,16 @@ class SettingScreenState extends State<SettingScreen> {
                   bottom: BorderSide(color: AppColors.iconColor, width: .5),
                 ),
               ),
-              child: const Text(
-                'Setting',
-                style: TextStyle(
+              child:   Text(
+               optionName!.title,
+                style: const TextStyle(
                   letterSpacing: .8,
                   color: AppColors.whiteColor,
                   fontFamily: CustomLabels.primaryFont,
                   fontSize: 18,
                 ),
               ),
+
             ),
           ),
           Expanded(
@@ -140,7 +148,7 @@ class SettingScreenState extends State<SettingScreen> {
                 children: [
                   _buildMenuItem(
                     iconPath: AllIcons.menu,
-                    title: 'Menu',
+                    title: optionName!.menu,
                     trailing: InkWell(
                       onTap: () {
                         BlocProvider.of<MenuNameBloc>(context).add(
@@ -156,7 +164,7 @@ class SettingScreenState extends State<SettingScreen> {
                   ),
                   _buildMenuItem(
                     iconPath: AllIcons.tables,
-                    title: 'Tables',
+                    title: optionName.tables,
                     trailing: const Icon(
                       Icons.arrow_forward_ios_sharp,
                       color: AppColors.iconColor,
@@ -165,29 +173,55 @@ class SettingScreenState extends State<SettingScreen> {
                   ),
                   _buildMenuItem(
                     iconPath: AllIcons.lang,
-                    title: 'Language',
-                    trailing: const Row(
+                    title: optionName.language,
+                    trailing:  Row(
                       children: [
-                        Text(
-                          'English',
-                          style: TextStyle(
+                         Text(
+                          selectedLanguage!,
+                          style: const TextStyle(
                             color: AppColors.secondaryColor,
                             fontSize: 14,
                             fontFamily: CustomLabels.primaryFont,
                           ),
                         ),
-                        SizedBox(width: 10),
-                        Icon(
-                          Icons.arrow_forward_ios_sharp,
-                          color: AppColors.iconColor,
-                          size: 18,
+                        // const SizedBox(width: 20),
+                      BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
+                        builder: (context, state){
+                       return PopupMenuButton(
+                         icon: const Icon(
+                         Icons.keyboard_arrow_down_outlined,
+                         color: AppColors.iconColor,
+                         size: 20,
+                       ),
+                      onSelected: (Language value) {
+                           // selectedLanguage = "$value";
+                        if(Language.english.name == value.name){
+                          selectedLanguage = "English";
+                        BlocProvider.of<ChangeLanguageBloc>(context).add(ChangeLanguagePressed(Locale('en')));
+                        }else{
+                          selectedLanguage = "عربي";
+                          BlocProvider.of<ChangeLanguageBloc>(context).add(ChangeLanguagePressed(Locale('ar')));
+                        }
+                      },
+                      itemBuilder: (BuildContext context) => <PopupMenuEntry<Language>>
+                      [
+                        const PopupMenuItem(
+                          value: Language.english,
+                          child: Text('English'),
                         ),
+                        const PopupMenuItem(
+                          value: Language.arabic,
+                          child: Text('arabic'),
+                        ),
+
+                      ]
+                  );})
                       ],
                     ),
                   ),
                   _buildMenuItem(
                     iconPath: AllIcons.sound,
-                    title: 'Sounds',
+                    title: optionName.sounds,
                     trailing: _buildSwitch(
                       value: light1,
                       onChanged: (value) {
@@ -199,7 +233,7 @@ class SettingScreenState extends State<SettingScreen> {
                   ),
                   _buildMenuItem(
                     iconPath: AllIcons.notif,
-                    title: 'Notifications',
+                    title: optionName.notifications,
                     trailing: _buildSwitch(
                       value: light0,
                       onChanged: (value) {
@@ -219,3 +253,4 @@ class SettingScreenState extends State<SettingScreen> {
     );
   }
 }
+

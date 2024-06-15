@@ -12,6 +12,7 @@ import '../../../home/presentation/bloc/menu_name_event.dart';
 import '../../../home/presentation/bloc/order_bloc/cancel_order_event.dart';
 import '../bloc/order_list/order_list_event.dart';
 import '../bloc/order_list/order_list_state.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class OrderList extends StatefulWidget {
   const OrderList({super.key});
@@ -31,6 +32,7 @@ class OrderListState extends State<OrderList> {
 
   @override
   Widget build(BuildContext context) {
+    var optionName = AppLocalizations.of(context);
     return Theme(
       data: ThemeData(
         dataTableTheme: DataTableThemeData(
@@ -49,10 +51,10 @@ class OrderListState extends State<OrderList> {
               final successState = state as OrderListSuccessState;
               orders = successState.orderList!;
               if(orders.isEmpty){
-                return const Center(
+                return  Center(
                   child: Text(
-                    'No orders found',
-                    style: TextStyle(
+                    optionName!.noOrdersFound,
+                    style: const TextStyle(
                       fontSize: 30.0,
                       color: AppColors.whiteColor,
                       fontFamily: CustomLabels.primaryFont,
@@ -94,9 +96,9 @@ class OrderListState extends State<OrderList> {
                         BorderSide(color: AppColors.iconColor, width: .5),
                       ),
                     ),
-                    child: const Text(
-                      'Orders',
-                      style: TextStyle(
+                    child:  Text(
+                      optionName!.orders,
+                      style: const TextStyle(
                         letterSpacing: .8,
                         color: AppColors.whiteColor,
                         fontFamily: CustomLabels.primaryFont,
@@ -136,8 +138,8 @@ class OrderListState extends State<OrderList> {
                       sortColumnIndex: _sortColumnIndex,
                       columns: [
                         DataColumn2(
-                          label: const Text(
-                            'Order Number',
+                          label:  Text(
+                            optionName!.orderNumber,
                             style: TextStyle(
                                 color: AppColors.iconColor,
                                 fontFamily: CustomLabels.primaryFont),
@@ -159,8 +161,8 @@ class OrderListState extends State<OrderList> {
                           },
                         ),
                         DataColumn2(
-                          label: const Text(
-                            'Amount',
+                          label:  Text(
+                            optionName!.amount,
                             style: TextStyle(
                                 color: AppColors.iconColor,
                                 fontFamily: CustomLabels.primaryFont),
@@ -182,8 +184,8 @@ class OrderListState extends State<OrderList> {
                           },
                         ),
                         DataColumn2(
-                          label: const Text(
-                            'Table Number',
+                          label:  Text(
+                            optionName!.tableNumber,
                             style: TextStyle(
                                 color: AppColors.iconColor,
                                 fontFamily: CustomLabels.primaryFont),
@@ -205,8 +207,8 @@ class OrderListState extends State<OrderList> {
                           },
                         ),
                         DataColumn2(
-                          label: const Text(
-                            'Guest Name',
+                          label:  Text(
+                            optionName!.guestName,
                             style: TextStyle(
                                 color: AppColors.iconColor,
                                 fontFamily: CustomLabels.primaryFont),
@@ -228,8 +230,8 @@ class OrderListState extends State<OrderList> {
                           },
                         ),
                         DataColumn2(
-                          label: const Text(
-                            'Order Status',
+                          label:  Text(
+                            optionName!.orderStatus,
                             style: TextStyle(
                                 color: AppColors.iconColor,
                                 fontFamily: CustomLabels.primaryFont),
@@ -251,8 +253,8 @@ class OrderListState extends State<OrderList> {
                           },
                         ),
                         DataColumn2(
-                          label: const Text(
-                            'Placed By',
+                          label:  Text(
+                            optionName!.placedBy,
                             style: TextStyle(
                                 color: AppColors.iconColor,
                                 fontFamily: CustomLabels.primaryFont),
@@ -262,8 +264,8 @@ class OrderListState extends State<OrderList> {
                           },
                         ),
                         DataColumn2(
-                          label: const Text(
-                            'Payment Type',
+                          label:  Text(
+                            optionName!.placedBy,
                             style: TextStyle(
                                 color: AppColors.iconColor,
                                 fontFamily: CustomLabels.primaryFont),
@@ -273,8 +275,8 @@ class OrderListState extends State<OrderList> {
                           },
                         ),
                         DataColumn2(
-                          label: const Text(
-                            'Action',
+                          label:  Text(
+                            optionName!.action,
                             style: TextStyle(
                                 color: AppColors.iconColor,
                                 fontFamily: CustomLabels.primaryFont),
@@ -284,8 +286,8 @@ class OrderListState extends State<OrderList> {
                           },
                         ),
                         DataColumn2(
-                          label: const Text(
-                            'Cancel Order',
+                          label:  Text(
+                            optionName!.cancelOrder,
                             style: TextStyle(
                                 color: AppColors.iconColor,
                                 fontFamily: CustomLabels.primaryFont),
@@ -317,6 +319,7 @@ class OrderDataSource extends DataTableSource {
   @override
   DataRow? getRow(int index) {
     if (index >= orders.length) return null;
+    var optionName = AppLocalizations.of(context);
     final order = orders[index];
     return DataRow(cells: [
       DataCell(
@@ -379,8 +382,8 @@ class OrderDataSource extends DataTableSource {
               .add(MenuNameSelected(context: context, menuName: "View Order"));
           BlocProvider.of<OrderListBloc>(context).add(OrderListShowDetailsEvent(order.id));
         },
-        child: const Text(
-          'View Order',
+        child:  Text(
+          optionName!.viewOrder,
           style: TextStyle(
               fontFamily: CustomLabels.primaryFont,
               color: AppColors.secondaryColor),
@@ -423,15 +426,15 @@ class OrderDataSource extends DataTableSource {
 
 MaterialColor changeColor(String name){
   switch(name){
-    case "Placed":
+    case "Placed" || "وضعت":
       return Colors.green;
-    case "Cancelled":
+    case "Cancelled" || "ألغيت":
       return Colors.red;
-    case "Preparing":
+    case "Preparing" || "خطة":
       return Colors.yellow;
-    case "Ready":
+    case "Ready" || "مستعد":
       return Colors.orange;
-    case "Completed":
+    case "Completed" || "مكتمل":
       return Colors.blue;
     default:
       return Colors.red;

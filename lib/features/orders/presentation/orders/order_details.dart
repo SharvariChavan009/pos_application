@@ -25,6 +25,7 @@ import '../../../home/presentation/bloc/menu_name_event.dart';
 import '../../data/order_details.dart';
 import '../bloc/order_list/order_list_event.dart';
 import '../bloc/order_list/order_list_state.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class OrderDetails extends StatefulWidget {
   const OrderDetails({super.key});
@@ -37,6 +38,7 @@ OrderDetailsData? viewOrder;
 class _OrderDetailsState extends State<OrderDetails> {
   @override
   Widget build(BuildContext context) {
+    var optionName = AppLocalizations.of(context);
     return Container(
       margin: const EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
       decoration: const BoxDecoration(
@@ -78,8 +80,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                         const SizedBox(
                           width: 30,
                         ),
-                        const Text(
-                          'Orders',
+                         Text(
+                          optionName!.orders,
                           style: TextStyle(
                             letterSpacing: .8,
                             color: AppColors.whiteColor,
@@ -97,9 +99,9 @@ class _OrderDetailsState extends State<OrderDetails> {
                         const SizedBox(
                           width: 5,
                         ),
-                        const Text(
-                          'Order Details',
-                          style: TextStyle(
+                         Text(
+                           optionName!.orderDetails,
+                          style: const TextStyle(
                             letterSpacing: .8,
                             color: AppColors.whiteColor,
                             fontFamily: CustomLabels.primaryFont,
@@ -142,7 +144,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                           color: AppColors.iconColor, width: .5),
                                     ),
                                   ),
-                                  child: const Column(
+                                  child:  Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
@@ -151,32 +153,37 @@ class _OrderDetailsState extends State<OrderDetails> {
                                         height: 5,
                                       ),
                                       Text(
-                                        'Table No:',
-                                        style: TextStyle(
+                                        // 'Table No:',
+                                        "${optionName!.tableNo}:",
+                                        style: const TextStyle(
                                             color: AppColors.iconColor,
                                             fontFamily: CustomLabels.primaryFont),
                                       ),
                                       Text(
-                                        'Order#:',
-                                        style: TextStyle(
+                                        // 'Order#:',
+                                        '${optionName!.order}#:',
+                                        style: const TextStyle(
                                             color: AppColors.iconColor,
                                             fontFamily: CustomLabels.primaryFont),
                                       ),
                                       Text(
-                                        'Guests:',
-                                        style: TextStyle(
+                                        // 'Guests:',
+                                        '${optionName!.guests}:',
+                                        style: const TextStyle(
                                             color: AppColors.iconColor,
                                             fontFamily: CustomLabels.primaryFont),
                                       ),
                                       Text(
-                                        'Manager:',
-                                        style: TextStyle(
+                                        // 'Manager:',
+                                        '${optionName!.manager}:',
+                                        style: const TextStyle(
                                             color: AppColors.iconColor,
                                             fontFamily: CustomLabels.primaryFont),
                                       ),
                                       Text(
-                                        'Payment Status:',
-                                        style: TextStyle(
+                                        // 'Payment Status:',
+                                        '${optionName!.paymentStatus}:',
+                                        style: const TextStyle(
                                             color: AppColors.iconColor,
                                             fontFamily: CustomLabels.primaryFont),
                                       ),
@@ -273,7 +280,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                       },
                                     ),
                                         Text(
-                                         '${viewOrder!.status! == "Completed" ? "Paid" : "Unpaid"}',
+                                         viewOrder!.status! == optionName.completed ? optionName.paid : optionName!.unpaid,
                                         style: const TextStyle(
                                             fontSize: 14,
                                             fontWeight:
@@ -317,34 +324,38 @@ class _OrderDetailsState extends State<OrderDetails> {
                                           color: AppColors.iconColor, width: .5),
                                     ),
                                   ),
-                                  child: const Column(
+                                  child:  Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 0,
                                       ),
                                       Text(
-                                        'Amount:',
+                                        // 'Amount:',
+                                        '${optionName!.amount}:',
+                                        style: const TextStyle(
+                                            color: AppColors.iconColor,
+                                            fontFamily: CustomLabels.primaryFont),
+                                      ),
+                                      Text(
+                                        // 'Name:',
+                                        '${optionName!.name}:',
                                         style: TextStyle(
                                             color: AppColors.iconColor,
                                             fontFamily: CustomLabels.primaryFont),
                                       ),
                                       Text(
-                                        'Name:',
+                                        // 'Date & Time:',
+                                        '${optionName!.dateTime}:',
                                         style: TextStyle(
                                             color: AppColors.iconColor,
                                             fontFamily: CustomLabels.primaryFont),
                                       ),
                                       Text(
-                                        'Date & Time:',
-                                        style: TextStyle(
-                                            color: AppColors.iconColor,
-                                            fontFamily: CustomLabels.primaryFont),
-                                      ),
-                                      Text(
-                                        'Status:',
+                                        // 'Status:',
+                                        '${optionName.status}:',
                                         style: TextStyle(
                                             color: AppColors.iconColor,
                                             fontFamily: CustomLabels.primaryFont),
@@ -406,7 +417,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                               fontSize: 14,
                                               fontWeight:
                                                   CustomLabels.mediumFontWeight,
-                                              color: viewOrder!.status == "Cancelled" ? CupertinoColors.destructiveRed:CupertinoColors.systemGreen,
+                                              color: viewOrder!.status == optionName!.cancelled ? CupertinoColors.destructiveRed:CupertinoColors.systemGreen,
                                               fontFamily:
                                                   CustomLabels.primaryFont)),
                                       const SizedBox(

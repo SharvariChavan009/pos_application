@@ -7,9 +7,9 @@ import 'package:pos_application/core/common/w_custom_button.dart';
 import 'package:pos_application/features/orders/presentation/bloc/order_list/order_list_event.dart';
 import 'package:pos_application/features/orders/presentation/bloc/order_list/order_list_state.dart';
 import 'package:pos_application/features/orders/presentation/widget/custom_radio_button.dart';
-
 import '../../../../core/common/api_methods.dart';
 import '../../domain/repository/order_list_repository.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 enum TableStatus { available, reserved, servicing }
 
@@ -50,6 +50,7 @@ class OrderBottomState extends State<OrderBottom> {
 
   @override
   Widget build(BuildContext context) {
+    var optionName = AppLocalizations.of(context);
     return BlocBuilder<OrderListBloc, OrderListDisplayState>(
       builder: (context, state) {
         int? quantity  = 0;
@@ -75,16 +76,16 @@ class OrderBottomState extends State<OrderBottom> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         const SizedBox(width: 30),
-                        buildRichText('Item:', '${state.orderDetails!.orderItems!.length}'),
+                        buildRichText('${optionName!.item}:', ' ${state.orderDetails!.orderItems!.length}'),
                         const SizedBox(width: 20),
-                        buildRichText('Quantity:', "$totalQuantity"),
+                        buildRichText('${optionName!.quantity}:', " $totalQuantity"),
                         const SizedBox(width: 20),
-                        buildRichText('SubTotal:', '$currency${state.orderDetails!.summary!.subTotal}'),
+                        buildRichText('${optionName!.subTotal}:', ' $currency${state.orderDetails!.summary!.subTotal}'),
                         const SizedBox(width: 20),
-                        buildRichText('Taxed:', '$currency${state.orderDetails!.summary!.tax?.value}'),
+                        buildRichText('${optionName.taxed}:', ' $currency${state.orderDetails!.summary!.tax?.value}'),
                         const SizedBox(width: 20),
-                        buildRichText('Discount:', '$currency${state.orderDetails!.summary!.discount!.value}'),                        const SizedBox(width: 20),
-                        buildRichText('Bill Amount:', '$currency${state.orderDetails!.summary!.total}'),
+                        buildRichText('${optionName!.discount}:', ' $currency${state.orderDetails!.summary!.discount!.value}'),                        const SizedBox(width: 20),
+                        buildRichText('${optionName!.billAmount}:', ' $currency${state.orderDetails!.summary!.total}'),
                         const SizedBox(width: 0),
                       ],
                     ),
@@ -95,7 +96,7 @@ class OrderBottomState extends State<OrderBottom> {
                 child: SizedBox(
                   width: 150,
                   child: Visibility (
-                    visible: state.orderDetails!.status == "Ready" ? true : false,
+                    visible: state.orderDetails!.status == "Ready" || state.orderDetails!.status == "مستعد" ? true : false,
                       child:CustomButton(
                     onPressed: () {
                       showDialog(
@@ -106,7 +107,7 @@ class OrderBottomState extends State<OrderBottom> {
                       );
                       },
                     activeButtonColor: AppColors.secondaryColor,
-                    text: 'Complete Order' ,
+                    text: optionName!.completeOrder ,
                     height: 40,
                   )),
                 ),
@@ -119,11 +120,11 @@ class OrderBottomState extends State<OrderBottom> {
                 child: SizedBox(
                   width: 150,
                   child: Visibility(
-                    visible: state.orderDetails!.status == "Completed" ? true : false,
+                    visible: state.orderDetails!.status == "Completed" || state.orderDetails!.status == "مكتمل" ? true : false,
                     child:CustomButton(
                     onPressed: () {},
                     activeButtonColor: AppColors.secondaryColor,
-                    text: 'Refund',
+                    text: optionName!.refund,
                     height: 40,
                   ),
                 )),
@@ -176,6 +177,7 @@ class _SelectionDialogState extends State<SelectionDialog> {
   String? selectedPaymentType = "";
   @override
   Widget build(BuildContext context) {
+    var optionName = AppLocalizations.of(context);
     return BlocBuilder<OrderListBloc, OrderListDisplayState>(
       builder: (context, state) {
         int? orderID = 0 ;
@@ -196,7 +198,7 @@ class _SelectionDialogState extends State<SelectionDialog> {
       actions: <Widget>[
         TextButton(
           onPressed: () => Navigator.pop(context, 'Cancel'),
-          child: const Text('Cancel'),
+          child:  Text(optionName!.cancel),
         ),
         TextButton(
           onPressed: () {
@@ -204,20 +206,19 @@ class _SelectionDialogState extends State<SelectionDialog> {
             Navigator.pop(context, 'OK');
             switch(_selectedOption){
               case PaymentType.cash:
-                selectedPaymentType = "Cash";
+                selectedPaymentType = optionName!.cash;
                 break;
               case PaymentType.online:
-                selectedPaymentType = "Online";
-                break;
+                selectedPaymentType = optionName!.online;
              default:
-               selectedPaymentType = "Cash";
+               selectedPaymentType = optionName!.cash;
                break;
 
             }
             BlocProvider.of<OrderListBloc>(context).add(OrderPaymentEvent(orderID,total,selectedPaymentType));
             BlocProvider.of<OrderListBloc>(context).add(OrderListShowDetailsEvent(orderID));
             },
-          child: const Text('OK'),
+          child:  Text(optionName!.oK),
         ),
       ],
     );

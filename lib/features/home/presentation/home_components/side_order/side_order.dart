@@ -30,6 +30,7 @@ import '../../../../menu/bloc/add_menu/add_menu_cart_event.dart';
 import '../../bloc/order_bloc/cancel_order_event.dart';
 import '../../bloc/order_bloc/place_order_event.dart';
 import 'cart_item_selector.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class RotationTransitionWidget extends StatefulWidget {
   final AnimationController controller;
@@ -124,6 +125,7 @@ class _OrderScreenState extends State<OrderScreen>
   }
 
   Widget _getSideOrder({FloorTable? currentTable}) {
+    var optionName = AppLocalizations.of(context);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
       decoration: BoxDecoration(
@@ -666,7 +668,7 @@ class _OrderScreenState extends State<OrderScreen>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "SubTotal:",
+                              optionName!.subTotal,
                               style: CustomLabels.bodyTextStyle(
                                 fontSize: 12,
                                 fontFamily: CustomLabels.secondaryFont,
@@ -741,7 +743,7 @@ class _OrderScreenState extends State<OrderScreen>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Total:",
+                              optionName!.total,
                               style: CustomLabels.bodyTextStyle(
                                 fontSize: 21,
                                 fontFamily: CustomLabels.secondaryFont,
@@ -791,7 +793,7 @@ class _OrderScreenState extends State<OrderScreen>
                                             .add(CancelOrderButtonPressed(
                                                 "", orderNumber!));
                                       },
-                                      text: 'Cancel Order',
+                                      text: optionName.cancelOrder,
                                       activeButtonColor:
                                           AppColors.errorColor.withOpacity(.2),
                                       backgroundColor: Colors.red,
@@ -832,7 +834,7 @@ class _OrderScreenState extends State<OrderScreen>
                                       activeButtonColor:
                                           AppColors.secondaryColor,
                                       backgroundColor: AppColors.darkColor,
-                                      text: 'Place Order',
+                                      text: optionName.placeOrder,
                                       height: 40,
                                     );
                                   },
@@ -860,7 +862,7 @@ class _OrderScreenState extends State<OrderScreen>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "SubTotal:",
+                            optionName!.subTotal,
                             style: CustomLabels.bodyTextStyle(
                               fontSize: 12,
                               fontFamily: CustomLabels.secondaryFont,
@@ -885,7 +887,7 @@ class _OrderScreenState extends State<OrderScreen>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Taxed:",
+                            optionName!.taxed,
                             style: CustomLabels.bodyTextStyle(
                               fontSize: 12,
                               fontFamily: CustomLabels.secondaryFont,
@@ -910,7 +912,7 @@ class _OrderScreenState extends State<OrderScreen>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Discount:",
+                            optionName!.discount,
                             style: CustomLabels.bodyTextStyle(
                               fontSize: 12,
                               fontFamily: CustomLabels.secondaryFont,
@@ -935,7 +937,7 @@ class _OrderScreenState extends State<OrderScreen>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Total:",
+                            optionName!.total,
                             style: CustomLabels.bodyTextStyle(
                               fontSize: 21,
                               fontFamily: CustomLabels.secondaryFont,
@@ -964,7 +966,7 @@ class _OrderScreenState extends State<OrderScreen>
                             width: 150,
                             child: CustomButton(
                               onPressed: () {},
-                              text: 'Cancel Order',
+                              text: optionName!.cancelOrder,
                               activeButtonColor:
                                   AppColors.errorColor.withOpacity(.2),
                               backgroundColor: Colors.red,
@@ -980,7 +982,7 @@ class _OrderScreenState extends State<OrderScreen>
                               onPressed: () {},
                               activeButtonColor: AppColors.secondaryColor,
                               backgroundColor: AppColors.darkColor,
-                              text: 'Place Order',
+                              text: optionName!.placeOrder,
                               height: 40,
                             ),
                           ),

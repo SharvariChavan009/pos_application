@@ -6,7 +6,7 @@ import 'package:pos_application/core/images/image.dart';
 import 'package:pos_application/features/Profile/domain/repository/profile_repository.dart';
 import 'package:pos_application/features/Profile/presentation/bloc/profile_event.dart';
 import 'package:pos_application/features/Profile/presentation/bloc/profile_state.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 class RestaurantDetails extends StatefulWidget {
   const RestaurantDetails({super.key});
 
@@ -17,6 +17,7 @@ class RestaurantDetails extends StatefulWidget {
 class _RestaurantDetailsState extends State<RestaurantDetails> {
   @override
   Widget build(BuildContext context) {
+    var optionName = AppLocalizations.of(context);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -41,7 +42,7 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                   }
                   if(state is ProfileStateSuccess) {
                     return AutoSizeText(
-                      'Welcome to ${state.user.user.name}',
+                      '${optionName!.welcomeMsg} ${state.user.user.name}',
                       textAlign: TextAlign.center,
                       minFontSize: 12,
                       maxFontSize: 16,
@@ -52,7 +53,7 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                     );
                   }else{
                     return AutoSizeText(
-                      'Welcome to ',
+                      optionName!.welcomeMsg,
                       textAlign: TextAlign.center,
                       minFontSize: 12,
                       maxFontSize: 16,

@@ -10,6 +10,8 @@ import '../../home/presentation/bloc/menu_name_bloc.dart';
 import '../../home/presentation/bloc/menu_name_event.dart';
 import '../../orders/domain/repository/order_list_repository.dart';
 import '../../orders/presentation/bloc/order_list/order_list_event.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
+
 
 
 class PaymentList extends StatefulWidget {
@@ -30,6 +32,7 @@ class PaymentListState extends State<PaymentList> {
 
   @override
   Widget build(BuildContext context) {
+    var optionName = AppLocalizations.of(context);
     return Theme(
       data: ThemeData(
         dataTableTheme: DataTableThemeData(
@@ -48,9 +51,9 @@ class PaymentListState extends State<PaymentList> {
                 final successState = state as PaymentListSuccessState;
                 paymentList = successState.paymentList!;
                 if(paymentList.isEmpty){
-                  return const Center(
+                  return  Center(
                     child: Text(
-                      'No orders found',
+                      optionName!.noOrdersFound,
                       style: TextStyle(
                         fontSize: 30.0,
                         color: AppColors.whiteColor,
@@ -130,134 +133,123 @@ class PaymentListState extends State<PaymentList> {
                         sortColumnIndex: _sortColumnIndex,
                         columns: [
                           DataColumn2(
-                            label: const Text(
-                              'Order Number',
+                            label:  Text(
+                              optionName!.orderNumber,
                               style: TextStyle(
                                   color: AppColors.iconColor,
                                   fontFamily: CustomLabels.primaryFont),
                             ),
                             onSort: (columnIndex, ascending) {
-                              // setState(() {
-                              //   _sortColumnIndex = columnIndex;
-                              //   _sortAscending = ascending;
-                              //   if (ascending) {
-                              //     resultOrders.sort((a, b) =>
-                              //         a.orderNo!
-                              //             .compareTo(b.orderNo!));
-                              //   } else {
-                              //     resultOrders.sort((a, b) =>
-                              //         b.orderNo!
-                              //             .compareTo(a.orderNo!));
-                              //   }
-                              // });
+                              setState(() {
+                                _sortColumnIndex = columnIndex;
+                                _sortAscending = ascending;
+                                if (ascending) {
+                                  resultOrders.sort((a, b) =>
+                                      a.order!.orderNo!
+                                          .compareTo(b.order!.orderNo!));
+                                } else {
+                                  resultOrders.sort((a, b) =>
+                                      b.order!.orderNo!
+                                          .compareTo(a.order!.orderNo!));
+                                }
+                              });
                             },
                           ),
                           DataColumn2(
-                            label: const Text(
-                              'Amount',
+                            label:  Text(
+                              optionName!.amount,
                               style: TextStyle(
                                   color: AppColors.iconColor,
                                   fontFamily: CustomLabels.primaryFont),
                             ),
                             onSort: (columnIndex, ascending) {
-                              // setState(() {
-                              //   _sortColumnIndex = columnIndex;
-                              //   _sortAscending = ascending;
-                              //   if (ascending) {
-                              //     resultOrders.sort((a, b) =>
-                              //         a.summary!.total!.compareTo(
-                              //             b.summary!.total!));
-                              //   } else {
-                              //     resultOrders.sort((a, b) =>
-                              //         b.summary!.total!.compareTo(
-                              //             a.summary!.total!));
-                              //   }
-                              // });
+                              setState(() {
+                                _sortColumnIndex = columnIndex;
+                                _sortAscending = ascending;
+                                if (ascending) {
+                                  resultOrders.sort((a, b) =>
+                                      a!.amount!.compareTo(
+                                          b.amount!));
+                                } else {
+                                  resultOrders.sort((a, b) =>
+                                      b.amount!.compareTo(
+                                          a.amount!));
+                                }
+                              });
                             },
                           ),
                           DataColumn2(
-                            label: const Text(
-                              'Table Number',
+                            label:  Text(
+                              optionName!.tableNumber,
                               style: TextStyle(
                                   color: AppColors.iconColor,
                                   fontFamily: CustomLabels.primaryFont),
                             ),
                             onSort: (columnIndex, ascending) {
-                              // setState(() {
-                              //   _sortColumnIndex = columnIndex;
-                              //   _sortAscending = ascending;
-                              //   if (ascending) {
-                              //     resultOrders.sort((a, b) =>
-                              //         a.floorTableId!
-                              //             .compareTo(b.floorTableId!));
-                              //   } else {
-                              //     resultOrders.sort((a, b) =>
-                              //         b.floorTableId!
-                              //             .compareTo(a.floorTableId!));
-                              //   }
-                              // });
+                              setState(() {
+                                _sortColumnIndex = columnIndex;
+                                _sortAscending = ascending;
+                                if (ascending) {
+                                  resultOrders.sort((a, b) =>
+                                      a.order!.floorTableId!
+                                          .compareTo(b.order!.floorTableId!));
+                                } else {
+                                  resultOrders.sort((a, b) =>
+                                      b.order!.floorTableId!
+                                          .compareTo(a.order!.floorTableId!));
+                                }
+                              });
                             },
                           ),
                           DataColumn2(
-                            label: const Text(
-                              'Guest Name',
+                            label:  Text(
+                              optionName!.guestName,
                               style: TextStyle(
                                   color: AppColors.iconColor,
                                   fontFamily: CustomLabels.primaryFont),
                             ),
                             onSort: (columnIndex, ascending) {
-                              // setState(() {
-                              //   _sortColumnIndex = columnIndex;
-                              //   _sortAscending = ascending;
-                              //   if (ascending) {
-                              //     resultOrders.sort((a, b) =>
-                              //         // a.customer!.name!.compareTo(
-                              //         //     b.customer!.name!));
-                              //   } else {
-                              //     resultOrders.sort((a, b) =>
-                              //         b.customer!.name!.compareTo(
-                              //             a.customer!.name!));
-                              //   }
-                              // });
+                              setState(() {
+                                _sortColumnIndex = columnIndex;
+                                _sortAscending = ascending;
+                                if (ascending) {
+                                  resultOrders.sort((a, b) =>
+                                      a.order!.customer!.name!.compareTo(
+                                          b.order!.customer!.name!));
+                                } else {
+                                  resultOrders.sort((a, b) =>
+                                      b!.order!.customer!.name!.compareTo(
+                                          a.order!.customer!.name!));
+                                }
+                              });
                             },
                           ),
                           DataColumn2(
-                            label: const Text(
-                              'Order Status',
+                            label:  Text(
+                              optionName!.orderStatus,
                               style: TextStyle(
                                   color: AppColors.iconColor,
                                   fontFamily: CustomLabels.primaryFont),
                             ),
                             onSort: (columnIndex, ascending) {
-                              // setState(() {
-                              //   _sortColumnIndex = columnIndex;
-                              //   _sortAscending = ascending;
-                              //   if (ascending) {
-                              //     resultOrders.sort((a, b) =>
-                              //         a.status!
-                              //             .compareTo(b.status!));
-                              //   } else {
-                              //     resultOrders.sort((a, b) =>
-                              //         b.status!
-                              //             .compareTo(a.status!));
-                              //   }
-                              // });
+                              setState(() {
+                                _sortColumnIndex = columnIndex;
+                                _sortAscending = ascending;
+                                if (ascending) {
+                                  resultOrders.sort((a, b) =>
+                                      a.order!.status!
+                                          .compareTo(b.order!.status!));
+                                } else {
+                                  resultOrders.sort((a, b) =>
+                                      b.order!.status!
+                                          .compareTo(a.order!.status!));
+                                }
+                              });
                             },
                           ),
                           DataColumn2(
-                            label: const Text(
-                              'Payment Mode',
-                              style: TextStyle(
-                                  color: AppColors.iconColor,
-                                  fontFamily: CustomLabels.primaryFont),
-                            ),
-                            onSort: (columnIndex, ascending) {
-                              // No need to sort the Action column
-                            },
-                          ),
-                          DataColumn2(
-                            label: const Text(
-                              'Action',
+                            label:  Text(
+                              optionName!.paymentMode,
                               style: TextStyle(
                                   color: AppColors.iconColor,
                                   fontFamily: CustomLabels.primaryFont),
@@ -267,8 +259,19 @@ class PaymentListState extends State<PaymentList> {
                             },
                           ),
                           DataColumn2(
-                            label: const Text(
-                              'Status',
+                            label:  Text(
+                              optionName!.action,
+                              style: TextStyle(
+                                  color: AppColors.iconColor,
+                                  fontFamily: CustomLabels.primaryFont),
+                            ),
+                            onSort: (columnIndex, ascending) {
+                              // No need to sort the Action column
+                            },
+                          ),
+                          DataColumn2(
+                            label:  Text(
+                              optionName!.status,
                               style: TextStyle(
                                   color: AppColors.iconColor,
                                   fontFamily: CustomLabels.primaryFont),
@@ -300,6 +303,7 @@ class PaymentDataSource extends DataTableSource {
   @override
   DataRow? getRow(int index) {
     if (index >= payments.length) return null;
+    var optionName = AppLocalizations.of(context);
     final payment = payments[index];
     return DataRow(cells: [
       DataCell(
@@ -354,8 +358,8 @@ class PaymentDataSource extends DataTableSource {
               .add(MenuNameSelected(context: context, menuName: "View Order"));
           BlocProvider.of<OrderListBloc>(context).add(OrderListShowDetailsEvent(payment.orderId));
         },
-        child: const Text(
-          'View Order',
+        child:  Text(
+          optionName!.viewOrder,
           style: TextStyle(
               fontFamily: CustomLabels.primaryFont,
               color: AppColors.secondaryColor),
@@ -398,15 +402,15 @@ class PaymentDataSource extends DataTableSource {
 
 MaterialColor changeColor(String name){
   switch(name){
-    case "Placed":
+    case "Placed" || "وضعت":
       return Colors.green;
-    case "Cancelled":
+    case "Cancelled" || "ألغيت":
       return Colors.red;
-    case "Preparing":
+    case "Preparing" || "خطة":
       return Colors.yellow;
-    case "Ready":
+    case "Ready" || "مستعد":
       return Colors.orange;
-    case "Completed":
+    case "Completed" || "مكتمل":
       return Colors.blue;
     default:
       return Colors.red;

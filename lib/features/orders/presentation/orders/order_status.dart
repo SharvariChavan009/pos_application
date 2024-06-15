@@ -6,6 +6,7 @@ import 'package:pos_application/features/orders/domain/repository/order_list_rep
 import 'package:pos_application/features/orders/presentation/bloc/order_list/order_list_event.dart';
 import '../../data/order_data.dart';
 import '../bloc/order_list/order_list_state.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class OrderStatus extends StatefulWidget {
   static String floorSelected = "";
@@ -21,6 +22,7 @@ class OrderStatusState extends State<OrderStatus> {
 
   @override
   Widget build(BuildContext context) {
+    var optionName = AppLocalizations.of(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -28,12 +30,12 @@ class OrderStatusState extends State<OrderStatus> {
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            _buildButton(0, "All", widget.orderList),
-            _buildButton(1, "Placed", widget.orderList),
-            _buildButton(2, "Preparing", widget.orderList),
-            _buildButton(3, "Ready", widget.orderList),
-            _buildButton(4, "Cancelled", widget.orderList),
-            _buildButton(5, "Completed", widget.orderList),
+            _buildButton(0, optionName!.all, widget.orderList),
+            _buildButton(1, optionName!.placed, widget.orderList),
+            _buildButton(2, optionName!.preparing, widget.orderList),
+            _buildButton(3, optionName!.ready, widget.orderList),
+            _buildButton(4, optionName!.cancelled, widget.orderList),
+            _buildButton(5, optionName!.completed, widget.orderList),
           ],
         ),
         const Spacer(),

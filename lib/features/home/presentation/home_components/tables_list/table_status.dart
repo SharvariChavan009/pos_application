@@ -14,6 +14,7 @@ import 'package:pos_application/features/home/presentation/home_components/table
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import '../../../../auth/widget/custom_snackbar.dart';
 import '../../bloc/floor_table_event.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 
 class AllTableStatus extends StatefulWidget {
@@ -27,20 +28,20 @@ class AllTableStatus extends StatefulWidget {
 
 class _AllTableStatusState extends State<AllTableStatus> {
   int _selectedButtonIndex = 0;
-
   @override
   Widget build(BuildContext context) {
+    var optionName = AppLocalizations.of(context);
     return BlocBuilder<FloorTableStatus, List<FloorTable>>(
         builder: (context, floorWiseTables) {
       int allTables = floorWiseTables.length;
       int servingTables = floorWiseTables
-          .where((element) => element.status == "Serving")
+          .where((element) => element.status == "Serving" || element.status == "خدمة")
           .length;
       int rervedTables = floorWiseTables
-          .where((element) => element.status == "Reserved")
+          .where((element) => element.status == "Reserved" || element.status == "محجوز")
           .length;
       int availableTables = floorWiseTables
-          .where((element) => element.status == "Available")
+          .where((element) => element.status == "Available" || element.status == "متاح")
           .length;
 
       return Row(
@@ -50,10 +51,10 @@ class _AllTableStatusState extends State<AllTableStatus> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              _buildButton(0, "All Tables", allTables,floorWiseTables),
-              _buildButton(1, "Serving", servingTables,floorWiseTables),
-              _buildButton(2, "Reserved", rervedTables,floorWiseTables),
-              _buildButton(3, "Available", availableTables,floorWiseTables),
+              _buildButton(0, optionName!.allTables, allTables,floorWiseTables),
+              _buildButton(1, optionName!.serving, servingTables,floorWiseTables),
+              _buildButton(2, optionName!.reserved, rervedTables,floorWiseTables),
+              _buildButton(3, optionName!.available, availableTables,floorWiseTables),
             ],
           ),
           const Spacer(),
@@ -80,14 +81,14 @@ class _AllTableStatusState extends State<AllTableStatus> {
                       OverlayManager.showSnackbar(
                         context,
                         type: ContentType.failure,
-                        title: "Add Table",
+                        title: optionName!.addTable,
                         message: CustomMessages.tableSelectionMessage,
                       );
                     } else {
                       MainBodyTable.currentState?.addTable();
                     }
                   },
-                  text: 'Add Table',
+                  text: optionName!.addTable,
                   textStyle: const TextStyle(
                       color: AppColors.secondaryColor,
                       fontFamily: CustomLabels.primaryFont),
