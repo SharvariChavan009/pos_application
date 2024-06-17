@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
 
 import 'change_language_event.dart';
@@ -12,13 +13,15 @@ class ChangeLanguageBloc extends Bloc<ChangeLanguageEvent, ChangeLanguageState> 
     Locale? _appLocale;
     // Locale? get  appLocale => _appLocale;
     on<ChangeLanguagePressed>((event, emit) async {
-      SharedPreferences sp = await SharedPreferences.getInstance();
+      var box = await Hive.openBox('LanguageData');
       _appLocale = event.type;
       if(event.type == Locale('en')){
-        await sp.setString("language", 'en');
+        // await sp.setString("language", 'en');
+        box.put("language", 'en');
         emit(ChangeLanguageSuccess(Locale('en')));
       }else{
-        await sp.setString("language", 'ar');
+        // await sp.setString("language", 'ar');
+        box.put("language", 'ar');
         emit(ChangeLanguageSuccess(Locale('ar')));
       }
     });

@@ -8,6 +8,7 @@ import 'package:pos_application/core/utils/device_dimension.dart';
 import '../../../../menu/bloc/add_menu/add_menu_cart_event.dart';
 import '../../../../menu/domain/add_menu_to_cart_repository.dart';
 import '../../../../menu/domain/cart_response.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class CartItemSelector extends StatefulWidget {
   final CartItem menuItem;
@@ -86,7 +87,7 @@ class CartItemSelectorState extends State<CartItemSelector> {
       child: IconButton(
         alignment: Alignment.center,
         highlightColor: AppColors.secondaryColor.withOpacity(.4),
-        tooltip: CustomMessages.toolTipMessage,
+        tooltip: AppLocalizations.of(context)!.toolTipMessage,
         icon: Icon(
           icon,
           color: AppColors.secondaryColor,

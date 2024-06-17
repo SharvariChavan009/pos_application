@@ -11,6 +11,7 @@ import '../../../../orders/domain/repository/order_list_repository.dart';
 import '../../../../orders/presentation/bloc/order_list/order_list_event.dart';
 import '../../bloc/menu_name_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 
 class SidebarPage extends StatefulWidget {
@@ -34,7 +35,7 @@ class SidebarPageState extends State<SidebarPage> {
   List<CollapsibleItem> get _generateItems {
     return [
       CollapsibleItem(
-        text: "home",
+        text: AppLocalizations.of(context)!.home,
         iconImage: AllIcons.home,
         isSelected: true,
         onPressed: () {

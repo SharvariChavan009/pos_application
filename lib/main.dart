@@ -38,9 +38,17 @@ import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 void main() async {
   await Hive.initFlutter();
+  var box = await Hive.openBox('LanguageData');
+  _fetchLanguage(box);
   runApp(const MyApp());
 }
-
+Locale? selectedLanguage = Locale('en');
+Locale _fetchLanguage(Box? box) {
+  String? storedLanguage = box!.get('language', defaultValue: 'en');
+  selectedLanguage = Locale(storedLanguage!);
+  print("selectedLanguage=${selectedLanguage}");
+  return Locale(storedLanguage!);
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -87,10 +95,11 @@ class MyApp extends StatelessWidget {
         child: BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
           builder: (context, state) {
             Locale? languageName;
+            languageName = selectedLanguage;
             if(state is ChangeLanguageSuccess){
               languageName = state.name;
-              print("languagage name =${languageName},code=${languageName!.languageCode}");
             }
+            print("languagae name =${languageName}");
             return MaterialApp.router(
               debugShowCheckedModeBanner: false,
               title: 'POS Applications',
