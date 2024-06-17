@@ -4,6 +4,7 @@ import 'package:pos_application/core/common/colors.dart';
 import 'package:pos_application/core/common/common_messages.dart';
 import 'package:pos_application/core/utils/device_dimension.dart';
 import 'package:pos_application/features/home/data/floor_tables.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class GuestSelector extends StatefulWidget {
   final FloorTable? floorTable;
@@ -82,7 +83,7 @@ class GuestSelectorState extends State<GuestSelector> {
       child: IconButton(
         alignment: Alignment.center,
         highlightColor: AppColors.secondaryColor.withOpacity(.4),
-        tooltip: CustomMessages.toolTipMessage,
+        tooltip: AppLocalizations.of(context)!.toolTipMessage,
         icon: Icon(
           icon,
           color: AppColors.secondaryColor,

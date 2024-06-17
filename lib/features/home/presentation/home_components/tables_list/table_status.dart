@@ -82,7 +82,7 @@ class _AllTableStatusState extends State<AllTableStatus> {
                         context,
                         type: ContentType.failure,
                         title: optionName!.addTable,
-                        message: CustomMessages.tableSelectionMessage,
+                        message: optionName!.tableSelectionMessage,
                       );
                     } else {
                       MainBodyTable.currentState?.addTable();

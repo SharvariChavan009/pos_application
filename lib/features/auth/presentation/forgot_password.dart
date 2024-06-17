@@ -19,6 +19,7 @@ import 'bloc/textfield_validation_bloc.dart';
 import 'bloc/textfield_validation_event.dart';
 import 'bloc/textfield_validation_state.dart';
 import 'login.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 TextEditingController createNewPasswordController = TextEditingController();
 TextEditingController confirmNewPasswordController = TextEditingController();
@@ -28,6 +29,7 @@ class ForgotPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var optionName = AppLocalizations.of(context);
     return Column(
       crossAxisAlignment:
       CrossAxisAlignment.center,
@@ -38,7 +40,7 @@ class ForgotPassword extends StatelessWidget {
               .center,
           child: Center(
             child: AutoSizeText(
-              'Forgot Password',
+              optionName!.forgotPassword,
               textAlign:
               TextAlign.center,
               minFontSize: 10,
@@ -54,7 +56,8 @@ class ForgotPassword extends StatelessWidget {
           ),
         ),
         AutoSizeText(
-          CustomMessages.forgotPasswordErrorMessage,
+          // CustomMessages.forgotPasswordErrorMessage,
+          optionName!.forgotPasswordErrorMessage,
           textAlign: TextAlign.center,
           minFontSize: 13,
           maxFontSize: 18,
@@ -87,7 +90,7 @@ class ForgotPassword extends StatelessWidget {
                 CustomTextField(
                   controller:
                   emailController,
-                  hintText: 'Email',
+                  hintText: optionName!.email,
                   cursorColor: AppColors
                       .secondaryColor,
                   borderColor: (state
@@ -120,7 +123,8 @@ class ForgotPassword extends StatelessWidget {
                           state
                           is TextfieldValidationInitial)
                           ? ''
-                          : CustomMessages.invalidEmailErrorMessage,
+                          // : CustomMessages.invalidEmailErrorMessage,
+                      : optionName!.invalidEmailErrorMessage,
                       minFontSize: 10,
                       maxFontSize: 14,
                       textAlign:
@@ -147,7 +151,7 @@ class ForgotPassword extends StatelessWidget {
             if(state is ForgotPasswordSuccess){
               OverlayManager.showSnackbar(context,
                   type: ContentType.success,
-                  title: "Forgot Password",
+                  title: optionName!.forgotPassword,
                   message: state.message);
             }
           },
@@ -159,7 +163,7 @@ class ForgotPassword extends StatelessWidget {
                     menuName: Screens.verificationCodeScreen));
               }
               return CustomButton(
-                text: 'Continue',
+                text: optionName!.continueM,
                 activeButtonColor: AppColors
                     .secondaryColor,
                 textStyle: CustomLabels
@@ -170,8 +174,8 @@ class ForgotPassword extends StatelessWidget {
                 onPressed: () {
                   OverlayManager.showSnackbar(context,
                       type: ContentType.help,
-                      title: "Forgot Password",
-                      message: CustomMessages.verificationCodeMessage);
+                      title: optionName!.forgotPassword,
+                      message: optionName!.verificationCodeMessage);
                   BlocProvider.of<
                       TextFieldValidationBloc>(
                       context)
@@ -200,17 +204,17 @@ class ForgotPassword extends StatelessWidget {
                 .add(MenuNameSelected(
                 context: context, menuName: Screens.loginScreen));
           },
-          child: const Row(
+          child:  Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
+              const Icon(
                 Icons.arrow_back_ios, // Choose the arrow icon you prefer
                 color: AppColors.iconColor,
                 size: 14, // Set the color of the arrow icon
               ),
               SizedBox(width: 4), // Add some space between the icon and text
               AutoSizeText(
-                'Back to Login',
+                optionName!.backToLogin,
                 minFontSize: 10,
                 maxFontSize: 14,
                 textAlign: TextAlign.left,

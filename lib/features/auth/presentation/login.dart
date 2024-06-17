@@ -32,6 +32,7 @@ import '../../../core/common/u_validations_all.dart';
 import '../../../core/images/image.dart';
 import '../../home/presentation/bloc/menu_name_event.dart';
 import 'forgot_password.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 TextEditingController emailController = TextEditingController();
 TextEditingController passwordController = TextEditingController();
@@ -41,6 +42,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var optionName = AppLocalizations.of(context);
     return Scaffold(
       body: BlocListener<LoginBloc, LoginState>(
         listener: (context, state) {
@@ -48,8 +50,8 @@ class LoginPage extends StatelessWidget {
           if (state is LoginFailure) {
             OverlayManager.showSnackbar(context,
                 type: ContentType.failure,
-                title: "Login Error",
-                message: CustomMessages.loginFailed);
+                title: optionName!.loginError,
+                message: optionName!.loginFailed);
           } else if (state is LoginSuccess) {
             customRouter.go('/home');
           }
@@ -147,8 +149,8 @@ class LoginPage extends StatelessWidget {
                                           const EdgeInsets.only(bottom: 280),
                                       child: Center(
                                         child: AutoSizeText(
-                                          'Embark on an extraordinary culinary journey with our \nenchantingly efficient POS experience.',
-                                          textAlign: TextAlign.center,
+                                          optionName!.loginWelcomeMsg,
+                                           textAlign: TextAlign.center,
                                           minFontSize: 13,
                                           maxFontSize: 18,
                                           style: CustomLabels.bodyTextStyle(
@@ -307,6 +309,7 @@ class LoginPage extends StatelessWidget {
 }
 
 Widget LoginColumn(BuildContext context) {
+  var optionName = AppLocalizations.of(context);
   return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
@@ -314,7 +317,7 @@ Widget LoginColumn(BuildContext context) {
         alignment: AlignmentDirectional.center,
         child: Center(
           child: AutoSizeText(
-            CustomMessages.loginWelcomeMessage,
+            optionName!.loginBack,
             textAlign: TextAlign.center,
             minFontSize: 10,
             maxFontSize: 30,
@@ -325,7 +328,7 @@ Widget LoginColumn(BuildContext context) {
         ),
       ),
       AutoSizeText(
-        CustomMessages.loginSecondaryMessage,
+        optionName!.loginSecondaryMessage,
         textAlign: TextAlign.center,
         minFontSize: 13,
         maxFontSize: 18,
@@ -347,7 +350,7 @@ Widget LoginColumn(BuildContext context) {
             children: [
               CustomTextField(
                 controller: emailController,
-                hintText: 'Email',
+                hintText: optionName!.email,
                 cursorColor: AppColors.secondaryColor,
                 borderColor: (state is TextFieldValidationSuccess ||
                         state is TextfieldValidationInitial)
@@ -366,7 +369,7 @@ Widget LoginColumn(BuildContext context) {
                     (state is TextFieldValidationSuccess ||
                             state is TextfieldValidationInitial)
                         ? ''
-                        : CustomMessages.invalidEmailErrorMessage,
+                        : optionName!.invalidEmailErrorMessage,
                     minFontSize: 10,
                     maxFontSize: 14,
                     textAlign: TextAlign.left,
@@ -392,7 +395,7 @@ Widget LoginColumn(BuildContext context) {
             children: [
               CustomTextField(
                 controller: passwordController,
-                hintText: 'Password',
+                hintText: optionName!.password,
                 obscureText: true,
                 inputType: CustomTextInputType.password,
                 cursorColor: AppColors.secondaryColor,
@@ -413,7 +416,7 @@ Widget LoginColumn(BuildContext context) {
                     (state is PasswordValidationSuccess ||
                             state is PasswordValidationInitial)
                         ? ''
-                        : CustomMessages.invalidPasswordErrorMessage,
+                        : optionName!.invalidPasswordErrorMessage,
                     minFontSize: 10,
                     maxFontSize: 14,
                     textAlign: TextAlign.left,
@@ -440,7 +443,7 @@ Widget LoginColumn(BuildContext context) {
               context: context, menuName: Screens.forgotPasswordScreen));
         },
         child: AutoSizeText(
-          'Forgot Password?',
+          optionName!.forgotPassword,
           textAlign: TextAlign.right,
           minFontSize: 13,
           maxFontSize: 18,
@@ -456,7 +459,7 @@ Widget LoginColumn(BuildContext context) {
         height: 20,
       ),
       CustomButton(
-        text: 'Login',
+        text: optionName!.login,
         activeButtonColor: AppColors.secondaryColor,
         textStyle: CustomLabels.bodyTextStyle(
             fontSize: 14, color: AppColors.darkColor),

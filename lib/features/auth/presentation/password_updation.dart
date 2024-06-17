@@ -11,11 +11,13 @@ import 'package:pos_application/core/common/w_custom_button.dart';
 import '../../../core/images/image.dart';
 import '../../home/presentation/bloc/menu_name_bloc.dart';
 import '../../home/presentation/bloc/menu_name_event.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 class PasswordUpdationScreen extends StatelessWidget {
   const PasswordUpdationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var optionName = AppLocalizations.of(context);
     return Column(
       crossAxisAlignment:
       CrossAxisAlignment.center,
@@ -32,7 +34,7 @@ class PasswordUpdationScreen extends StatelessWidget {
               .center,
           child: Center(
             child: AutoSizeText(
-              'Password Updated Successfully',
+              optionName!.passwordUpdatedSuccessfully,
               textAlign:
               TextAlign.center,
               minFontSize: 10,
@@ -48,7 +50,7 @@ class PasswordUpdationScreen extends StatelessWidget {
           ),
         ),
         AutoSizeText(
-          'Login Below',
+          optionName!.loginBelow,
           textAlign: TextAlign.center,
           minFontSize: 13,
           maxFontSize: 18,
@@ -67,7 +69,7 @@ class PasswordUpdationScreen extends StatelessWidget {
           height: 50,
         ),
         CustomButton(
-          text: 'Login',
+          text: optionName!.login,
           activeButtonColor: AppColors
               .secondaryColor,
           textStyle: CustomLabels

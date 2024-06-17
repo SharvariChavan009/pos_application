@@ -19,6 +19,7 @@ import '../../../../auth/widget/custom_snackbar.dart';
 import '../../../../menu/bloc/add_menu/add_menu_cart_event.dart';
 import '../../../../../core/common/custom_snackbar.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class FoodItemCard extends StatefulWidget {
   final MenuItem foodItem;
@@ -46,6 +47,7 @@ class FoodItemCardState extends State<FoodItemCard> {
 
   @override
   Widget build(BuildContext context) {
+    var optionName = AppLocalizations.of(context);
     return Card(
       elevation: 4.0,
       borderOnForeground: false,
@@ -218,8 +220,8 @@ class FoodItemCardState extends State<FoodItemCard> {
                                                 OverlayManager.showSnackbar(
                                                   context,
                                                   type: ContentType.failure,
-                                                  title: "Add item to cart",
-                                                  message: CustomMessages.addTableErrorMessage,
+                                                  title: optionName!.additemtocart,
+                                                  message: optionName!.addTableErrorMessage,
                                                 );
 
                                               }else {
@@ -242,8 +244,8 @@ class FoodItemCardState extends State<FoodItemCard> {
                                                     floorId, "add"));
                                               }
                                             },
-                                            child: const Text(
-                                              "Add",
+                                            child:  Text(
+                                              optionName!.add,
                                               style: TextStyle(
                                                   color: AppColors.whiteColor,
                                                   fontSize: 13,

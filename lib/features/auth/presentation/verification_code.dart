@@ -18,12 +18,14 @@ import 'bloc/forgot_password/forgot_password_event.dart';
 import 'bloc/textfield_validation_bloc.dart';
 import 'bloc/textfield_validation_event.dart';
 import 'login.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class VerificationCodeScreen extends StatelessWidget {
   const VerificationCodeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var optionName = AppLocalizations.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -31,7 +33,7 @@ class VerificationCodeScreen extends StatelessWidget {
           alignment: AlignmentDirectional.center,
           child: Center(
             child: AutoSizeText(
-              'Forgot Password',
+              optionName!.forgotPassword,
               textAlign: TextAlign.center,
               minFontSize: 10,
               maxFontSize: 30,
@@ -45,7 +47,7 @@ class VerificationCodeScreen extends StatelessWidget {
           height: 5,
         ),
         AutoSizeText(
-          CustomMessages.verificationCodeSuccessMessage,
+          optionName!.verificationCodeSuccessMessage,
           textAlign: TextAlign.center,
           minFontSize: 13,
           maxFontSize: 18,
@@ -81,7 +83,7 @@ class VerificationCodeScreen extends StatelessWidget {
           height: 20,
         ),
         CustomButton(
-          text: 'Submit',
+          text: optionName!.submit,
           activeButtonColor: AppColors.secondaryColor,
           textStyle: CustomLabels.bodyTextStyle(
               fontSize: 14, color: AppColors.darkColor),
@@ -98,7 +100,7 @@ class VerificationCodeScreen extends StatelessWidget {
             if(state is ForgotPasswordSuccess){
               OverlayManager.showSnackbar(context,
                   type: ContentType.success,
-                  title: "Forgot Password",
+                  title: optionName!.forgotPassword,
                   message: state.message);
             }
           },
@@ -106,18 +108,18 @@ class VerificationCodeScreen extends StatelessWidget {
             onTap: () {
               OverlayManager.showSnackbar(context,
                   type: ContentType.help,
-                  title: "Forgot Password",
-                  message: CustomMessages.verificationCodeMessage);
+                  title: optionName!.forgotPassword,
+                  message: optionName!.verificationCodeMessage);
               BlocProvider.of<ForgotPasswordBloc>(context)
                   .add(
                   ForgotPasswordButtonPressed(email: emailController.text));
             },
-            child: const Row(
+            child:  Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // Add some space between the icon and text
                 AutoSizeText(
-                  'Resend Code',
+                  optionName!.resendCode,
                   minFontSize: 10,
                   maxFontSize: 14,
                   textAlign: TextAlign.left,

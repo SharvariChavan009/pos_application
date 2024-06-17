@@ -20,6 +20,7 @@ import 'package:pos_application/features/home/presentation/bloc/menu_name_state.
 import '../../../core/common/u_validations_all.dart';
 import '../../home/presentation/bloc/menu_name_bloc.dart';
 import '../../home/presentation/bloc/menu_name_event.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 TextEditingController createNewPasswordController = TextEditingController();
 TextEditingController confirmNewPasswordController = TextEditingController();
@@ -30,6 +31,7 @@ class ResetPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var optionName = AppLocalizations.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -37,7 +39,7 @@ class ResetPasswordScreen extends StatelessWidget {
           alignment: AlignmentDirectional.center,
           child: Center(
             child: AutoSizeText(
-              'Reset Password',
+              optionName!.resetPassword,
               textAlign: TextAlign.center,
               minFontSize: 10,
               maxFontSize: 30,
@@ -48,7 +50,7 @@ class ResetPasswordScreen extends StatelessWidget {
           ),
         ),
         AutoSizeText(
-          'Create a New Password',
+          optionName!.createaNewPassword,
           textAlign: TextAlign.center,
           minFontSize: 13,
           maxFontSize: 18,
@@ -70,7 +72,7 @@ class ResetPasswordScreen extends StatelessWidget {
               children: [
                 CustomTextField(
                   controller: createNewPasswordController,
-                  hintText: 'Create New Password',
+                  hintText: optionName!.createaNewPassword,
                   obscureText: true,
                   inputType: CustomTextInputType.password,
                   cursorColor: AppColors.secondaryColor,
@@ -91,7 +93,7 @@ class ResetPasswordScreen extends StatelessWidget {
                       (state is PasswordValidationSuccess ||
                               state is PasswordValidationInitial)
                           ? ''
-                          : CustomMessages.invalidPasswordErrorMessage,
+                          : optionName!.invalidPasswordErrorMessage,
                       minFontSize: 10,
                       maxFontSize: 14,
                       textAlign: TextAlign.left,
@@ -123,7 +125,7 @@ class ResetPasswordScreen extends StatelessWidget {
               children: [
                 CustomTextField(
                   controller: confirmNewPasswordController,
-                  hintText: 'Confirm Password',
+                  hintText: optionName!.confirmPassword,
                   obscureText: true,
                   inputType: CustomTextInputType.password,
                   cursorColor: AppColors.secondaryColor,
@@ -144,7 +146,7 @@ class ResetPasswordScreen extends StatelessWidget {
                       (state is PasswordValidationSuccess ||
                               state is PasswordValidationInitial)
                           ? ''
-                          : CustomMessages.invalidPasswordErrorMessage,
+                          : optionName!.invalidPasswordErrorMessage,
                       minFontSize: 10,
                       maxFontSize: 14,
                       textAlign: TextAlign.left,
@@ -177,7 +179,7 @@ class ResetPasswordScreen extends StatelessWidget {
                 if (state is ResetPasswordSuccess) {
                   OverlayManager.showSnackbar(context,
                       type: ContentType.success,
-                      title: "Reset Password",
+                      title: optionName!.resetPassword,
                       message: state.message!);
                 }
               },
@@ -189,7 +191,7 @@ class ResetPasswordScreen extends StatelessWidget {
                         context: context, menuName: Screens.passwordUpdatedScreen));
                   }
                   return CustomButton(
-                      text: 'Submit',
+                      text: optionName!.submit,
                       activeButtonColor: AppColors.secondaryColor,
                       textStyle: CustomLabels.bodyTextStyle(
                           fontSize: 14, color: AppColors.darkColor),
@@ -215,8 +217,8 @@ class ResetPasswordScreen extends StatelessWidget {
                         } else {
                          OverlayManager.showSnackbar(context,
                              type: ContentType.failure,
-                             title: "Reset Password Error",
-                             message: CustomMessages.invalidPasswordErrorMessage);
+                             title: optionName!.resetPasswordError,
+                             message: optionName!.invalidPasswordErrorMessage);
                         }
                       });
                 },
@@ -232,7 +234,7 @@ class ResetPasswordScreen extends StatelessWidget {
             BlocProvider.of<MenuNameBloc>(context).add(MenuNameSelected(
                 context: context, menuName: Screens.loginScreen));
           },
-          child: const Row(
+          child:  Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
@@ -242,7 +244,7 @@ class ResetPasswordScreen extends StatelessWidget {
               ),
               SizedBox(width: 4), // Add some space between the icon and text
               AutoSizeText(
-                'Back to Login',
+                optionName!.backToLogin,
                 minFontSize: 10,
                 maxFontSize: 14,
                 textAlign: TextAlign.left,

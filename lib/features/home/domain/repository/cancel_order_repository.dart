@@ -30,7 +30,7 @@ class CancelOrderBloc extends Bloc<CancelOrderEvent, CancelOrderState> {
         final response = await _dio.post(
           "$url/${event.floorTableId}/cancel",
           data: {
-            "reason": CustomMessages.cancelCodeReasonMessage,
+            "reason": "Order Gets Delayed",
           },
           options: Options(
             headers: {'Content-Type': 'application/json',
