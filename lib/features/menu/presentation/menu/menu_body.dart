@@ -40,14 +40,13 @@ class ListOfMenus extends StatelessWidget {
               listener: (context, state) {
                 if (state is MenuListStateSuccess) {
                   menuItems = state.menus;
-                  tempMenuItems = menuItems;
+                  tempMenuItems = menuItems.where((item) => item.active).toList();
                   BlocProvider.of<UpdateTimerBloc>(context)
                       .add(UpdateTimerPressed());
                 } else {
                   tempMenuItems = menuItems;
                 }
                 List<MenuCategories> menuCategories = [];
-
                 for (int i = 0; i < tempMenuItems.length; i++) {
                   for (int j = 0;
                       j < tempMenuItems[i].menuCategories.length;

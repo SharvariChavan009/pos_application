@@ -29,12 +29,12 @@ class _SplashScreenState extends State<SplashScreen> {
       () {
         setState(
           () {
-            isLogoVisible = false;
+            isLogoVisible = true;
           },
         );
       },
     );
-    Future.delayed(const Duration(milliseconds: 50), () {
+    Future.delayed(const Duration(milliseconds: 5000), () {
       try {
         String? authToken = box.get("authToken");
         print("authToken =$authToken");
@@ -87,15 +87,15 @@ class _SplashScreenState extends State<SplashScreen> {
             const FadeOutParticle(
               curve: Easing.emphasizedAccelerate,
               disappear: true,
-              duration: Duration(milliseconds: 4000),
+              duration: Duration(milliseconds: 50),
               child: AutoSizeText(
                 'Empowering Your Culinary Journey',
                 minFontSize: 25,
                 maxFontSize: 30,
                 textAlign: TextAlign.end,
                 style: TextStyle(
-                  color: AppColors.whiteColor,
-                  decorationColor: AppColors.whiteColor,
+                  color: AppColors.darkColor,
+                  decorationColor: AppColors.darkColor,
                   fontSize: 30,
                   fontWeight: CustomLabels.largeFontWeight,
                   fontFamily: CustomLabels.secondaryFont,
@@ -124,8 +124,8 @@ class _SplashScreenState extends State<SplashScreen> {
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(
-                    AppImage.splash,
-                  ),
+              "assets/image/splash.webp",
+            ),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -198,3 +198,155 @@ class SplashLoadingState extends SplashState {}
 class SplashLoadedState extends SplashState {}
 
 class SplashDoneState extends SplashState {}
+
+
+
+
+//digvijay
+//
+//
+// class SplashScreen extends StatefulWidget {
+//   const SplashScreen({super.key});
+//
+//   @override
+//   State<SplashScreen> createState() => _SplashScreenState();
+// }
+//
+// class _SplashScreenState extends State<SplashScreen> {
+//   bool isLogoVisible = true;
+//
+//   Future<void> checkLoginStatus() async {
+//     var box = await Hive.openBox('authBox');
+//
+//     // header["Authorization"]="Bearer ${box.get("authToken")}";
+//     Future.delayed(
+//       const Duration(milliseconds: 300),
+//           () {
+//         setState(
+//               () {
+//             isLogoVisible = false;
+//           },
+//         );
+//       },
+//     );
+//     Future.delayed(const Duration(milliseconds: 3000), () {
+//       try {
+//         String? authToken = box.get("authToken");
+//         print("authToken =$authToken");
+//         Navigator.of(context).push(
+//           MyCustomRouteTransition(
+//             route: (box.get("authToken") == null)
+//                 ? const LoginPage()
+//                 : HomeScreen(),
+//           ),
+//         );
+//       } catch (e) {
+//         debugPrint('Error navigating to LoginScreen: $e');
+//       }
+//     });
+//   }
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//
+//     checkLoginStatus();
+//   }
+//
+//   Future<bool> isImageSets() {
+//     return Future.delayed(
+//       const Duration(seconds: 2),
+//           () => false,
+//     );
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     bool isLogoVisible = true;
+//
+//     Widget getAnimationContainer({bool isImageSet = true}) {
+//       return LayoutBuilder(
+//         builder: (context, size) {
+//           return Stack(
+//             alignment: Alignment.center,
+//             children: [
+//               AnimatedPositioned(
+//                 height:
+//                 isImageSet ? 550 : MediaQuery.of(context).size.height / 1.5,
+//                 width: isImageSet ? 550 : 250,
+//                 curve: Curves.fastOutSlowIn,
+//                 duration: const Duration(seconds: 1),
+//                 top: isImageSet ? size.maxHeight : 20,
+//                 child: Image.asset(
+//                   "assets/image/Logo1.webp",
+//                   height: 300,
+//                   width: 500,
+//                   fit: BoxFit.fitWidth,
+//                 ),
+//               ),
+//               const FadeOutParticle(
+//                 curve: Easing.emphasizedAccelerate,
+//                 disappear: true,
+//                 duration: Duration(milliseconds: 50),
+//                 child: AutoSizeText(
+//                   'Empowering Your Culinary Journey',
+//                   minFontSize: 25,
+//                   maxFontSize: 30,
+//                   textAlign: TextAlign.end,
+//                   style: TextStyle(
+//                     color: Colors.black,
+//                     decorationColor: AppColors.whiteColor,
+//                     fontSize: 30,
+//                     fontWeight: CustomLabels.largeFontWeight,
+//                     fontFamily: CustomLabels.secondaryFont,
+//                   ),
+//                   maxLines: 1,
+//                 ),
+//               )
+//             ],
+//           );
+//         },
+//       );
+//     }
+//
+//     return Scaffold(
+//       extendBodyBehindAppBar: false,
+//       extendBody: true,
+//       body: Container(
+//         height: double.infinity,
+//         width: double.infinity,
+//         decoration: const BoxDecoration(
+//           // color: Colors.white
+//           image: DecorationImage(
+//             image: AssetImage(
+//               "assets/image/splash.webp",
+//             ),
+//             fit: BoxFit.cover,
+//           ),
+//         ),
+//         child: SingleChildScrollView(
+//           child: Stack(
+//             children: [
+//               Center(
+//                 child: Hero(
+//                   tag: 'Logo',
+//                   child: AnimatedOpacity(
+//                     duration: const Duration(seconds: 2),
+//                     // ignore: dead_code
+//                     opacity: isLogoVisible ? 1.0 : 1.0,
+//                     child: Center(
+//                       child: SizedBox(
+//                         height: MediaQuery.of(context).size.height,
+//                         child: getAnimationContainer(isImageSet: isLogoVisible),
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

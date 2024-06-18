@@ -88,5 +88,13 @@
   "oK" : "نعم",
   "payments" : "المدفوعات",
   "paymentMode": "طريقة الدفع",
-  "home" : "بيت"
+  "home" : "بيت",
+  "srNo" : "الأب رقم",
+  "image" : "صورة",
+  "menuName" : "اسم القائمة",
+  "type" : "يكتب",
+  "category" : "فئة",
+  "price" : "سعر",
+  "active" : "نشيط"
+
 }

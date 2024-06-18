@@ -1,8 +1,30 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_application/core/common/colors.dart';
 import 'package:pos_application/core/common/label.dart';
 import 'package:pos_application/core/images/image.dart';
+import 'package:pos_application/features/home/data/menu_list.dart';
+import 'package:pos_application/features/home/domain/repository/menus_repository.dart';
+import 'package:pos_application/features/home/presentation/bloc/menu_list_state.dart';
+import 'package:pos_application/features/menu/domain/cart_response.dart';
+
+import '../../../../../core/common/api_methods.dart';
+import '../../../../../core/common/icon.dart';
+import '../../../../home/domain/repository/cancel_order_repository.dart';
+import '../../../../home/presentation/bloc/menu_list_event.dart';
+import '../../../../home/presentation/bloc/menu_name_bloc.dart';
+import '../../../../home/presentation/bloc/menu_name_event.dart';
+import '../../../../home/presentation/bloc/order_bloc/cancel_order_event.dart';
+import '../../../../orders/data/order_data.dart';
+import '../../../../orders/domain/repository/order_list_repository.dart';
+import '../../../../orders/presentation/bloc/order_list/order_list_event.dart';
+import '../../../../orders/presentation/bloc/order_list/order_list_state.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
+
+import '../../../../orders/presentation/orders/order_status.dart';
+
 
 class MenuListSetting extends StatefulWidget {
   const MenuListSetting({super.key});
@@ -15,190 +37,25 @@ class MenuListSettingState extends State<MenuListSetting> {
   int _rowsPerPage = 10;
   int _sortColumnIndex = 0;
   bool _sortAscending = true;
-  bool _selectAll = false;
-  Image imageUrl = Image.asset('assets/image/pizza.webp');
+  String? currency;
 
-  List<Map<String, dynamic>> menus = [
-    {
-      'orderNumber': '001',
-      'amount': '\$10',
-      'guest': '1',
-      'tableNumber': '1',
-      'guestName': 'Leya',
-      'orderStatus': 'Pending',
-    },
-    {
-      'orderNumber': '002',
-      'amount': '\$50',
-      'guest': '2',
-      'tableNumber': '2',
-      'guestName': 'Deanna',
-      'orderStatus': 'Serving',
-    },
-    {
-      'orderNumber': '003',
-      'amount': '\$150',
-      'guest': '3',
-      'tableNumber': '3',
-      'guestName': 'Emam',
-      'orderStatus': 'Completed',
-    },
-    {
-      'orderNumber': '004',
-      'amount': '\$20',
-      'guest': '4',
-      'tableNumber': '4',
-      'guestName': 'John',
-      'orderStatus': 'Pending',
-    },
-    {
-      'orderNumber': '005',
-      'amount': '\$30',
-      'guest': '5',
-      'tableNumber': '5',
-      'guestName': 'Alice',
-      'orderStatus': 'Serving',
-    },
-    {
-      'orderNumber': '006',
-      'amount': '\$40',
-      'guest': '6',
-      'tableNumber': '6',
-      'guestName': 'Bob',
-      'orderStatus': 'Completed',
-    },
-    {
-      'orderNumber': '007',
-      'amount': '\$60',
-      'guest': '7',
-      'tableNumber': '7',
-      'guestName': 'Sarah',
-      'orderStatus': 'Pending',
-    },
-    {
-      'orderNumber': '008',
-      'amount': '\$70',
-      'guest': '8',
-      'tableNumber': '8',
-      'guestName': 'Michael',
-      'orderStatus': 'Serving',
-    },
-    {
-      'orderNumber': '009',
-      'amount': '\$80',
-      'guest': '9',
-      'tableNumber': '9',
-      'guestName': 'Sophia',
-      'orderStatus': 'Completed',
-    },
-    {
-      'orderNumber': '010',
-      'amount': '\$90',
-      'guest': '10',
-      'tableNumber': '10',
-      'guestName': 'David',
-      'orderStatus': 'Pending',
-    },
-    {
-      'orderNumber': '011',
-      'amount': '\$100',
-      'guest': '11',
-      'tableNumber': '11',
-      'guestName': 'Emily',
-      'orderStatus': 'Serving',
-    },
-    {
-      'orderNumber': '012',
-      'amount': '\$110',
-      'guest': '12',
-      'tableNumber': '12',
-      'guestName': 'William',
-      'orderStatus': 'Completed',
-    },
-    {
-      'orderNumber': '013',
-      'amount': '\$120',
-      'guest': '13',
-      'tableNumber': '13',
-      'guestName': 'Olivia',
-      'orderStatus': 'Pending',
-    },
-    {
-      'orderNumber': '014',
-      'amount': '\$130',
-      'guest': '14',
-      'tableNumber': '14',
-      'guestName': 'James',
-      'orderStatus': 'Serving',
-    },
-    {
-      'orderNumber': '015',
-      'amount': '\$140',
-      'guest': '15',
-      'tableNumber': '15',
-      'guestName': 'Ava',
-      'orderStatus': 'Completed',
-    },
-    {
-      'orderNumber': '016',
-      'amount': '\$160',
-      'guest': '16',
-      'tableNumber': '16',
-      'guestName': 'Alexander',
-      'orderStatus': 'Pending',
-    },
-    {
-      'orderNumber': '017',
-      'amount': '\$170',
-      'guest': '17',
-      'tableNumber': '17',
-      'guestName': 'Mia',
-      'orderStatus': 'Serving',
-    },
-    {
-      'orderNumber': '018',
-      'amount': '\$180',
-      'guest': '18',
-      'tableNumber': '18',
-      'guestName': 'Benjamin',
-      'orderStatus': 'Completed',
-    },
-    {
-      'orderNumber': '019',
-      'amount': '\$190',
-      'guest': '19',
-      'tableNumber': '19',
-      'guestName': 'Charlotte',
-      'orderStatus': 'Pending',
-    },
-    {
-      'orderNumber': '020',
-      'amount': '\$200',
-      'guest': '20',
-      'tableNumber': '20',
-      'guestName': 'Ethan',
-      'orderStatus': 'Serving',
-    },
-    {
-      'orderNumber': '001',
-      'amount': '\$10',
-      'guest': '1',
-      'tableNumber': '1',
-      'guestName': 'Leya',
-      'orderStatus': 'Pending',
-    },
-    {
-      'orderNumber': '002',
-      'amount': '\$50',
-      'guest': '2',
-      'tableNumber': '2',
-      'guestName': 'Deanna',
-      'orderStatus': 'Serving',
-    },
-  ];
+  List<MenuItem> orders = [];
+  List<MenuItem> sortedOrders = [];
+  List<MenuItem> resultOrders = [];
+  @override
+  void initState() {
+    super.initState();
+    fetchCurrency();
+  }
+
+  void fetchCurrency() async {
+    currency = await ApiMethods.getCurrency();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
+    var optionName = AppLocalizations.of(context);
     return Theme(
       data: ThemeData(
         dataTableTheme: DataTableThemeData(
@@ -206,298 +63,320 @@ class MenuListSettingState extends State<MenuListSetting> {
               (states) => AppColors.primaryColor),
         ),
       ),
-      child: Container(
-        decoration: const BoxDecoration(
-          color: AppColors.primaryColor,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-             // Expanded(flex: 1, child: OrderStatus(menus)),//uncomment when its required.
-            Expanded(
-              flex: 10,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: PaginatedDataTable(
-                  horizontalMargin: 10,
-                  showEmptyRows: false,
-                  showCheckboxColumn: false,
-                  showFirstLastButtons: true,
-                  headingRowColor: MaterialStateColor.resolveWith(
-                      (states) => AppColors.primaryColor),
-                  arrowHeadColor: AppColors.secondaryColor,
-                  columnSpacing: 60,
-                  rowsPerPage: _rowsPerPage,
-                  onRowsPerPageChanged: (value) {
-                    setState(
-                      () {
-                        _rowsPerPage =
-                            value ?? PaginatedDataTable.defaultRowsPerPage;
-                      },
-                    );
-                  },
-                  sortAscending: _sortAscending,
-                  sortColumnIndex: _sortColumnIndex,
-                  columns: [
-                    DataColumn(
-                      label: Checkbox(
-                        activeColor: AppColors.secondaryColor,
-                        side: BorderSide(
-                            color: AppColors.whiteColor.withOpacity(.8)),
-                        checkColor: AppColors.whiteColor,
-                        tristate: true,
-                        value: _selectAll,
-                        onChanged: (value) {
+      child:
+          BlocBuilder<MenuListBloc, MenuListState>(builder: (context, state) {
+        switch (state.runtimeType) {
+          case MenuListStateInitial:
+            BlocProvider.of<MenuListBloc>(context).add(MenuListButtonPressed());
+            return const Center(child: CircularProgressIndicator());
+          case MenuListStateSuccess:
+            final successState = state as MenuListStateSuccess;
+            orders = successState.menus!;
+            print(orders.length);
+            if (orders.isEmpty) {
+              return Center(
+                child: Text(
+                  optionName!.noOrdersFound,
+                  style: const TextStyle(
+                    fontSize: 30.0,
+                    color: AppColors.whiteColor,
+                    fontFamily: CustomLabels.primaryFont,
+                  ),
+                ),
+              );
+            } else {
+              resultOrders = orders;
+            }
+
+            break;
+        }
+        return Container(
+          margin:
+              const EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 0),
+          decoration: const BoxDecoration(
+            color: AppColors.primaryColor,
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(10),
+              topLeft: Radius.circular(10),
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 1,
+                child: Container(
+                  padding: const EdgeInsets.only(left: 20),
+                  alignment: Alignment.centerLeft,
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(color: AppColors.iconColor, width: .5),
+                    ),
+                  ),
+                  child: Text(
+                    optionName!.menuList,
+                    style: const TextStyle(
+                      letterSpacing: .8,
+                      color: AppColors.whiteColor,
+                      fontFamily: CustomLabels.primaryFont,
+                      fontWeight: CustomLabels.mediumFontWeight,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+              ),
+              // Expanded(flex: 1, child: OrderStatus(orders)),
+              const SizedBox(
+                height: 5,
+              ),
+              Expanded(
+                flex: 10,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: PaginatedDataTable(
+                    horizontalMargin: 10,
+                    showEmptyRows: false,
+                    showFirstLastButtons: true,
+                    headingRowColor: MaterialStateColor.resolveWith(
+                        (states) => AppColors.primaryColor),
+                    arrowHeadColor: AppColors.secondaryColor,
+                    columnSpacing: 60,
+                    rowsPerPage: _rowsPerPage,
+                    onRowsPerPageChanged: (value) {
+                      setState(
+                        () {
+                          _rowsPerPage =
+                              value ?? PaginatedDataTable.defaultRowsPerPage;
+                        },
+                      );
+                    },
+                    sortAscending: _sortAscending,
+                    sortColumnIndex: _sortColumnIndex,
+                    columns: [
+                        DataColumn2(
+                        label: Text(
+                          optionName!.srNo,
+                          style: TextStyle(
+                              color: AppColors.iconColor,
+                              fontFamily: CustomLabels.primaryFont),
+                        ),
+                      ),
+                       DataColumn2(
+                        label: Text(
+                          optionName!.image,
+                          style: TextStyle(
+                              color: AppColors.iconColor,
+                              fontFamily: CustomLabels.primaryFont),
+                        ),
+                      ),
+                       DataColumn2(
+                        label: Center(
+                            child:Text(
+                          optionName!.menuName,
+                          style: TextStyle(
+                              color: AppColors.iconColor,
+                              fontFamily: CustomLabels.primaryFont),
+                        )),
+                        onSort: (columnIndex, ascending) {
                           setState(() {
-                            _selectAll = value ?? false;
-                            // Update the selection status of each row
-                            for (var menu in menus) {
-                              menu['selected'] = _selectAll;
+                            _sortColumnIndex = columnIndex;
+                            _sortAscending = ascending;
+                            if (ascending) {
+                              resultOrders.sort((a, b) =>
+                                  a.name!
+                                      .compareTo(b.name!));
+                            } else {
+                              resultOrders.sort((a, b) =>
+                                  b.name!
+                                      .compareTo(a.name!));
                             }
                           });
                         },
                       ),
-                    ),
-                    const DataColumn(
-                      label: Text('Images'),
-                    ),
-                    DataColumn2(
-                      label: const Text(
-                        'Order Number',
-                        style: TextStyle(
-                            color: AppColors.iconColor,
-                            fontFamily: CustomLabels.primaryFont),
+                      DataColumn2(
+                        label:  Text(
+                          optionName!.type,
+                          style: TextStyle(
+                              color: AppColors.iconColor,
+                              fontFamily: CustomLabels.primaryFont),
+                        ),
+                        onSort: (columnIndex, ascending) {
+                          setState(() {
+                            _sortColumnIndex = columnIndex;
+                            _sortAscending = ascending;
+                            if (ascending) {
+                              resultOrders.sort((a, b) =>
+                                  a.type.compareTo(
+                                      b.type));
+                            } else {
+                              resultOrders.sort((a, b) =>
+                                  b.type.compareTo(
+                                      a.type));
+                            }
+                          });
+                        },
                       ),
-                      onSort: (columnIndex, ascending) {
-                        setState(() {
-                          _sortColumnIndex = columnIndex;
-                          _sortAscending = ascending;
-                          if (ascending) {
-                            menus.sort((a, b) =>
-                                a['orderNumber'].compareTo(b['orderNumber']));
-                          } else {
-                            menus.sort((a, b) =>
-                                b['orderNumber'].compareTo(a['orderNumber']));
-                          }
-                        });
-                      },
-                    ),
-                    DataColumn2(
-                      label: const Text(
-                        'Amount',
-                        style: TextStyle(
-                            color: AppColors.iconColor,
-                            fontFamily: CustomLabels.primaryFont),
+                      DataColumn2(
+                        label:  Text(
+                          optionName!.category,
+                          style: TextStyle(
+                              color: AppColors.iconColor,
+                              fontFamily: CustomLabels.primaryFont),
+                        ),
+                        onSort: (columnIndex, ascending) {
+                          setState(() {
+                            _sortColumnIndex = columnIndex;
+                            _sortAscending = ascending;
+                            if (ascending) {
+                              resultOrders.sort((a, b) =>
+                                  a.menuCategories.first.name.compareTo(
+                                      b.menuCategories.first.name!));
+                            } else {
+                              resultOrders.sort((a, b) =>
+                                  b.menuCategories.first.name.compareTo(
+                                      a.menuCategories.first.name));
+                            }
+                          });
+                        },
                       ),
-                      onSort: (columnIndex, ascending) {
-                        setState(() {
-                          _sortColumnIndex = columnIndex;
-                          _sortAscending = ascending;
-                          if (ascending) {
-                            menus.sort(
-                                (a, b) => a['amount'].compareTo(b['amount']));
-                          } else {
-                            menus.sort(
-                                (a, b) => b['amount'].compareTo(a['amount']));
-                          }
-                        });
-                      },
-                    ),
-                    DataColumn2(
-                      label: const Text(
-                        'Guest',
-                        style: TextStyle(
-                            color: AppColors.iconColor,
-                            fontFamily: CustomLabels.primaryFont),
+                       DataColumn2(
+                        label: Text(
+                          "${optionName.price} {In ${currency}}",
+                          style: TextStyle(
+                              color: AppColors.iconColor,
+                              fontFamily: CustomLabels.primaryFont),
+                        ),
+                        onSort: (columnIndex, ascending) {
+                          setState(() {
+                            _sortColumnIndex = columnIndex;
+                            _sortAscending = ascending;
+                            if (ascending) {
+                              resultOrders.sort((a, b) =>
+                                  a.price
+                                      .compareTo(b.price));
+                            } else {
+                              resultOrders.sort((a, b) =>
+                                  b.price
+                                      .compareTo(a.price));
+                            }
+                          });
+                        },
                       ),
-                      onSort: (columnIndex, ascending) {
-                        setState(() {
-                          _sortColumnIndex = columnIndex;
-                          _sortAscending = ascending;
-                          if (ascending) {
-                            menus.sort(
-                                (a, b) => a['guest'].compareTo(b['guest']));
-                          } else {
-                            menus.sort(
-                                (a, b) => b['guest'].compareTo(a['guest']));
-                          }
-                        });
-                      },
-                    ),
-                    DataColumn2(
-                      label: const Text(
-                        'Table Number',
-                        style: TextStyle(
-                            color: AppColors.iconColor,
-                            fontFamily: CustomLabels.primaryFont),
+                       DataColumn2(
+                        label: Text(
+                          optionName!.active,
+                          style: const TextStyle(
+                              color: AppColors.iconColor,
+                              fontFamily: CustomLabels.primaryFont),
+                        ),
                       ),
-                      onSort: (columnIndex, ascending) {
-                        setState(() {
-                          _sortColumnIndex = columnIndex;
-                          _sortAscending = ascending;
-                          if (ascending) {
-                            menus.sort((a, b) =>
-                                a['tableNumber'].compareTo(b['tableNumber']));
-                          } else {
-                            menus.sort((a, b) =>
-                                b['tableNumber'].compareTo(a['tableNumber']));
-                          }
-                        });
-                      },
-                    ),
-                    DataColumn2(
-                      label: const Text(
-                        'Guest Name',
-                        style: TextStyle(
-                            color: AppColors.iconColor,
-                            fontFamily: CustomLabels.primaryFont),
-                      ),
-                      onSort: (columnIndex, ascending) {
-                        setState(() {
-                          _sortColumnIndex = columnIndex;
-                          _sortAscending = ascending;
-                          if (ascending) {
-                            menus.sort((a, b) =>
-                                a['guestName'].compareTo(b['guestName']));
-                          } else {
-                            menus.sort((a, b) =>
-                                b['guestName'].compareTo(a['guestName']));
-                          }
-                        });
-                      },
-                    ),
-                    DataColumn2(
-                      label: const Text(
-                        'Order Status',
-                        style: TextStyle(
-                            color: AppColors.iconColor,
-                            fontFamily: CustomLabels.primaryFont),
-                      ),
-                      onSort: (columnIndex, ascending) {
-                        setState(() {
-                          _sortColumnIndex = columnIndex;
-                          _sortAscending = ascending;
-                          if (ascending) {
-                            menus.sort((a, b) =>
-                                a['orderStatus'].compareTo(b['orderStatus']));
-                          } else {
-                            menus.sort((a, b) =>
-                                b['orderStatus'].compareTo(a['orderStatus']));
-                          }
-                        });
-                      },
-                    ),
-                    DataColumn2(
-                      label: const Text(
-                        'Action',
-                        style: TextStyle(
-                            color: AppColors.iconColor,
-                            fontFamily: CustomLabels.primaryFont),
-                      ),
-                      onSort: (columnIndex, ascending) {
-                        // No need to sort the Action column
-                      },
-                    ),
-                  ],
-                  source: OrderDataSource(menus),
+                    ],
+                    source: OrderDataSource(resultOrders, context,currency),
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ),
+            ],
+          ),
+        );
+      }),
     );
   }
 }
 
 class OrderDataSource extends DataTableSource {
-  final List<Map<String, dynamic>> orders;
+  final List<MenuItem> orders;
+  BuildContext context;
+  String? Currency;
+  OrderDataSource(this.orders, this.context, this.Currency);
 
-  OrderDataSource(this.orders);
 
   @override
   DataRow? getRow(int index) {
     if (index >= orders.length) return null;
-    final order = orders[index];
-    return DataRow.byIndex(
-        index: index,
-        selected: order['selected'] ?? false,
-        onSelectChanged: (selected) {
-          if (selected != null) {
-            orders[index]['selected'] = selected;
-          }
-        },
-        cells: [
-          DataCell(
-            Checkbox(
-              value: order['selected'] ?? false,
-              onChanged: (value) {
-                if (value != null) {
-                  orders[index]['selected'] = value;
-                }
-              },
-            ),
-          ),
-          DataCell(
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 3),
-              child: Image.asset(
-                AppImage.pizza,
-                width: 50,
-                height: 50,
+    var optionName = AppLocalizations.of(context);
+    final menus = orders[index];
+    var id = index + 1 ;
+    return DataRow(cells: [
+      DataCell(Center(
+        child: Text(
+          id.toString(),
+          style: const TextStyle(
+              fontFamily: CustomLabels.primaryFont,
+              color: AppColors.whiteColor),
+        ),
+      )),
+      DataCell(
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 3),
+          child: CachedNetworkImage(
+            imageUrl: menus.images.first,
+            imageBuilder: (context, imageProvider) => Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: imageProvider,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-          DataCell(
-            Text(
-              order['orderNumber'].toString(),
-              style: const TextStyle(
-                  fontFamily: CustomLabels.primaryFont,
-                  color: AppColors.whiteColor),
+            placeholder: (context, url) => LinearProgressIndicator(
+              color: Colors.transparent,
+              backgroundColor: AppColors.secondaryColor.withOpacity(.1),
             ),
+            errorWidget: (context, url, error) {
+              return const Icon(Icons.error);
+            },
           ),
-          DataCell(
-            Text(
-              order['amount'].toString(),
-              style: const TextStyle(
-                  fontFamily: CustomLabels.primaryFont,
-                  color: AppColors.secondaryColor),
-            ),
+        ),
+      ),
+      DataCell(Center(
+          child: Text(
+        menus.name,
+        style: TextStyle(
+            fontFamily: CustomLabels.primaryFont, color: AppColors.whiteColor),
+      ))),
+      DataCell(Center(
+          child: Row(children: [
+        Text(
+          menus.type,
+          style: const TextStyle(
+              fontFamily: CustomLabels.primaryFont,
+              color: AppColors.whiteColor),
+        ),
+         const SizedBox(
+           width: 5,
+         ),
+         Image.asset(
+         changeIcon(menus.type),
+          height: 20,
+          width: 20,
+        ),
+      ]))),
+      DataCell(Text(
+        menus.menuCategories.first.name,
+        style: TextStyle(
+            fontFamily: CustomLabels.primaryFont, color: AppColors.whiteColor),
+      )),
+      DataCell(Center(
+        child: Text(
+          menus.price,
+          style: TextStyle(
+            fontFamily: CustomLabels.primaryFont,
+            color: changeColor("Placed"),
           ),
-          DataCell(Text(
-            order['guest'].toString(),
-            style: const TextStyle(
-                fontFamily: CustomLabels.primaryFont,
-                color: AppColors.whiteColor),
-          )),
-          DataCell(Text(
-            order['tableNumber'].toString(),
-            style: const TextStyle(
-                fontFamily: CustomLabels.primaryFont,
-                color: AppColors.whiteColor),
-          )),
-          DataCell(Text(
-            order['guestName'].toString(),
-            style: const TextStyle(
-                fontFamily: CustomLabels.primaryFont,
-                color: AppColors.whiteColor),
-          )),
-          DataCell(
-            Text(
-              order['orderStatus'].toString(),
-              style: const TextStyle(
-                  fontFamily: CustomLabels.primaryFont, color: Colors.yellow),
-            ),
+        ),
+      )),
+      DataCell(Center(
+        child: Transform.scale(
+          scale: 0.5, // Adjust the scale to make the Switch smaller
+          child: Switch(
+            value: menus.active ? true : false,
+            activeColor: Colors.blue,
+            onChanged: (bool value) {},
           ),
-          const DataCell(InkWell(
-            child: Text(
-              'View Order',
-              style: TextStyle(
-                  fontFamily: CustomLabels.primaryFont,
-                  color: AppColors.secondaryColor),
-            ),
-          )),
-        ]);
+        ),
+
+      )),
+    ]);
   }
 
   @override
@@ -508,4 +387,36 @@ class OrderDataSource extends DataTableSource {
 
   @override
   int get selectedRowCount => 0;
+}
+
+MaterialColor changeColor(String name) {
+  switch (name) {
+    case "Placed" || "وضعت":
+      return Colors.green;
+    case "Cancelled" || "ألغيت":
+      return Colors.red;
+    case "Preparing" || "خطة":
+      return Colors.yellow;
+    case "Ready" || "مستعد":
+      return Colors.orange;
+    case "Completed" || "مكتمل":
+      return Colors.blue;
+    default:
+      return Colors.red;
+  }
+}
+
+String changeIcon(String typeName){
+  switch (typeName) {
+    case "Veg":
+      return AllIcons.veg;
+    case "NonVeg":
+      return AllIcons.chkn;
+    case "Egg":
+      return AllIcons.egg;
+    case "Vegan":
+      return AllIcons.vegan;
+    default:
+      return AllIcons.veg;
+  }
 }

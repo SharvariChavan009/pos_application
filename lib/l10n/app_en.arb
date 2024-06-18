@@ -88,6 +88,14 @@
   "oK" : "OK",
   "payments" : "Payments",
   "paymentMode": "Payment Mode",
-  "home" : "Home"
+  "home" : "Home",
+
+  "srNo" : "Sr. No",
+  "image" : "Image",
+  "menuName" : "Menu Name",
+  "type" : "Type",
+  "category" : "Category",
+  "price" : "Price",
+  "active" : "Active"
 
 }

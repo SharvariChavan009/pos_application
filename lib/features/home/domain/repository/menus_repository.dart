@@ -16,7 +16,7 @@ class MenuListBloc  extends Bloc<MenuListEvent,MenuListState>{
     _dio.interceptors.add(PrettyDioLogger(
       requestHeader: true,
       requestBody: true,
-      responseBody: false,
+      responseBody: true,
       responseHeader: true,
       error: true,
       compact: true,
