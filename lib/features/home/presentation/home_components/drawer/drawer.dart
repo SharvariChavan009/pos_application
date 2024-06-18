@@ -35,7 +35,7 @@ class SidebarPageState extends State<SidebarPage> {
   List<CollapsibleItem> get _generateItems {
     return [
       CollapsibleItem(
-        text: AppLocalizations.of(context)!.home,
+        text: "Home",
         iconImage: AllIcons.home,
         isSelected: true,
         onPressed: () {

@@ -18,6 +18,7 @@ class AllIcons {
   static const lang = "assets/icons/lang.svg";
   static const notif = "assets/icons/notif.svg";
   static const sound = "assets/icons/sound.svg";
+  static const vegan = "assets/icons/vegan.webp";
 }
 
 class AppImage {

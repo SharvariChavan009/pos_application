@@ -23,7 +23,6 @@ import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class FoodItemCard extends StatefulWidget {
   final MenuItem foodItem;
-
   const FoodItemCard({super.key, required this.foodItem});
 
   @override
@@ -33,7 +32,6 @@ class FoodItemCard extends StatefulWidget {
 class FoodItemCardState extends State<FoodItemCard> {
   bool hColor = false;
   String? currency;
-
   @override
   void initState() {
     super.initState();
