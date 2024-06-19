@@ -89,10 +89,13 @@ class FloorTableSortBloc extends Bloc<FloorTableSortEvent, FloorTableState> {
       String? sortBy = event.sortBy;
       List<FloorTable>? floorTables = event.floorTableList;
       switch (sortBy) {
-        case "Avaliable" || "متاح":
+        case "Available" || "متاح":
           List<FloorTable> placedOrders = floorTables!
               .where((order) => order.status == "Available")
               .toList();
+          for (var i = 0 ; i < floorTables.length ;i++){
+            print("table stais = ${floorTables[i].status}");
+          }
           emit(FloorTableSortSuccess(placedOrders));
           break;
         case "Reserved" || "محجوز":

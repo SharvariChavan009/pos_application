@@ -85,7 +85,7 @@ class _AllTableStatusState extends State<AllTableStatus> {
                         message: optionName!.tableSelectionMessage,
                       );
                     } else {
-                      MainBodyTable.currentState?.addTable();
+                      MainBodyTable.currentState?.addTable(context);
                     }
                   },
                   text: optionName!.addTable,
@@ -121,6 +121,12 @@ class _AllTableStatusState extends State<AllTableStatus> {
                   ? AppColors.secondaryColor.withOpacity(.1)
                   : AppColors.lightGreyColor,
               borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: _selectedButtonIndex == index
+                    ? AppColors.lightGreyColor // Color when selected
+                    : AppColors.lightGreyColor, // Color when not selected
+                width: 0.5, // Adjust border width as needed
+              ),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,

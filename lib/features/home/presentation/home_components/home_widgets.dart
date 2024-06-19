@@ -28,7 +28,7 @@ Widget headerPart(context) {
     flex: 1,
     child: Container(
       margin: const EdgeInsets.only(left: 5),
-      color: AppColors.primaryColor,
+      color: AppColors.whiteColor,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -59,6 +59,7 @@ Widget headerPart(context) {
                   const SizedBox(
                     height: 18,
                     child: CustomIcon(
+                      color: AppColors.darkColor,
                       iconPath: AllIcons.bell,
                       size: 20,
                     ),
@@ -71,6 +72,7 @@ Widget headerPart(context) {
                     child: BlocBuilder<ConnectivityBloc, ConnectivityState>(
                         builder: (context, state) {
                       return CustomIcon(
+                        color: AppColors.darkColor,
                         iconPath: (state.isConnected)
                             ? AllIcons.olStatus
                             : AllIcons.ofStatus,
@@ -168,10 +170,10 @@ Widget headerPart(context) {
                           position: PopupMenuPosition.under,
                           icon: const Icon(
                             Icons.keyboard_arrow_down_sharp,
-                            color: AppColors.whiteColor,
+                            color: AppColors.darkColor,
                             size: 20,
                           ),
-                          color: AppColors.darkColor,
+                          color: AppColors.whiteColor,
                           itemBuilder: (context) => [
                                 PopupMenuItem(
                                     onTap: () {
@@ -179,13 +181,13 @@ Widget headerPart(context) {
                                           .add(LogoutButtonPressed());
                                     },
                                     textStyle: const TextStyle(
-                                      color: AppColors.whiteColor,
+                                      color: AppColors.darkColor,
                                     ),
                                     child: const Row(
                                       children: [
                                         Icon(
                                           Icons.logout,
-                                          color: AppColors.whiteColor,
+                                          color: AppColors.darkColor,
                                           size: 20,
                                         ),
                                         SizedBox(
@@ -194,7 +196,7 @@ Widget headerPart(context) {
                                         Text(
                                           "Logout",
                                           style: TextStyle(
-                                            color: AppColors.whiteColor,
+                                            color: AppColors.darkColor,
                                           ),
                                         ),
                                       ],
@@ -221,7 +223,7 @@ Widget middleBody(TabController tabController) {
     child: Container(
       margin: const EdgeInsets.all(10),
       decoration: const BoxDecoration(
-        color: AppColors.primaryColor,
+        color: AppColors.lightGray,
         borderRadius: BorderRadius.all(
           Radius.circular(10),
         ),

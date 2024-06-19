@@ -27,7 +27,14 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
           child: CircleAvatar(
             minRadius: 20,
             maxRadius: 20,
-            child: Image.asset(AppImage.appLogo3),
+            child: ClipOval(
+          child: Image.asset(
+         AppImage.appHeaderLogo, // Replace with AppImage.appHeaderLogo if it's a constant string
+            fit: BoxFit.contain,
+            width: 30,
+            height: 30,
+          ),
+    ),
           ),
         ),
         Expanded(

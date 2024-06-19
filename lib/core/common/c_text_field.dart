@@ -134,7 +134,7 @@ class CustomTextField extends StatelessWidget {
         textInputAction: textInputAction,
         style: TextStyle(
             fontFamily: CustomLabels.primaryFont,
-            color: AppColors.whiteColor,
+            color: AppColors.darkColor,
             fontSize: 14),
         controller: controller,
         obscuringCharacter: '*',

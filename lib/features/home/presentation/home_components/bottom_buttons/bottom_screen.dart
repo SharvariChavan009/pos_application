@@ -9,6 +9,7 @@ import 'package:pos_application/features/home/presentation/bloc/menu_name_bloc.d
 import 'package:pos_application/features/home/presentation/bloc/menu_name_event.dart';
 import 'package:pos_application/features/home/presentation/bloc/table_bloc/floor_table_status_bloc.dart';
 import 'package:pos_application/features/home/presentation/home_components/side_order/guest_numbers.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 enum TableStatus { available, reserved, servicing }
 
@@ -37,6 +38,7 @@ class _BottomScreenState extends State<BottomScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var optionName = AppLocalizations.of(context);
     return Expanded(
       flex: 1,
       child: BlocBuilder<FloorTableStatus, List<FloorTable>>(
@@ -57,7 +59,7 @@ class _BottomScreenState extends State<BottomScreen> {
               Row(
                 children: [
                   Text(
-                    'Table:',
+                    '${optionName!.table}:',
                     style: CustomLabels.body1TextStyle(
                       fontFamily: CustomLabels.primaryFont,
                       color: AppColors.iconColor,
@@ -92,7 +94,7 @@ class _BottomScreenState extends State<BottomScreen> {
               Row(
                 children: [
                   Text(
-                    'Guest:',
+                    '${optionName!.guest}:',
                     style: CustomLabels.body1TextStyle(
                       fontFamily: CustomLabels.primaryFont,
                       color: AppColors.iconColor,
@@ -114,7 +116,7 @@ class _BottomScreenState extends State<BottomScreen> {
                   onPressed: () {},
                   activeButtonColor: AppColors.errorColor.withOpacity(.3),
                   backgroundColor: AppColors.darkColor,
-                  text: 'Reserve Table',
+                  text: optionName!.reserveTable,
                   height: 40,
                 ),
               ),
@@ -126,7 +128,7 @@ class _BottomScreenState extends State<BottomScreen> {
                     },
                   activeButtonColor: AppColors.secondaryColor,
                   backgroundColor: AppColors.darkColor,
-                  text: 'Continue',
+                  text: optionName!.continueM,
                   height: 40,
                 ),
               ),
