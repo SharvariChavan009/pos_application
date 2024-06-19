@@ -89,8 +89,10 @@ class _AllTableStatusState extends State<AllTableStatus> {
                     }
                   },
                   text: optionName!.addTable,
+                  activeButtonColor: AppColors.secondaryColor,
+                  backgroundColor: AppColors.darkColor,
                   textStyle: const TextStyle(
-                      color: AppColors.secondaryColor,
+                      color: AppColors.whiteColor,
                       fontFamily: CustomLabels.primaryFont),
                 );
               },

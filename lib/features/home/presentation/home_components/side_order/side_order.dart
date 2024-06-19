@@ -128,8 +128,23 @@ class _OrderScreenState extends State<OrderScreen>
     var optionName = AppLocalizations.of(context);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+
       decoration: BoxDecoration(
-        color: AppColors.darkColor.withOpacity(.9),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.indigo,
+            blurRadius: 5,
+            spreadRadius: 0.01,
+            offset: Offset(.1, .1),
+          ),
+          BoxShadow(
+            color: Colors.green,
+            blurRadius: 2,
+            spreadRadius: 0.01,
+            offset: Offset(.1, .1),
+          ),
+        ],
+        color: AppColors.whiteColor,
         border: Border(
             left: BorderSide(
                 color: const Color(0xFF98d6f1).withOpacity(.3), width: .5)),
@@ -161,7 +176,7 @@ class _OrderScreenState extends State<OrderScreen>
                           children: [
                             FittedBox(
                               child: AutoSizeText(
-                                'Table#',
+                                '${optionName!.table}#',
                                 textAlign: TextAlign.center,
                                 minFontSize: 10,
                                 maxFontSize: 16,
@@ -195,7 +210,7 @@ class _OrderScreenState extends State<OrderScreen>
                             children: [
                               FittedBox(
                                 child: AutoSizeText(
-                                  'Guest',
+                                  optionName!.guest,
                                   textAlign: TextAlign.center,
                                   minFontSize: 10,
                                   maxFontSize: 16,
@@ -244,7 +259,7 @@ class _OrderScreenState extends State<OrderScreen>
                             children: [
                               FittedBox(
                                 child: AutoSizeText(
-                                  'Item',
+                                  optionName!.item,
                                   textAlign: TextAlign.center,
                                   minFontSize: 10,
                                   maxFontSize: 16,
@@ -277,7 +292,7 @@ class _OrderScreenState extends State<OrderScreen>
                               const Spacer(),
                               FittedBox(
                                 child: AutoSizeText(
-                                  'Quantity',
+                                  optionName!.quantity,
                                   textAlign: TextAlign.center,
                                   minFontSize: 10,
                                   maxFontSize: 16,
@@ -794,8 +809,7 @@ class _OrderScreenState extends State<OrderScreen>
                                                 "", orderNumber!));
                                       },
                                       text: optionName.cancelOrder,
-                                      activeButtonColor:
-                                          AppColors.errorColor.withOpacity(.2),
+                                      activeButtonColor: AppColors.errorColor.withOpacity(.3),
                                       backgroundColor: Colors.red,
                                       height: 40,
                                     );
@@ -967,8 +981,7 @@ class _OrderScreenState extends State<OrderScreen>
                             child: CustomButton(
                               onPressed: () {},
                               text: optionName!.cancelOrder,
-                              activeButtonColor:
-                                  AppColors.errorColor.withOpacity(.2),
+                              activeButtonColor: AppColors.errorColor.withOpacity(.3),
                               backgroundColor: Colors.red,
                               height: 40,
                             ),

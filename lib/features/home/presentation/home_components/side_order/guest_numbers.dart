@@ -46,7 +46,7 @@ class GuestSelectorState extends State<GuestSelector> {
                 value: widget.floorTable!.tableUsersCount,
                 duration: const Duration(milliseconds: 200),
                 textStyle:
-                    const TextStyle(fontSize: 13, color: AppColors.whiteColor),
+                    const TextStyle(fontSize: 13, color: AppColors.darkColor),
               ),
             ),
             const SizedBox(
