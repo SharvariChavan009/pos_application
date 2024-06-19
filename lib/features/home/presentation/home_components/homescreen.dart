@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(context) {
     return Scaffold(
-      backgroundColor: AppColors.darkColor,
+      backgroundColor: AppColors.whiteColor,
       body: Row(
           children: [
             const SidebarPage(),

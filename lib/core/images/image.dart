@@ -22,7 +22,9 @@ class AllIcons {
 }
 
 class AppImage {
-  static const appLogo1 = "assets/image/Logo1.webp";
+  static const appLogo1 = "assets/image/qd_updated_logo.webp";
+  static const appHeaderLogo = "assets/image/header_logo.webp";
+  static const appBackground = "assets/image/background.webp";
   static const splash = "assets/image/splash.webp";
   static const login = "assets/image/loginn.png";
   static const login1 = "assets/image/login1.webp";
@@ -31,7 +33,6 @@ class AppImage {
   static const appLogo3 = "assets/image/Logo3.webp";
   static const logo = "assets/image/quick.webp";
   static const logo1 = "assets/image/Logo1.webp";
-  static const logo2 = "assets/image/Logo2.webp";
   static const logo3 = "assets/image/Logo3.webp";
   static const logoBlack = "assets/image/logo_black.webp";
   static const signInBalls = "assets/image/signin_balls.webp";

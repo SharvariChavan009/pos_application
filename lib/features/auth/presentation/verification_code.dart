@@ -17,8 +17,9 @@ import '../widget/custom_snackbar.dart';
 import 'bloc/forgot_password/forgot_password_event.dart';
 import 'bloc/textfield_validation_bloc.dart';
 import 'bloc/textfield_validation_event.dart';
-import 'login.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
+
+import 'login_screen.dart';
 
 class VerificationCodeScreen extends StatelessWidget {
   const VerificationCodeScreen({super.key});

@@ -137,7 +137,7 @@ class SidebarPageState extends State<SidebarPage> {
                 //     SnackBar(content: Text('Yay! Flutter Collapsible Sidebar!')));
               },
               body: _body(size, context),
-              backgroundColor: AppColors.primaryColor,
+              backgroundColor: AppColors.whiteColor,
               topPadding: 140,
               selectedTextColor: AppColors.secondaryColor,
               textStyle:

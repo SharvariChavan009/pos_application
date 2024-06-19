@@ -95,6 +95,12 @@
   "type" : "يكتب",
   "category" : "فئة",
   "price" : "سعر",
-  "active" : "نشيط"
+  "active" : "نشيط",
+  "addaTable" : "إضافة جدول",
+  "capacity" : "سعة",
+
+  "table" : "طاولة",
+  "guest" : "ضيف",
+  "reserveTable" : "جدول الاحتياط"
 
 }

@@ -61,7 +61,7 @@ class _DiscountStatusState extends State<DiscountStatus> {
             ),
             child: CustomButton(
               onPressed: () {
-                MainBodyTable.currentState?.addTable();
+                // MainBodyTable.currentState?.addTable();
                 //              widget.tableKey.currentState?.addTable();
               },
               text: 'Create Discount',

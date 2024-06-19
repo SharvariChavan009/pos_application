@@ -14,13 +14,14 @@ import 'package:pos_application/features/auth/presentation/bloc/password_validat
 import 'package:pos_application/features/auth/presentation/bloc/password_validation_state.dart';
 import 'package:pos_application/features/auth/presentation/bloc/reset_password/reset_password_event.dart';
 import 'package:pos_application/features/auth/presentation/bloc/reset_password/reset_password_state.dart';
-import 'package:pos_application/features/auth/presentation/login.dart';
 import 'package:pos_application/features/auth/widget/custom_snackbar.dart';
 import 'package:pos_application/features/home/presentation/bloc/menu_name_state.dart';
 import '../../../core/common/u_validations_all.dart';
 import '../../home/presentation/bloc/menu_name_bloc.dart';
 import '../../home/presentation/bloc/menu_name_event.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
+
+import 'login_screen.dart';
 
 TextEditingController createNewPasswordController = TextEditingController();
 TextEditingController confirmNewPasswordController = TextEditingController();

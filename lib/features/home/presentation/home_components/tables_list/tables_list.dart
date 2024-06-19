@@ -20,6 +20,7 @@ import 'package:pos_application/features/menu/domain/add_menu_to_cart_repository
 
 import '../../bloc/menu_list_event.dart';
 import '../../bloc/set_table/set_table_event.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 
 class MainBodyTable extends StatefulWidget {
@@ -50,7 +51,9 @@ class MainBodyTableState extends State<MainBodyTable> {
   int availableTables = 0;
   int servingTables = 0;
 
-  void addTable() {
+
+  void addTable(BuildContext context) {
+    var optionName = AppLocalizations.of(context);
     TextEditingController txtTableName = TextEditingController();
     TextEditingController txtMaxCapacity = TextEditingController();
 
@@ -61,15 +64,21 @@ class MainBodyTableState extends State<MainBodyTable> {
             AlertDialog(
               elevation: 0,
               surfaceTintColor: Colors.red,
-              backgroundColor: AppColors.primaryColor,
+              backgroundColor: AppColors.whiteColor,
               contentPadding: const EdgeInsets.all(30),
               titleTextStyle: const TextStyle(
                   fontSize: 18,
                   fontFamily: CustomLabels.primaryFont,
-                  color: AppColors.whiteColor),
-              title: const Text(
-                'Add a Table:',
+                  color: AppColors.darkColor),
+              title:  Text(
+               optionName!.addaTable,
                 textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontFamily: CustomLabels.primaryFont,
+                  color: AppColors.darkColor,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -81,11 +90,11 @@ class MainBodyTableState extends State<MainBodyTable> {
                       SizedBox(
                         width: 200,
                         child: Text(
-                          'Table Number',
+                         "${optionName!.tableNumber} : ",
                           style: CustomLabels.body1TextStyle(
                             fontFamily: CustomLabels.primaryFont,
-                            color: AppColors.iconColor,
-                            fontSize: 14,
+                            color: AppColors.darkColor,
+                            fontSize: 16,
                             letterSpacing: 0,
                           ),
                         ),
@@ -112,11 +121,11 @@ class MainBodyTableState extends State<MainBodyTable> {
                       SizedBox(
                         width: 200,
                         child: Text(
-                          'Capacity:',
+                          "${optionName!.capacity} : ",
                           style: CustomLabels.body1TextStyle(
                             fontFamily: CustomLabels.primaryFont,
-                            color: AppColors.iconColor,
-                            fontSize: 14,
+                            color: AppColors.darkColor,
+                            fontSize: 16,
                             letterSpacing: 0,
                           ),
                         ),
@@ -137,7 +146,7 @@ class MainBodyTableState extends State<MainBodyTable> {
               ),
               actions: <Widget>[
                 CustomButton(
-                  text: 'Add',
+                  text: optionName!.add,
                   activeButtonColor: AppColors.secondaryColor,
                   onPressed: () {
                     BlocProvider.of<FloorTableBloc>(context).add(

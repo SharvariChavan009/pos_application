@@ -10,4 +10,7 @@ class AppColors {
   static const Color buttonColor = Color(0xFF0CB3E0);
   static const Color errorColor = Color(0xFffF0101);
   static const Color newPri = Color(0xff212121);
+  static const Color lightGray = Color(0xFFD6DBE2);
+
+
 }
