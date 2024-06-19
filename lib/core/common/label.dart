@@ -117,7 +117,7 @@ class CustomLabels {
   static TextStyle bodyTextStyle(
       {double fontSize = mediumFontSize,
       FontWeight fontWeight = largeFontWeight,
-      Color color = AppColors.whiteColor,
+      Color color = AppColors.darkColor,
       String fontFamily = primaryFont,
       double letterSpacing = 0.2,
       double height = 1.4,

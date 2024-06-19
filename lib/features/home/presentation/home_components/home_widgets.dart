@@ -257,7 +257,7 @@ Widget bottomPart() {
     flex: 1,
     child: Container(
       margin: const EdgeInsets.only(left: 5),
-      color: AppColors.primaryColor,
+      color: AppColors.whiteColor,
       child: const BottomScreen(),
     ),
   );
