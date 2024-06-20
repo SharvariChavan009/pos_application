@@ -43,7 +43,7 @@ class SettingScreenState extends State<SettingScreen> {
               child: SvgPicture.asset(
                 iconPath,
                 colorFilter: const ColorFilter.mode(
-                  AppColors.whiteColor,
+                  AppColors.darkColor,
                   BlendMode.srcIn,
                 ),
               ),
@@ -55,7 +55,7 @@ class SettingScreenState extends State<SettingScreen> {
               style: const TextStyle(
                 fontFamily: CustomLabels.primaryFont,
                 fontSize: 16,
-                color: AppColors.whiteColor,
+                color: AppColors.darkColor,
               ),
             ),
             const Spacer(),
@@ -106,7 +106,7 @@ class SettingScreenState extends State<SettingScreen> {
     return Container(
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: AppColors.primaryColor,
+        color: AppColors.whiteColor,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
@@ -125,7 +125,7 @@ class SettingScreenState extends State<SettingScreen> {
                optionName!.title,
                 style: const TextStyle(
                   letterSpacing: .8,
-                  color: AppColors.whiteColor,
+                  color: AppColors.darkColor,
                   fontFamily: CustomLabels.primaryFont,
                   fontSize: 18,
                 ),
