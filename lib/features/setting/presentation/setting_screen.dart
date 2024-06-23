@@ -139,7 +139,7 @@ class SettingScreenState extends State<SettingScreen> {
               margin: const EdgeInsets.all(30),
               padding: const EdgeInsets.only(left: 30, top: 30, bottom: 30),
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(.8),
+                color: AppColors.lightGray,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Column(

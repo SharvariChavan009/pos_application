@@ -71,7 +71,9 @@ class PaymentListState extends State<PaymentList> {
               margin:
               const EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 0),
               decoration: const BoxDecoration(
-                color: AppColors.primaryColor,
+                // color: AppColors.primaryColor,
+                color: AppColors.lightGray,
+
                 borderRadius: BorderRadius.only(
                   topRight: Radius.circular(10),
                   topLeft: Radius.circular(10),
@@ -95,7 +97,9 @@ class PaymentListState extends State<PaymentList> {
                         'Payments',
                         style: TextStyle(
                           letterSpacing: .8,
-                          color: AppColors.whiteColor,
+                          color: AppColors.darkColor,
+                       
+
                           fontFamily: CustomLabels.primaryFont,
                           fontWeight: CustomLabels.mediumFontWeight,
                           fontSize: 18,
@@ -116,7 +120,7 @@ class PaymentListState extends State<PaymentList> {
                         showEmptyRows: false,
                         showFirstLastButtons: true,
                         headingRowColor: MaterialStateColor.resolveWith(
-                                (states) => AppColors.primaryColor),
+                                (states) => AppColors.lightGray),
                         arrowHeadColor: AppColors.secondaryColor,
                         columnSpacing: 30,
                         rowsPerPage: _rowsPerPage,
@@ -136,7 +140,7 @@ class PaymentListState extends State<PaymentList> {
                             label:  Text(
                               optionName!.orderNumber,
                               style: TextStyle(
-                                  color: AppColors.iconColor,
+                                  color: AppColors.darkColor,
                                   fontFamily: CustomLabels.primaryFont),
                             ),
                             onSort: (columnIndex, ascending) {
@@ -159,7 +163,7 @@ class PaymentListState extends State<PaymentList> {
                             label:  Text(
                               optionName!.amount,
                               style: TextStyle(
-                                  color: AppColors.iconColor,
+                                  color: AppColors.darkColor,
                                   fontFamily: CustomLabels.primaryFont),
                             ),
                             onSort: (columnIndex, ascending) {
@@ -182,7 +186,7 @@ class PaymentListState extends State<PaymentList> {
                             label:  Text(
                               optionName!.tableNumber,
                               style: TextStyle(
-                                  color: AppColors.iconColor,
+                                  color: AppColors.darkColor,
                                   fontFamily: CustomLabels.primaryFont),
                             ),
                             onSort: (columnIndex, ascending) {
@@ -205,7 +209,7 @@ class PaymentListState extends State<PaymentList> {
                             label:  Text(
                               optionName!.guestName,
                               style: TextStyle(
-                                  color: AppColors.iconColor,
+                                  color: AppColors.darkColor,
                                   fontFamily: CustomLabels.primaryFont),
                             ),
                             onSort: (columnIndex, ascending) {
@@ -228,7 +232,7 @@ class PaymentListState extends State<PaymentList> {
                             label:  Text(
                               optionName!.orderStatus,
                               style: TextStyle(
-                                  color: AppColors.iconColor,
+                                  color: AppColors.darkColor,
                                   fontFamily: CustomLabels.primaryFont),
                             ),
                             onSort: (columnIndex, ascending) {
@@ -251,7 +255,7 @@ class PaymentListState extends State<PaymentList> {
                             label:  Text(
                               optionName!.paymentMode,
                               style: TextStyle(
-                                  color: AppColors.iconColor,
+                                  color: AppColors.darkColor,
                                   fontFamily: CustomLabels.primaryFont),
                             ),
                             onSort: (columnIndex, ascending) {
@@ -262,7 +266,7 @@ class PaymentListState extends State<PaymentList> {
                             label:  Text(
                               optionName!.action,
                               style: TextStyle(
-                                  color: AppColors.iconColor,
+                                  color: AppColors.darkColor,
                                   fontFamily: CustomLabels.primaryFont),
                             ),
                             onSort: (columnIndex, ascending) {
@@ -273,7 +277,7 @@ class PaymentListState extends State<PaymentList> {
                             label:  Text(
                               optionName!.status,
                               style: TextStyle(
-                                  color: AppColors.iconColor,
+                                  color: AppColors.darkColor,
                                   fontFamily: CustomLabels.primaryFont),
                             ),
                             onSort: (columnIndex, ascending) {

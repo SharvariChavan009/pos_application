@@ -60,7 +60,7 @@ class MenuListSettingState extends State<MenuListSetting> {
       data: ThemeData(
         dataTableTheme: DataTableThemeData(
           dataRowColor: MaterialStateColor.resolveWith(
-              (states) => AppColors.primaryColor),
+              (states) => AppColors.lightGray),
         ),
       ),
       child:
@@ -94,7 +94,7 @@ class MenuListSettingState extends State<MenuListSetting> {
           margin:
               const EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 0),
           decoration: const BoxDecoration(
-            color: AppColors.primaryColor,
+            color: AppColors.lightGray,
             borderRadius: BorderRadius.only(
               topRight: Radius.circular(10),
               topLeft: Radius.circular(10),
@@ -117,9 +117,9 @@ class MenuListSettingState extends State<MenuListSetting> {
                     optionName!.menuList,
                     style: const TextStyle(
                       letterSpacing: .8,
-                      color: AppColors.whiteColor,
+                      color: AppColors.darkColor,
                       fontFamily: CustomLabels.primaryFont,
-                      fontWeight: CustomLabels.mediumFontWeight,
+                      fontWeight: FontWeight.bold,
                       fontSize: 18,
                     ),
                   ),
@@ -138,7 +138,7 @@ class MenuListSettingState extends State<MenuListSetting> {
                     showEmptyRows: false,
                     showFirstLastButtons: true,
                     headingRowColor: MaterialStateColor.resolveWith(
-                        (states) => AppColors.primaryColor),
+                        (states) => AppColors.lightGray),
                     arrowHeadColor: AppColors.secondaryColor,
                     columnSpacing: 60,
                     rowsPerPage: _rowsPerPage,
@@ -157,7 +157,7 @@ class MenuListSettingState extends State<MenuListSetting> {
                         label: Text(
                           optionName!.srNo,
                           style: TextStyle(
-                              color: AppColors.iconColor,
+                              color: AppColors.darkColor,
                               fontFamily: CustomLabels.primaryFont),
                         ),
                       ),
@@ -165,7 +165,7 @@ class MenuListSettingState extends State<MenuListSetting> {
                         label: Text(
                           optionName!.image,
                           style: TextStyle(
-                              color: AppColors.iconColor,
+                              color: AppColors.darkColor,
                               fontFamily: CustomLabels.primaryFont),
                         ),
                       ),
@@ -174,7 +174,7 @@ class MenuListSettingState extends State<MenuListSetting> {
                             child:Text(
                           optionName!.menuName,
                           style: TextStyle(
-                              color: AppColors.iconColor,
+                              color: AppColors.darkColor,
                               fontFamily: CustomLabels.primaryFont),
                         )),
                         onSort: (columnIndex, ascending) {
@@ -197,7 +197,7 @@ class MenuListSettingState extends State<MenuListSetting> {
                         label:  Text(
                           optionName!.type,
                           style: TextStyle(
-                              color: AppColors.iconColor,
+                              color: AppColors.darkColor,
                               fontFamily: CustomLabels.primaryFont),
                         ),
                         onSort: (columnIndex, ascending) {
@@ -220,7 +220,7 @@ class MenuListSettingState extends State<MenuListSetting> {
                         label:  Text(
                           optionName!.category,
                           style: TextStyle(
-                              color: AppColors.iconColor,
+                              color: AppColors.darkColor,
                               fontFamily: CustomLabels.primaryFont),
                         ),
                         onSort: (columnIndex, ascending) {
@@ -243,7 +243,7 @@ class MenuListSettingState extends State<MenuListSetting> {
                         label: Text(
                           "${optionName.price} {In ${currency}}",
                           style: TextStyle(
-                              color: AppColors.iconColor,
+                              color: AppColors.darkColor,
                               fontFamily: CustomLabels.primaryFont),
                         ),
                         onSort: (columnIndex, ascending) {
@@ -266,7 +266,7 @@ class MenuListSettingState extends State<MenuListSetting> {
                         label: Text(
                           optionName!.active,
                           style: const TextStyle(
-                              color: AppColors.iconColor,
+                              color: AppColors.darkColor,
                               fontFamily: CustomLabels.primaryFont),
                         ),
                       ),
@@ -302,7 +302,7 @@ class OrderDataSource extends DataTableSource {
           id.toString(),
           style: const TextStyle(
               fontFamily: CustomLabels.primaryFont,
-              color: AppColors.whiteColor),
+              color: AppColors.darkColor),
         ),
       )),
       DataCell(
@@ -332,7 +332,7 @@ class OrderDataSource extends DataTableSource {
           child: Text(
         menus.name,
         style: TextStyle(
-            fontFamily: CustomLabels.primaryFont, color: AppColors.whiteColor),
+            fontFamily: CustomLabels.primaryFont, color: AppColors.darkColor),
       ))),
       DataCell(Center(
           child: Row(children: [
@@ -340,7 +340,7 @@ class OrderDataSource extends DataTableSource {
           menus.type,
           style: const TextStyle(
               fontFamily: CustomLabels.primaryFont,
-              color: AppColors.whiteColor),
+              color: AppColors.darkColor),
         ),
          const SizedBox(
            width: 5,
@@ -354,12 +354,13 @@ class OrderDataSource extends DataTableSource {
       DataCell(Text(
         menus.menuCategories.first.name,
         style: TextStyle(
-            fontFamily: CustomLabels.primaryFont, color: AppColors.whiteColor),
+            fontFamily: CustomLabels.primaryFont, color: AppColors.darkColor),
       )),
       DataCell(Center(
         child: Text(
           menus.price,
           style: TextStyle(
+            
             fontFamily: CustomLabels.primaryFont,
             color: changeColor("Placed"),
           ),
