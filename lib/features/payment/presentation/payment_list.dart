@@ -6,6 +6,7 @@ import 'package:pos_application/core/common/label.dart';
 import 'package:pos_application/features/payment/data/payment_data.dart';
 import 'package:pos_application/features/payment/domain/repository/payment_list_bloc.dart';
 import 'package:pos_application/features/payment/presentation/bloc/payment_list_bloc_state.dart';
+import '../../../core/common/api_methods.dart';
 import '../../home/presentation/bloc/menu_name_bloc.dart';
 import '../../home/presentation/bloc/menu_name_event.dart';
 import '../../orders/domain/repository/order_list_repository.dart';
@@ -25,10 +26,21 @@ class PaymentListState extends State<PaymentList> {
   int _rowsPerPage = 10;
   int _sortColumnIndex = 0;
   bool _sortAscending = true;
+  String? currency;
 
   List<Payment> paymentList = [];
   List<Payment> sortedOrders = [];
   List<Payment> resultOrders = [];
+  @override
+  void initState() {
+    super.initState();
+    fetchCurrency();
+  }
+
+  void fetchCurrency() async {
+    currency = await ApiMethods.getCurrency();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +49,7 @@ class PaymentListState extends State<PaymentList> {
       data: ThemeData(
         dataTableTheme: DataTableThemeData(
           dataRowColor: MaterialStateColor.resolveWith(
-                  (states) => AppColors.primaryColor),
+                  (states) => AppColors.lightGray),
         ),
       ),
       child: BlocBuilder<PaymentListBloc, PaymentListBlocState>(
@@ -56,7 +68,7 @@ class PaymentListState extends State<PaymentList> {
                       optionName!.noOrdersFound,
                       style: TextStyle(
                         fontSize: 30.0,
-                        color: AppColors.whiteColor,
+                        color: AppColors.darkColor,
                         fontFamily: CustomLabels.primaryFont,
                       ),
                     ),
@@ -140,7 +152,7 @@ class PaymentListState extends State<PaymentList> {
                             label:  Text(
                               optionName!.orderNumber,
                               style: TextStyle(
-                                  color: AppColors.darkColor,
+                                  color: AppColors.buttonColor,
                                   fontFamily: CustomLabels.primaryFont),
                             ),
                             onSort: (columnIndex, ascending) {
@@ -161,9 +173,9 @@ class PaymentListState extends State<PaymentList> {
                           ),
                           DataColumn2(
                             label:  Text(
-                              optionName!.amount,
+                             " ${optionName!.amount}{In ${currency}}",
                               style: TextStyle(
-                                  color: AppColors.darkColor,
+                                  color: AppColors.buttonColor,
                                   fontFamily: CustomLabels.primaryFont),
                             ),
                             onSort: (columnIndex, ascending) {
@@ -186,7 +198,7 @@ class PaymentListState extends State<PaymentList> {
                             label:  Text(
                               optionName!.tableNumber,
                               style: TextStyle(
-                                  color: AppColors.darkColor,
+                                  color: AppColors.buttonColor,
                                   fontFamily: CustomLabels.primaryFont),
                             ),
                             onSort: (columnIndex, ascending) {
@@ -209,7 +221,7 @@ class PaymentListState extends State<PaymentList> {
                             label:  Text(
                               optionName!.guestName,
                               style: TextStyle(
-                                  color: AppColors.darkColor,
+                                  color: AppColors.buttonColor,
                                   fontFamily: CustomLabels.primaryFont),
                             ),
                             onSort: (columnIndex, ascending) {
@@ -232,7 +244,7 @@ class PaymentListState extends State<PaymentList> {
                             label:  Text(
                               optionName!.orderStatus,
                               style: TextStyle(
-                                  color: AppColors.darkColor,
+                                  color: AppColors.buttonColor,
                                   fontFamily: CustomLabels.primaryFont),
                             ),
                             onSort: (columnIndex, ascending) {
@@ -255,7 +267,7 @@ class PaymentListState extends State<PaymentList> {
                             label:  Text(
                               optionName!.paymentMode,
                               style: TextStyle(
-                                  color: AppColors.darkColor,
+                                  color: AppColors.buttonColor,
                                   fontFamily: CustomLabels.primaryFont),
                             ),
                             onSort: (columnIndex, ascending) {
@@ -266,7 +278,7 @@ class PaymentListState extends State<PaymentList> {
                             label:  Text(
                               optionName!.action,
                               style: TextStyle(
-                                  color: AppColors.darkColor,
+                                  color: AppColors.buttonColor,
                                   fontFamily: CustomLabels.primaryFont),
                             ),
                             onSort: (columnIndex, ascending) {
@@ -277,7 +289,7 @@ class PaymentListState extends State<PaymentList> {
                             label:  Text(
                               optionName!.status,
                               style: TextStyle(
-                                  color: AppColors.darkColor,
+                                  color: AppColors.buttonColor,
                                   fontFamily: CustomLabels.primaryFont),
                             ),
                             onSort: (columnIndex, ascending) {
@@ -316,7 +328,7 @@ class PaymentDataSource extends DataTableSource {
     payment.order!.orderNo.toString(),
               style: const TextStyle(
                   fontFamily: CustomLabels.primaryFont,
-                  color: AppColors.whiteColor),
+                  color: AppColors.darkColor),
             ),)
       ),
       DataCell(
@@ -324,7 +336,7 @@ class PaymentDataSource extends DataTableSource {
          payment.amount.toString(),
           style: const TextStyle(
               fontFamily: CustomLabels.primaryFont,
-              color: AppColors.secondaryColor),
+              color: AppColors.darkColor),
         ),
       ),
       DataCell(
@@ -332,13 +344,13 @@ class PaymentDataSource extends DataTableSource {
               child: Text(
                 payment.order!.floorTableId.toString(),
                 style: const TextStyle(
-                    fontFamily: CustomLabels.primaryFont, color: AppColors.whiteColor),
+                    fontFamily: CustomLabels.primaryFont, color: AppColors.darkColor),
               ))
       ),
       DataCell(Text(
         payment.order!.customer!.name!,
         style: const TextStyle(
-            fontFamily: CustomLabels.primaryFont, color: AppColors.whiteColor),
+            fontFamily: CustomLabels.primaryFont, color: AppColors.darkColor),
       )),
       DataCell(
           Center(
@@ -354,7 +366,7 @@ class PaymentDataSource extends DataTableSource {
               payment.paymentProvider!,
               style: const TextStyle(
                 fontFamily: CustomLabels.primaryFont,
-                color: Colors.white,
+                color: AppColors.buttonColor,
               ),),)),
       DataCell(InkWell(
         onTap: () {
@@ -366,7 +378,8 @@ class PaymentDataSource extends DataTableSource {
           optionName!.viewOrder,
           style: TextStyle(
               fontFamily: CustomLabels.primaryFont,
-              color: AppColors.secondaryColor),
+              color: AppColors.secondaryColor,
+            decoration: TextDecoration.underline,),
         ),
       )),
       DataCell(InkWell(

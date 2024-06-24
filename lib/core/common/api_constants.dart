@@ -16,5 +16,6 @@ class ApiConstants {
   static const apiPendingOrderUrl = '$apiOrderBaseUrl/pending';
   static const apiOrderPlaceUrl = '$apiOrderBaseUrl/place';
   static const apiPaymentListUrl = '$apiOrderBaseUrl/payment-history';
+  static const apiMenuSetting = '$apiBaseUrl/menu-settings';
 
 }

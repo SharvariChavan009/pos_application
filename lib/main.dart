@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:pos_application/controller/change_language_state.dart';
+import 'package:pos_application/features/setting/bloc/menu_setting_bloc.dart';
 import 'package:provider/provider.dart';
 import 'controller/change_language_bloc.dart';
 import 'controller/language_change_controller.dart';
@@ -78,6 +79,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => OrderListBloc()),
           BlocProvider(create: (context) => FloorTableSortBloc()),
           BlocProvider(create: (context) => PaymentListBloc()),
+          BlocProvider(create: (context) => MenuSettingBloc()),
           BlocProvider<ConnectivityBloc>(
             create: (BuildContext context) => ConnectivityBloc(),
           ),

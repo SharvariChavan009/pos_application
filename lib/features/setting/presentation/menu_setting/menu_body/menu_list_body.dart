@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:data_table_2/data_table_2.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_application/core/common/colors.dart';
@@ -9,6 +10,8 @@ import 'package:pos_application/features/home/data/menu_list.dart';
 import 'package:pos_application/features/home/domain/repository/menus_repository.dart';
 import 'package:pos_application/features/home/presentation/bloc/menu_list_state.dart';
 import 'package:pos_application/features/menu/domain/cart_response.dart';
+import 'package:pos_application/features/setting/bloc/menu_setting_bloc.dart';
+import 'package:pos_application/features/setting/bloc/menu_setting_state.dart';
 
 import '../../../../../core/common/api_methods.dart';
 import '../../../../../core/common/icon.dart';
@@ -24,7 +27,7 @@ import '../../../../orders/presentation/bloc/order_list/order_list_state.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 import '../../../../orders/presentation/orders/order_status.dart';
-
+import '../../../bloc/menu_setting_event.dart';
 
 class MenuListSetting extends StatefulWidget {
   const MenuListSetting({super.key});
@@ -59,8 +62,8 @@ class MenuListSettingState extends State<MenuListSetting> {
     return Theme(
       data: ThemeData(
         dataTableTheme: DataTableThemeData(
-          dataRowColor: MaterialStateColor.resolveWith(
-              (states) => AppColors.lightGray),
+          dataRowColor:
+              MaterialStateColor.resolveWith((states) => AppColors.lightGray),
         ),
       ),
       child:
@@ -104,27 +107,40 @@ class MenuListSettingState extends State<MenuListSetting> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                flex: 1,
-                child: Container(
-                  padding: const EdgeInsets.only(left: 20),
-                  alignment: Alignment.centerLeft,
-                  decoration: const BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(color: AppColors.iconColor, width: .5),
+                  flex: 1,
+                  child: Row(children: [
+                    InkWell(
+                        onTap: () {
+                          BlocProvider.of<MenuNameBloc>(context).add(
+                              MenuNameSelected(
+                                  context: context, menuName: "Setting"));
+                        },
+                        child: const Icon(
+                          Icons.arrow_back_rounded,
+                          color: AppColors.iconColor,
+                          size: 22,
+                        )),
+                    Container(
+                      padding: const EdgeInsets.only(left: 20),
+                      alignment: Alignment.centerLeft,
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          bottom:
+                              BorderSide(color: AppColors.iconColor, width: .5),
+                        ),
+                      ),
+                      child: Text(
+                        optionName!.menuList,
+                        style: const TextStyle(
+                          letterSpacing: .8,
+                          color: AppColors.darkColor,
+                          fontFamily: CustomLabels.primaryFont,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
                     ),
-                  ),
-                  child: Text(
-                    optionName!.menuList,
-                    style: const TextStyle(
-                      letterSpacing: .8,
-                      color: AppColors.darkColor,
-                      fontFamily: CustomLabels.primaryFont,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-              ),
+                  ])),
               // Expanded(flex: 1, child: OrderStatus(orders)),
               const SizedBox(
                 height: 5,
@@ -153,28 +169,28 @@ class MenuListSettingState extends State<MenuListSetting> {
                     sortAscending: _sortAscending,
                     sortColumnIndex: _sortColumnIndex,
                     columns: [
-                        DataColumn2(
+                      DataColumn2(
                         label: Text(
                           optionName!.srNo,
                           style: TextStyle(
-                              color: AppColors.darkColor,
+                              color: AppColors.buttonColor,
                               fontFamily: CustomLabels.primaryFont),
                         ),
                       ),
-                       DataColumn2(
+                      DataColumn2(
                         label: Text(
                           optionName!.image,
                           style: TextStyle(
-                              color: AppColors.darkColor,
+                              color: AppColors.buttonColor,
                               fontFamily: CustomLabels.primaryFont),
                         ),
                       ),
-                       DataColumn2(
+                      DataColumn2(
                         label: Center(
-                            child:Text(
+                            child: Text(
                           optionName!.menuName,
                           style: TextStyle(
-                              color: AppColors.darkColor,
+                              color: AppColors.buttonColor,
                               fontFamily: CustomLabels.primaryFont),
                         )),
                         onSort: (columnIndex, ascending) {
@@ -182,22 +198,20 @@ class MenuListSettingState extends State<MenuListSetting> {
                             _sortColumnIndex = columnIndex;
                             _sortAscending = ascending;
                             if (ascending) {
-                              resultOrders.sort((a, b) =>
-                                  a.name!
-                                      .compareTo(b.name!));
+                              resultOrders
+                                  .sort((a, b) => a.name!.compareTo(b.name!));
                             } else {
-                              resultOrders.sort((a, b) =>
-                                  b.name!
-                                      .compareTo(a.name!));
+                              resultOrders
+                                  .sort((a, b) => b.name!.compareTo(a.name!));
                             }
                           });
                         },
                       ),
                       DataColumn2(
-                        label:  Text(
+                        label: Text(
                           optionName!.type,
                           style: TextStyle(
-                              color: AppColors.darkColor,
+                              color: AppColors.buttonColor,
                               fontFamily: CustomLabels.primaryFont),
                         ),
                         onSort: (columnIndex, ascending) {
@@ -205,22 +219,20 @@ class MenuListSettingState extends State<MenuListSetting> {
                             _sortColumnIndex = columnIndex;
                             _sortAscending = ascending;
                             if (ascending) {
-                              resultOrders.sort((a, b) =>
-                                  a.type.compareTo(
-                                      b.type));
+                              resultOrders
+                                  .sort((a, b) => a.type.compareTo(b.type));
                             } else {
-                              resultOrders.sort((a, b) =>
-                                  b.type.compareTo(
-                                      a.type));
+                              resultOrders
+                                  .sort((a, b) => b.type.compareTo(a.type));
                             }
                           });
                         },
                       ),
                       DataColumn2(
-                        label:  Text(
+                        label: Text(
                           optionName!.category,
                           style: TextStyle(
-                              color: AppColors.darkColor,
+                              color: AppColors.buttonColor,
                               fontFamily: CustomLabels.primaryFont),
                         ),
                         onSort: (columnIndex, ascending) {
@@ -228,22 +240,22 @@ class MenuListSettingState extends State<MenuListSetting> {
                             _sortColumnIndex = columnIndex;
                             _sortAscending = ascending;
                             if (ascending) {
-                              resultOrders.sort((a, b) =>
-                                  a.menuCategories.first.name.compareTo(
-                                      b.menuCategories.first.name!));
+                              resultOrders.sort((a, b) => a
+                                  .menuCategories.first.name
+                                  .compareTo(b.menuCategories.first.name!));
                             } else {
-                              resultOrders.sort((a, b) =>
-                                  b.menuCategories.first.name.compareTo(
-                                      a.menuCategories.first.name));
+                              resultOrders.sort((a, b) => b
+                                  .menuCategories.first.name
+                                  .compareTo(a.menuCategories.first.name));
                             }
                           });
                         },
                       ),
-                       DataColumn2(
+                      DataColumn2(
                         label: Text(
                           "${optionName.price} {In ${currency}}",
                           style: TextStyle(
-                              color: AppColors.darkColor,
+                              color: AppColors.buttonColor,
                               fontFamily: CustomLabels.primaryFont),
                         ),
                         onSort: (columnIndex, ascending) {
@@ -251,27 +263,25 @@ class MenuListSettingState extends State<MenuListSetting> {
                             _sortColumnIndex = columnIndex;
                             _sortAscending = ascending;
                             if (ascending) {
-                              resultOrders.sort((a, b) =>
-                                  a.price
-                                      .compareTo(b.price));
+                              resultOrders
+                                  .sort((a, b) => a.price.compareTo(b.price));
                             } else {
-                              resultOrders.sort((a, b) =>
-                                  b.price
-                                      .compareTo(a.price));
+                              resultOrders
+                                  .sort((a, b) => b.price.compareTo(a.price));
                             }
                           });
                         },
                       ),
-                       DataColumn2(
+                      DataColumn2(
                         label: Text(
                           optionName!.active,
                           style: const TextStyle(
-                              color: AppColors.darkColor,
+                              color: AppColors.buttonColor,
                               fontFamily: CustomLabels.primaryFont),
                         ),
                       ),
                     ],
-                    source: OrderDataSource(resultOrders, context,currency),
+                    source: OrderDataSource(resultOrders, context, currency),
                   ),
                 ),
               ),
@@ -289,20 +299,18 @@ class OrderDataSource extends DataTableSource {
   String? Currency;
   OrderDataSource(this.orders, this.context, this.Currency);
 
-
   @override
   DataRow? getRow(int index) {
     if (index >= orders.length) return null;
     var optionName = AppLocalizations.of(context);
     final menus = orders[index];
-    var id = index + 1 ;
+    var id = index + 1;
     return DataRow(cells: [
       DataCell(Center(
         child: Text(
           id.toString(),
           style: const TextStyle(
-              fontFamily: CustomLabels.primaryFont,
-              color: AppColors.darkColor),
+              fontFamily: CustomLabels.primaryFont, color: AppColors.darkColor),
         ),
       )),
       DataCell(
@@ -339,14 +347,13 @@ class OrderDataSource extends DataTableSource {
         Text(
           menus.type,
           style: const TextStyle(
-              fontFamily: CustomLabels.primaryFont,
-              color: AppColors.darkColor),
+              fontFamily: CustomLabels.primaryFont, color: AppColors.darkColor),
         ),
-         const SizedBox(
-           width: 5,
-         ),
-         Image.asset(
-         changeIcon(menus.type),
+        const SizedBox(
+          width: 5,
+        ),
+        Image.asset(
+          changeIcon(menus.type),
           height: 20,
           width: 20,
         ),
@@ -358,25 +365,91 @@ class OrderDataSource extends DataTableSource {
       )),
       DataCell(Center(
         child: Text(
-          menus.price,
+          "${menus.price}/-",
           style: TextStyle(
-            
             fontFamily: CustomLabels.primaryFont,
-            color: changeColor("Placed"),
+            color: AppColors.darkColor,
           ),
         ),
       )),
-      DataCell(Center(
-        child: Transform.scale(
-          scale: 0.5, // Adjust the scale to make the Switch smaller
-          child: Switch(
-            value: menus.active ? true : false,
-            activeColor: Colors.blue,
-            onChanged: (bool value) {},
-          ),
-        ),
+      // DataCell(
+      //     Center(
+      //       child: Transform.scale(
+      //         scale: 0.5, // Adjust the scale to make the Switch smaller
+      //         child: Switch(
+      //           value: menus.active ? true : false,
+      //           activeColor: Colors.blue,
+      //           onChanged: (bool value) {
+      //
+      //             print("is active ? ${value} with id =${menus.id}");
+      //             BlocProvider.of<MenuSettingBloc>(context)
+      //                 .add(MenuSettingPressed(menus.id));
+      //             BlocProvider.of<MenuListBloc>(context).add(MenuListButtonPressed());
+      //
+      //           },
+      //         ),
+      //       ),
+      //     )
+      //    ),
+      DataCell(
+        BlocBuilder<MenuSettingBloc, MenuSettingState>(
+          builder: (context, state) {
+            if(state is MenuSettingSuccess){
 
-      )),
+            }
+            return Center(
+              child: Transform.scale(
+                scale: 0.5, // Adjust the scale to make the Switch smaller
+                child: Switch(
+                  value: menus.active ? true : false,
+                  activeColor: Colors.blue,
+                  onChanged: (bool value) {
+                    // BlocProvider.of<MenuSettingBloc>(context)
+                    //     .add(MenuSettingPressed(menus.id));
+                    // Future.delayed(const Duration(seconds: 1), () {
+                    //   BlocProvider.of<MenuListBloc>(context)
+                    //       .add(MenuListButtonPressed());
+                    // });
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context1) {
+                        return AlertDialog(
+                          title:
+                              Text(value ? "Activate Menu" : "Deactivate Menu"),
+                          content: Text(value
+                              ? "Do you want to activate this menu?"
+                              : "Do you want to deactivate this menu?"),
+                          actions: [
+                            TextButton(
+                              child: Text("Cancel"),
+                              onPressed: () {
+                                Navigator.of(context1)
+                                    .pop(); // Dismiss the dialog
+                              },
+                            ),
+                            TextButton(
+                              child: Text("OK"),
+                              onPressed: () {
+                                Navigator.of(context1)
+                                    .pop(); // Dismiss the dialog
+                                BlocProvider.of<MenuSettingBloc>(context)
+                                    .add(MenuSettingPressed(menus.id));
+                                Future.delayed(const Duration(seconds: 1), () {
+                                  BlocProvider.of<MenuListBloc>(context)
+                                      .add(MenuListButtonPressed());
+                                });
+                              }),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+            );
+          },
+        ),
+      )
     ]);
   }
 
@@ -407,7 +480,7 @@ MaterialColor changeColor(String name) {
   }
 }
 
-String changeIcon(String typeName){
+String changeIcon(String typeName) {
   switch (typeName) {
     case "Veg":
       return AllIcons.veg;
