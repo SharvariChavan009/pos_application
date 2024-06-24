@@ -37,7 +37,7 @@ class OrderListState extends State<OrderList> {
       data: ThemeData(
         dataTableTheme: DataTableThemeData(
           dataRowColor: MaterialStateColor.resolveWith(
-              (states) => AppColors.primaryColor),
+              (states) => AppColors.lightGray),
         ),
       ),
       child: BlocBuilder<OrderListBloc, OrderListDisplayState>(
@@ -56,7 +56,7 @@ class OrderListState extends State<OrderList> {
                     optionName!.noOrdersFound,
                     style: const TextStyle(
                       fontSize: 30.0,
-                      color: AppColors.whiteColor,
+                      color: AppColors.darkColor,
                       fontFamily: CustomLabels.primaryFont,
                     ),
                   ),
@@ -141,7 +141,7 @@ class OrderListState extends State<OrderList> {
                           label:  Text(
                             optionName!.orderNumber,
                             style: TextStyle(
-                                color: AppColors.darkColor,
+                                color: AppColors.buttonColor,
                                 fontFamily: CustomLabels.primaryFont),
                           ),
                           onSort: (columnIndex, ascending) {
@@ -164,7 +164,7 @@ class OrderListState extends State<OrderList> {
                           label:  Text(
                             optionName!.amount,
                             style: TextStyle(
-                                color: AppColors.darkColor,
+                                color: AppColors.buttonColor,
                                 fontFamily: CustomLabels.primaryFont),
                           ),
                           onSort: (columnIndex, ascending) {
@@ -187,7 +187,7 @@ class OrderListState extends State<OrderList> {
                           label:  Text(
                             optionName!.tableNumber,
                             style: TextStyle(
-                                color: AppColors.darkColor,
+                                color: AppColors.buttonColor,
                                 fontFamily: CustomLabels.primaryFont),
                           ),
                           onSort: (columnIndex, ascending) {
@@ -210,7 +210,7 @@ class OrderListState extends State<OrderList> {
                           label:  Text(
                             optionName!.guestName,
                             style: TextStyle(
-                                color: AppColors.darkColor,
+                                color: AppColors.buttonColor,
                                 fontFamily: CustomLabels.primaryFont),
                           ),
                           onSort: (columnIndex, ascending) {
@@ -233,7 +233,7 @@ class OrderListState extends State<OrderList> {
                           label:  Text(
                             optionName!.orderStatus,
                             style: TextStyle(
-                                color: AppColors.darkColor,
+                                color: AppColors.buttonColor,
                                 fontFamily: CustomLabels.primaryFont),
                           ),
                           onSort: (columnIndex, ascending) {
@@ -256,7 +256,7 @@ class OrderListState extends State<OrderList> {
                           label:  Text(
                             optionName!.placedBy,
                             style: TextStyle(
-                                color: AppColors.darkColor,
+                                color: AppColors.buttonColor,
                                 fontFamily: CustomLabels.primaryFont),
                           ),
                           onSort: (columnIndex, ascending) {
@@ -267,7 +267,7 @@ class OrderListState extends State<OrderList> {
                           label:  Text(
                             optionName!.placedBy,
                             style: TextStyle(
-                                color: AppColors.darkColor,
+                                color: AppColors.buttonColor,
                                 fontFamily: CustomLabels.primaryFont),
                           ),
                           onSort: (columnIndex, ascending) {
@@ -278,7 +278,7 @@ class OrderListState extends State<OrderList> {
                           label:  Text(
                             optionName!.action,
                             style: TextStyle(
-                                color: AppColors.darkColor,
+                                color: AppColors.buttonColor,
                                 fontFamily: CustomLabels.primaryFont),
                           ),
                           onSort: (columnIndex, ascending) {
@@ -289,7 +289,7 @@ class OrderListState extends State<OrderList> {
                           label:  Text(
                             optionName!.cancelOrder,
                             style: TextStyle(
-                                color: AppColors.darkColor,
+                                color: AppColors.buttonColor,
                                 fontFamily: CustomLabels.primaryFont),
                           ),
                           onSort: (columnIndex, ascending) {
@@ -328,7 +328,7 @@ class OrderDataSource extends DataTableSource {
           order.orderNo.toString(),
           style: const TextStyle(
               fontFamily: CustomLabels.primaryFont,
-              color: AppColors.whiteColor),
+              color: AppColors.darkColor),
         ),)
       ),
       DataCell(
@@ -336,7 +336,7 @@ class OrderDataSource extends DataTableSource {
           order.summary!.total.toString(),
           style: const TextStyle(
               fontFamily: CustomLabels.primaryFont,
-              color: AppColors.secondaryColor),
+              color: AppColors.darkColor),
         ),
       ),
       DataCell(
@@ -344,13 +344,13 @@ class OrderDataSource extends DataTableSource {
               child: Text(
         order.floorTableId.toString(),
         style: const TextStyle(
-            fontFamily: CustomLabels.primaryFont, color: AppColors.whiteColor),
+            fontFamily: CustomLabels.primaryFont, color: AppColors.darkColor),
       ))
       ),
       DataCell(Text(
         order.customer!.name!.isEmpty ? "customer name": order.customer!.name!,
         style: const TextStyle(
-            fontFamily: CustomLabels.primaryFont, color: AppColors.whiteColor),
+            fontFamily: CustomLabels.primaryFont, color: AppColors.darkColor),
       )),
       DataCell(
         Center(
@@ -366,7 +366,7 @@ class OrderDataSource extends DataTableSource {
               order.user!.name!,
               style: const TextStyle(
                   fontFamily: CustomLabels.primaryFont,
-                  color: Colors.white,
+                  color: AppColors.darkColor,
               ),),)),
       DataCell(
           Center(
@@ -374,7 +374,7 @@ class OrderDataSource extends DataTableSource {
               order.meta!.type!,
               style: const TextStyle(
                 fontFamily: CustomLabels.primaryFont,
-                color: Colors.white,
+                color: AppColors.darkColor,
               ),),)),
       DataCell(InkWell(
         onTap: () {
@@ -386,7 +386,8 @@ class OrderDataSource extends DataTableSource {
           optionName!.viewOrder,
           style: TextStyle(
               fontFamily: CustomLabels.primaryFont,
-              color: AppColors.secondaryColor),
+              color: AppColors.secondaryColor,
+            decoration: TextDecoration.underline),
         ),
       )),
       DataCell(InkWell(

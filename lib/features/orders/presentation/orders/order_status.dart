@@ -83,12 +83,18 @@ class OrderStatusState extends State<OrderStatus> {
                 // Adjust width as needed
                 alignment: Alignment.center,
                 margin: const EdgeInsets.symmetric(horizontal: 8),
-                decoration: BoxDecoration(
-                  color: _selectedButtonIndex == index
-                      ? AppColors.secondaryColor.withOpacity(.1)
-                      : AppColors.lightGreyColor,
-                  borderRadius: BorderRadius.circular(8),
-                ),
+            decoration: BoxDecoration(
+              color: _selectedButtonIndex == index
+                  ? AppColors.secondaryColor.withOpacity(.1)
+                  : AppColors.lightGreyColor,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: _selectedButtonIndex == index
+                    ? AppColors.lightGreyColor // Color when selected
+                    : AppColors.lightGreyColor, // Color when not selected
+                width: 0.5, // Adjust border width as needed
+              ),
+            ),
                 child: Text(
                   title,
                   style: TextStyle(

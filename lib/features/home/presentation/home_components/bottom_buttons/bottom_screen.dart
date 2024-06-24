@@ -71,7 +71,7 @@ class _BottomScreenState extends State<BottomScreen> {
                   ),
                   Container(
                     height: 35,
-                    width: 35,
+                    width: 55,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: AppColors.lightGreyColor,

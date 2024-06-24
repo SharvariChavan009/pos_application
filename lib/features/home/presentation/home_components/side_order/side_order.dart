@@ -82,6 +82,7 @@ class _OrderScreenState extends State<OrderScreen>
     parent: _controller,
     curve: Curves.elasticOut,
   );
+  String? currency;
 
   @override
   void dispose() {
@@ -453,7 +454,7 @@ class _OrderScreenState extends State<OrderScreen>
                                                       ],
                                                       style: const TextStyle(
                                                           color: AppColors
-                                                              .whiteColor),
+                                                              .darkColor),
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       maxLines: 1,
@@ -519,7 +520,7 @@ class _OrderScreenState extends State<OrderScreen>
                                                             fit:
                                                                 BoxFit.fitWidth,
                                                             child: AutoSizeText(
-                                                              "\$${(double.parse(cartState.cartResponse.data!.cart.cartItems[index].menu.price) * 1).toStringAsFixed(2)}",
+                                                              "${cartState.cartResponse.data!.currency.sign}${(double.parse(cartState.cartResponse.data!.cart.cartItems[index].menu.price) * 1).toStringAsFixed(2)}",
                                                               textAlign:
                                                                   TextAlign
                                                                       .center,
@@ -530,6 +531,7 @@ class _OrderScreenState extends State<OrderScreen>
                                                               ],
                                                               style: CustomLabels
                                                                   .bodyTextStyle(
+                                                                color: AppColors.buttonColor,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w400,
