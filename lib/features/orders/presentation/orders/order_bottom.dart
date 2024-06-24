@@ -106,7 +106,7 @@ class OrderBottomState extends State<OrderBottom> {
                         },
                       );
                       },
-                    activeButtonColor: AppColors.secondaryColor,
+                    activeButtonColor: AppColors.buttonColor,
                     text: optionName!.completeOrder ,
                     height: 40,
                   )),
@@ -123,7 +123,7 @@ class OrderBottomState extends State<OrderBottom> {
                     visible: state.orderDetails!.status == "Completed" || state.orderDetails!.status == "مكتمل" ? true : false,
                     child:CustomButton(
                     onPressed: () {},
-                    activeButtonColor: AppColors.secondaryColor,
+                    activeButtonColor: AppColors.buttonColor,
                     text: optionName!.refund,
                     height: 40,
                   ),
@@ -157,6 +157,7 @@ Widget buildRichText(String title, String value) {
         TextSpan(
           text: value,
           style: CustomLabels.body1TextStyle(
+            color: AppColors.buttonColor,
             fontFamily: CustomLabels.primaryFont,
             letterSpacing: 0,
           ),

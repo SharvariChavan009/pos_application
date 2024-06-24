@@ -36,13 +36,25 @@ class OrderDetails extends StatefulWidget {
 }
 OrderDetailsData? viewOrder;
 class _OrderDetailsState extends State<OrderDetails> {
+  String? currency;
+  @override
+  void initState() {
+    super.initState();
+    fetchCurrency();
+  }
+
+  void fetchCurrency() async {
+    currency = await ApiMethods.getCurrency();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     var optionName = AppLocalizations.of(context);
     return Container(
       margin: const EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
       decoration: const BoxDecoration(
-        color: AppColors.primaryColor,
+        color: AppColors.lightGray,
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: BlocBuilder<OrderListBloc, OrderListDisplayState>(
@@ -73,7 +85,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                           },
                             child: const Icon(
                           Icons.arrow_back_rounded,
-                          color: CupertinoColors.white,
+                          color: AppColors.iconColor,
                           size: 22,
                         )
                         ),
@@ -84,7 +96,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                           optionName!.orders,
                           style: TextStyle(
                             letterSpacing: .8,
-                            color: AppColors.whiteColor,
+                            color: AppColors.darkColor,
                             fontFamily: CustomLabels.primaryFont,
                             fontWeight: CustomLabels.mediumFontWeight,
                             fontSize: 18,
@@ -103,7 +115,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                            optionName!.orderDetails,
                           style: const TextStyle(
                             letterSpacing: .8,
-                            color: AppColors.whiteColor,
+                            color: AppColors.buttonColor,
                             fontFamily: CustomLabels.primaryFont,
                             fontWeight: CustomLabels.mediumFontWeight,
                             fontSize: 18,
@@ -120,6 +132,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         Expanded(
                           flex: 2,
                           child: Container(
+                            color: AppColors.lightGreyColor,
                             padding: const EdgeInsets.only(top: 50),
                             alignment: Alignment.topCenter,
                             child: Image.asset(
@@ -156,35 +169,35 @@ class _OrderDetailsState extends State<OrderDetails> {
                                         // 'Table No:',
                                         "${optionName!.tableNo}:",
                                         style: const TextStyle(
-                                            color: AppColors.iconColor,
+                                            color: AppColors.darkColor,
                                             fontFamily: CustomLabels.primaryFont),
                                       ),
                                       Text(
                                         // 'Order#:',
                                         '${optionName!.order}#:',
                                         style: const TextStyle(
-                                            color: AppColors.iconColor,
+                                            color: AppColors.darkColor,
                                             fontFamily: CustomLabels.primaryFont),
                                       ),
                                       Text(
                                         // 'Guests:',
                                         '${optionName!.guests}:',
                                         style: const TextStyle(
-                                            color: AppColors.iconColor,
+                                            color: AppColors.darkColor,
                                             fontFamily: CustomLabels.primaryFont),
                                       ),
                                       Text(
                                         // 'Manager:',
                                         '${optionName!.manager}:',
                                         style: const TextStyle(
-                                            color: AppColors.iconColor,
+                                            color: AppColors.darkColor,
                                             fontFamily: CustomLabels.primaryFont),
                                       ),
                                       Text(
                                         // 'Payment Status:',
                                         '${optionName!.paymentStatus}:',
                                         style: const TextStyle(
-                                            color: AppColors.iconColor,
+                                            color: AppColors.darkColor,
                                             fontFamily: CustomLabels.primaryFont),
                                       ),
                                       SizedBox(
@@ -239,16 +252,16 @@ class _OrderDetailsState extends State<OrderDetails> {
                                             fontSize: 14,
                                             fontWeight:
                                                 CustomLabels.mediumFontWeight,
-                                            color: AppColors.whiteColor,
+                                            color: AppColors.darkColor,
                                             fontFamily: CustomLabels.primaryFont),
                                       ),
-                                      const Text(
-                                        '300',
-                                        style: TextStyle(
+                                       Text(
+                                        '${viewOrder!.diners}',
+                                        style: const TextStyle(
                                             fontSize: 14,
                                             fontWeight:
                                                 CustomLabels.mediumFontWeight,
-                                            color: AppColors.whiteColor,
+                                            color: AppColors.darkColor,
                                             fontFamily: CustomLabels.primaryFont),
                                       ),
                                      BlocBuilder<ProfileBloc, ProfileState>(
@@ -263,7 +276,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                                     fontSize: 14,
                                                     fontWeight:
                                                         CustomLabels.mediumFontWeight,
-                                                    color: AppColors.whiteColor,
+                                                    color: AppColors.darkColor,
                                                     fontFamily: CustomLabels.primaryFont),
                                               );
                                         }else{
@@ -273,7 +286,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                                     fontSize: 14,
                                                     fontWeight:
                                                         CustomLabels.mediumFontWeight,
-                                                    color: AppColors.whiteColor,
+                                                    color: AppColors.darkColor,
                                                     fontFamily: CustomLabels.primaryFont),
                                               );
                                         }
@@ -285,7 +298,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                             fontSize: 14,
                                             fontWeight:
                                                 CustomLabels.mediumFontWeight,
-                                            color: AppColors.whiteColor,
+                                            color: AppColors.darkColor,
                                             fontFamily: CustomLabels.primaryFont),
                                       ),
                                       const SizedBox(
@@ -336,28 +349,28 @@ class _OrderDetailsState extends State<OrderDetails> {
                                         // 'Amount:',
                                         '${optionName!.amount}:',
                                         style: const TextStyle(
-                                            color: AppColors.iconColor,
+                                            color: AppColors.darkColor,
                                             fontFamily: CustomLabels.primaryFont),
                                       ),
                                       Text(
                                         // 'Name:',
                                         '${optionName!.name}:',
                                         style: TextStyle(
-                                            color: AppColors.iconColor,
+                                            color: AppColors.darkColor,
                                             fontFamily: CustomLabels.primaryFont),
                                       ),
                                       Text(
                                         // 'Date & Time:',
                                         '${optionName!.dateTime}:',
                                         style: TextStyle(
-                                            color: AppColors.iconColor,
+                                            color: AppColors.darkColor,
                                             fontFamily: CustomLabels.primaryFont),
                                       ),
                                       Text(
                                         // 'Status:',
                                         '${optionName.status}:',
                                         style: TextStyle(
-                                            color: AppColors.iconColor,
+                                            color: AppColors.darkColor,
                                             fontFamily: CustomLabels.primaryFont),
                                       ),
                                       SizedBox(
@@ -386,7 +399,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                         height: 0,
                                       ),
                                       Text(
-                                        "\u20B9 ${viewOrder!.summary!.total}",
+                                        "${currency} ${viewOrder!.summary!.total}",
                                         textAlign: TextAlign.center,
                                         style: CustomLabels.body1TextStyle(
                                             fontFamily: CustomLabels.primaryFont,
@@ -399,7 +412,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                             fontSize: 14,
                                             fontWeight:
                                                 CustomLabels.mediumFontWeight,
-                                            color: AppColors.whiteColor,
+                                            color: AppColors.darkColor,
                                             fontFamily: CustomLabels.primaryFont),
                                       ),
                                        Text(
@@ -408,7 +421,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                             fontSize: 14,
                                             fontWeight:
                                                 CustomLabels.mediumFontWeight,
-                                            color: AppColors.whiteColor,
+                                            color: AppColors.darkColor,
                                             fontFamily: CustomLabels.primaryFont),
                                       ),
                                        Text(
@@ -451,7 +464,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         width: 100,
                         margin: const EdgeInsets.only(bottom: 10),
                         decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(.9),
+                          color: AppColors.lightGreyColor,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Row(
@@ -533,47 +546,58 @@ class _OrderDetailsState extends State<OrderDetails> {
                                           mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                           children: [
-                                            FittedBox(
-                                              fit: BoxFit.fitWidth,
-                                              child: AutoSizeText(
-                                                "\u20B9 ${viewOrder!.orderItems![index].orderable!.price}",
-                                                textAlign: TextAlign.center,
-                                                minFontSize: 10,
-                                                maxFontSize: 16,
-                                                presetFontSizes: const [12.5],
-                                                style: CustomLabels
-                                                    .bodyTextStyle(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontFamily:
-                                                  CustomLabels.secondaryFont,
-                                                  letterSpacing: 0,
-                                                ),
-                                                overflow: TextOverflow.ellipsis,
-                                                maxLines: 1,
+                                            AutoSizeText(
+                                              "${currency} ${viewOrder!.orderItems![index].orderable!.price}",
+                                              textAlign: TextAlign.center,
+                                              minFontSize: 10,
+                                              maxFontSize: 16,
+                                              presetFontSizes: const [12.5],
+                                              style: CustomLabels
+                                                  .bodyTextStyle(
+                                                color: AppColors.secondaryColor,
+                                                fontWeight: FontWeight.w400,
+                                                fontFamily:
+                                                CustomLabels.secondaryFont,
+                                                letterSpacing: 0,
                                               ),
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
                                             ),
-                                            FittedBox(
-                                              fit: BoxFit.fitWidth,
-                                              child: SizedBox(
-                                                width: 70,
-                                                height: 30,
-                                                child: Visibility(
-                                                  visible: false,
-                                                  child: CustomButton(
-                                                  onPressed: () {},
-                                                  activeButtonColor:
-                                                  AppColors.darkColor,
-                                                  borderColor:
-                                                  AppColors.secondaryColor,
-                                                  text: 'Refund',
-                                                  textStyle: const TextStyle(
-                                                      color: AppColors
-                                                          .secondaryColor,
-                                                      fontFamily: CustomLabels
-                                                          .primaryFont),
-                                                ),)
+                                            AutoSizeText(
+                                              "Quantity : ${viewOrder!.orderItems![index].quantity}",
+                                              textAlign: TextAlign.center,
+                                              minFontSize: 10,
+                                              maxFontSize: 16,
+                                              presetFontSizes: const [12.5],
+                                              style: CustomLabels
+                                                  .bodyTextStyle(
+                                                color: AppColors.secondaryColor,
+                                                fontWeight: FontWeight.w400,
+                                                fontFamily:
+                                                CustomLabels.secondaryFont,
+                                                letterSpacing: 0,
                                               ),
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
                                             ),
+                                            AutoSizeText(
+                                              "Total : ${currency}${(viewOrder!.orderItems![index].quantity)! * (viewOrder!.orderItems![index].orderable!.price!)}",
+                                              textAlign: TextAlign.center,
+                                              minFontSize: 10,
+                                              maxFontSize: 16,
+                                              presetFontSizes: const [12.5],
+                                              style: CustomLabels
+                                                  .bodyTextStyle(
+                                                color: AppColors.secondaryColor,
+                                                fontWeight: FontWeight.w400,
+                                                fontFamily:
+                                                CustomLabels.secondaryFont,
+                                                letterSpacing: 0,
+                                              ),
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                            ),
+
                                           ],
                                         ),
                                       ),

@@ -50,7 +50,7 @@ class CartItemSelectorState extends State<CartItemSelector> {
                 value: widget.menuItem.quantity,
                 duration: const Duration(milliseconds: 200),
                 textStyle:
-                const TextStyle(fontSize: 13, color: AppColors.whiteColor),
+                const TextStyle(fontSize: 13, color: AppColors.darkColor),
               ),
             ),
             const SizedBox(
