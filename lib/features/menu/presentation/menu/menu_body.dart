@@ -67,7 +67,7 @@ class ListOfMenus extends StatelessWidget {
                 margin: const EdgeInsets.only(
                     top: 10, left: 10, right: 10, bottom: 0),
                 decoration: const BoxDecoration(
-                  color: AppColors.primaryColor,
+                  color: AppColors.lightGray,
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(10),
                     topLeft: Radius.circular(10),
@@ -93,7 +93,7 @@ class ListOfMenus extends StatelessWidget {
                               optionName!.menuList,
                               style: const TextStyle(
                                   letterSpacing: .8,
-                                  color: AppColors.whiteColor,
+                                  color: AppColors.darkColor,
                                   fontFamily: CustomLabels.primaryFont,
                                   fontWeight: CustomLabels.mediumFontWeight,
                                   fontSize: 18),
@@ -200,7 +200,7 @@ class ListOfMenus extends StatelessWidget {
                                       cacheExtent: 10,
                                       gridDelegate:
                                           const SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 4,
+                                        crossAxisCount: 3,
                                         mainAxisExtent: 250,
                                         crossAxisSpacing: 8.0,
                                         mainAxisSpacing: 8.0,
