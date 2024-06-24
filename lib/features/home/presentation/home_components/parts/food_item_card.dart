@@ -114,8 +114,8 @@ class FoodItemCardState extends State<FoodItemCard> {
                 width: double.infinity,
                 //color: Colors.red,
                 child: Text(
-                  ValidationsAll.stripHtmlTags(widget.foodItem.description),
-                  overflow: TextOverflow.fade,
+                     ValidationsAll.stripHtmlTags(widget.foodItem.description),
+                  // overflow: TextOverflow.fade,
                   maxLines: 2,
                   style: const TextStyle(
                     color: AppColors.iconColor,
