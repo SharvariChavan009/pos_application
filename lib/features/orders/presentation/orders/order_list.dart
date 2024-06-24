@@ -76,7 +76,7 @@ class OrderListState extends State<OrderList> {
             margin:
             const EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 0),
             decoration: const BoxDecoration(
-              color: AppColors.primaryColor,
+              color: AppColors.lightGray,
               borderRadius: BorderRadius.only(
                 topRight: Radius.circular(10),
                 topLeft: Radius.circular(10),
@@ -100,7 +100,7 @@ class OrderListState extends State<OrderList> {
                       optionName!.orders,
                       style: const TextStyle(
                         letterSpacing: .8,
-                        color: AppColors.whiteColor,
+                        color: AppColors.darkColor,
                         fontFamily: CustomLabels.primaryFont,
                         fontWeight: CustomLabels.mediumFontWeight,
                         fontSize: 18,
@@ -121,7 +121,7 @@ class OrderListState extends State<OrderList> {
                       showEmptyRows: false,
                       showFirstLastButtons: true,
                       headingRowColor: MaterialStateColor.resolveWith(
-                              (states) => AppColors.primaryColor),
+                              (states) => AppColors.lightGray),
                       arrowHeadColor: AppColors.secondaryColor,
                       columnSpacing: 30,
                       rowsPerPage: _rowsPerPage,
@@ -141,7 +141,7 @@ class OrderListState extends State<OrderList> {
                           label:  Text(
                             optionName!.orderNumber,
                             style: TextStyle(
-                                color: AppColors.iconColor,
+                                color: AppColors.darkColor,
                                 fontFamily: CustomLabels.primaryFont),
                           ),
                           onSort: (columnIndex, ascending) {
@@ -164,7 +164,7 @@ class OrderListState extends State<OrderList> {
                           label:  Text(
                             optionName!.amount,
                             style: TextStyle(
-                                color: AppColors.iconColor,
+                                color: AppColors.darkColor,
                                 fontFamily: CustomLabels.primaryFont),
                           ),
                           onSort: (columnIndex, ascending) {
@@ -187,7 +187,7 @@ class OrderListState extends State<OrderList> {
                           label:  Text(
                             optionName!.tableNumber,
                             style: TextStyle(
-                                color: AppColors.iconColor,
+                                color: AppColors.darkColor,
                                 fontFamily: CustomLabels.primaryFont),
                           ),
                           onSort: (columnIndex, ascending) {
@@ -210,7 +210,7 @@ class OrderListState extends State<OrderList> {
                           label:  Text(
                             optionName!.guestName,
                             style: TextStyle(
-                                color: AppColors.iconColor,
+                                color: AppColors.darkColor,
                                 fontFamily: CustomLabels.primaryFont),
                           ),
                           onSort: (columnIndex, ascending) {
@@ -233,7 +233,7 @@ class OrderListState extends State<OrderList> {
                           label:  Text(
                             optionName!.orderStatus,
                             style: TextStyle(
-                                color: AppColors.iconColor,
+                                color: AppColors.darkColor,
                                 fontFamily: CustomLabels.primaryFont),
                           ),
                           onSort: (columnIndex, ascending) {
@@ -256,7 +256,7 @@ class OrderListState extends State<OrderList> {
                           label:  Text(
                             optionName!.placedBy,
                             style: TextStyle(
-                                color: AppColors.iconColor,
+                                color: AppColors.darkColor,
                                 fontFamily: CustomLabels.primaryFont),
                           ),
                           onSort: (columnIndex, ascending) {
@@ -267,7 +267,7 @@ class OrderListState extends State<OrderList> {
                           label:  Text(
                             optionName!.placedBy,
                             style: TextStyle(
-                                color: AppColors.iconColor,
+                                color: AppColors.darkColor,
                                 fontFamily: CustomLabels.primaryFont),
                           ),
                           onSort: (columnIndex, ascending) {
@@ -278,7 +278,7 @@ class OrderListState extends State<OrderList> {
                           label:  Text(
                             optionName!.action,
                             style: TextStyle(
-                                color: AppColors.iconColor,
+                                color: AppColors.darkColor,
                                 fontFamily: CustomLabels.primaryFont),
                           ),
                           onSort: (columnIndex, ascending) {
@@ -289,7 +289,7 @@ class OrderListState extends State<OrderList> {
                           label:  Text(
                             optionName!.cancelOrder,
                             style: TextStyle(
-                                color: AppColors.iconColor,
+                                color: AppColors.darkColor,
                                 fontFamily: CustomLabels.primaryFont),
                           ),
                           onSort: (columnIndex, ascending) {
