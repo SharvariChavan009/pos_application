@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:data_table_2/data_table_2.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pos_application/core/common/colors.dart';
@@ -105,7 +106,19 @@ class MenuListSettingState extends State<MenuListSetting> {
             children: [
               Expanded(
                 flex: 1,
-                child: Container(
+                child: Row( children: [
+                  InkWell(
+                      onTap: () {
+                        BlocProvider.of<MenuNameBloc>(context)
+                            .add(MenuNameSelected(context: context, menuName: "Setting"));
+                      },
+                      child: const Icon(
+                        Icons.arrow_back_rounded,
+                        color:AppColors.iconColor,
+                        size: 22,
+                      )
+                  ),
+                  Container(
                   padding: const EdgeInsets.only(left: 20),
                   alignment: Alignment.centerLeft,
                   decoration: const BoxDecoration(
@@ -124,7 +137,7 @@ class MenuListSettingState extends State<MenuListSetting> {
                     ),
                   ),
                 ),
-              ),
+              ])),
               // Expanded(flex: 1, child: OrderStatus(orders)),
               const SizedBox(
                 height: 5,
@@ -157,7 +170,7 @@ class MenuListSettingState extends State<MenuListSetting> {
                         label: Text(
                           optionName!.srNo,
                           style: TextStyle(
-                              color: AppColors.darkColor,
+                              color: AppColors.buttonColor,
                               fontFamily: CustomLabels.primaryFont),
                         ),
                       ),
@@ -165,7 +178,7 @@ class MenuListSettingState extends State<MenuListSetting> {
                         label: Text(
                           optionName!.image,
                           style: TextStyle(
-                              color: AppColors.darkColor,
+                              color: AppColors.buttonColor,
                               fontFamily: CustomLabels.primaryFont),
                         ),
                       ),
@@ -174,7 +187,7 @@ class MenuListSettingState extends State<MenuListSetting> {
                             child:Text(
                           optionName!.menuName,
                           style: TextStyle(
-                              color: AppColors.darkColor,
+                              color: AppColors.buttonColor,
                               fontFamily: CustomLabels.primaryFont),
                         )),
                         onSort: (columnIndex, ascending) {
@@ -197,7 +210,7 @@ class MenuListSettingState extends State<MenuListSetting> {
                         label:  Text(
                           optionName!.type,
                           style: TextStyle(
-                              color: AppColors.darkColor,
+                              color: AppColors.buttonColor,
                               fontFamily: CustomLabels.primaryFont),
                         ),
                         onSort: (columnIndex, ascending) {
@@ -220,7 +233,7 @@ class MenuListSettingState extends State<MenuListSetting> {
                         label:  Text(
                           optionName!.category,
                           style: TextStyle(
-                              color: AppColors.darkColor,
+                              color: AppColors.buttonColor,
                               fontFamily: CustomLabels.primaryFont),
                         ),
                         onSort: (columnIndex, ascending) {
@@ -243,7 +256,7 @@ class MenuListSettingState extends State<MenuListSetting> {
                         label: Text(
                           "${optionName.price} {In ${currency}}",
                           style: TextStyle(
-                              color: AppColors.darkColor,
+                              color: AppColors.buttonColor,
                               fontFamily: CustomLabels.primaryFont),
                         ),
                         onSort: (columnIndex, ascending) {
@@ -266,7 +279,7 @@ class MenuListSettingState extends State<MenuListSetting> {
                         label: Text(
                           optionName!.active,
                           style: const TextStyle(
-                              color: AppColors.darkColor,
+                              color: AppColors.buttonColor,
                               fontFamily: CustomLabels.primaryFont),
                         ),
                       ),
@@ -358,11 +371,11 @@ class OrderDataSource extends DataTableSource {
       )),
       DataCell(Center(
         child: Text(
-          menus.price,
+          "${menus.price}/-",
           style: TextStyle(
             
             fontFamily: CustomLabels.primaryFont,
-            color: changeColor("Placed"),
+            color: AppColors.darkColor,
           ),
         ),
       )),

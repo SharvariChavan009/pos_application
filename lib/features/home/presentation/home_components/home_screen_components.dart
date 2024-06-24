@@ -10,7 +10,6 @@ import 'package:pos_application/features/orders/presentation/orders/order_detail
 import 'package:pos_application/features/orders/presentation/orders/order_list.dart';
 import 'package:pos_application/features/payment/presentation/payment_list.dart';
 import 'package:pos_application/features/setting/presentation/menu_setting/menu_body/menu_list_body.dart';
-import 'package:pos_application/features/setting/presentation/menu_setting/menu_setting_screen.dart';
 import 'package:pos_application/features/setting/presentation/setting_screen.dart';
 
 
