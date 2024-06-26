@@ -36,7 +36,7 @@ class LogoutBloc  extends Bloc<LogoutEvent,LogoutState>{
         final success = response.data['data'] != null;
         if (success) {
           box.delete('accessToken');
-          Hive.close();
+          // Hive.close();
           emit(LogoutSuccess());
           await Future.delayed(const Duration(seconds: 2), () {
             emit(LogoutInitial());

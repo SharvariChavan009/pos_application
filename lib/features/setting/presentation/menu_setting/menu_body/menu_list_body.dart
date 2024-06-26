@@ -415,20 +415,20 @@ class OrderDataSource extends DataTableSource {
                       builder: (BuildContext context1) {
                         return AlertDialog(
                           title:
-                              Text(value ? "Activate Menu" : "Deactivate Menu"),
+                              Text(value ? optionName!.activateMenu : optionName!.deactivateMenu),
                           content: Text(value
-                              ? "Do you want to activate this menu?"
-                              : "Do you want to deactivate this menu?"),
+                              ? optionName!.doyouwanttoactivatethismenu
+                              : optionName!.doyouwanttodeactivatethismenu),
                           actions: [
                             TextButton(
-                              child: Text("Cancel"),
+                              child: Text(optionName!.cancel),
                               onPressed: () {
                                 Navigator.of(context1)
                                     .pop(); // Dismiss the dialog
                               },
                             ),
                             TextButton(
-                              child: Text("OK"),
+                              child: Text(optionName!.oK),
                               onPressed: () {
                                 Navigator.of(context1)
                                     .pop(); // Dismiss the dialog

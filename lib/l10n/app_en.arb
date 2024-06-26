@@ -103,5 +103,16 @@
 
   "table" : "Table",
   "guest" : "Guest",
-  "reserveTable" : "Reserve Table"
+  "reserveTable" : "Reserve Table",
+
+  "staffAttendance" : "Staff Attendance",
+  "collapse" : "Collapse",
+  "search" : "Search",
+
+  "activateMenu" : "Activate Menu",
+  "deactivateMenu" : "Deactivate Menu",
+  "doyouwanttoactivatethismenu" : "Do you want to activate this menu?",
+  "doyouwanttodeactivatethismenu" : "Do you want to deactivate this menu?",
+
+  "empoweringYourCulinaryJourney" : "Empowering Your Culinary Journey"
 }

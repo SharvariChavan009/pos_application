@@ -3,6 +3,7 @@ import 'package:pos_application/core/common/colors.dart';
 import 'package:pos_application/features/home/presentation/home_components/drawer/drawer.dart';
 import 'package:pos_application/features/home/presentation/home_components/home_screen_components.dart';
 import 'package:pos_application/features/home/presentation/home_components/home_widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

@@ -101,6 +101,17 @@
 
   "table" : "طاولة",
   "guest" : "ضيف",
-  "reserveTable" : "جدول الاحتياط"
+  "reserveTable" : "جدول الاحتياط",
+
+  "staffAttendance" : "حضور الموظفين",
+  "collapse" : "ينهار",
+  "search" : "يبحث",
+
+  "activateMenu" : "تفعيل القائمة",
+  "deactivateMenu" : "إلغاء تنشيط القائمة",
+  "doyouwanttoactivatethismenu" : "هل تريد تفعيل هذه القائمة؟",
+  "doyouwanttodeactivatethismenu" : "هل تريد إلغاء تنشيط هذه القائمة؟",
+
+  "empoweringYourCulinaryJourney" : "تمكين رحلتك الطهوية"
 
 }

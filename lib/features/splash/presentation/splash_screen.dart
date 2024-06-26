@@ -11,6 +11,7 @@ import '../../../core/common/label.dart';
 import '../../../core/common/transition.dart';
 import '../../auth/presentation/login_screen.dart';
 import '../../home/presentation/home_components/homescreen.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -85,6 +86,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
+    var optionName = AppLocalizations.of(context);
     return Scaffold(
       extendBodyBehindAppBar: false,
       extendBody: true,
@@ -117,7 +119,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                   height: 20,
                 ),
                 AutoSizeText(
-                'Empowering Your Culinary Journey',
+                optionName!.empoweringYourCulinaryJourney,
                 minFontSize: 25,
                 maxFontSize: 30,
                 textAlign: TextAlign.end,

@@ -100,15 +100,11 @@ Widget buildContentColumn(context, TabController tabController) {
                     ],
                   ),
                 );
-                case "Setting Menu": return SizedBox(
+                case "Setting Menu":
+                  return SizedBox(
                   height: DeviceUtils.getDeviceDimension(context).height,
                   child: Column(
                     children: [
-                    //   headerPart(context),
-                    //   const Expanded(
-                    //     flex: 11,
-                    //     child: MenuListSetting(),
-                    //   ),
                       headerPart(context),
                       const Expanded(
                         flex: 11,
@@ -118,6 +114,17 @@ Widget buildContentColumn(context, TabController tabController) {
                     ],
                   ),
                 );
+                case "Setting Table" || "Setting add Table":
+                  return SizedBox(
+                    height: DeviceUtils.getDeviceDimension(context).height,
+                    child: Column(
+                      children: [
+                        headerPart(context),
+                        (name == "Setting add Table")?middleBodySettingTable(tabController,true):middleBodySettingTable(tabController,false),
+                        bottomPart(),
+                      ],
+                    ),
+                  );
                 default: return SizedBox(
                   height: DeviceUtils.getDeviceDimension(context).height,
                   child: Column(

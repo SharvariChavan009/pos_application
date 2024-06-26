@@ -45,7 +45,10 @@ void main() async {
 }
 Locale? selectedLanguage = Locale('en');
 Locale _fetchLanguage(Box? box) {
-  String? storedLanguage = box!.get('language', defaultValue: 'en');
+  String? storedLanguage = box!.get('language');
+  if(storedLanguage == null){
+    storedLanguage = 'en';
+  }
   selectedLanguage = Locale(storedLanguage!);
   print("selectedLanguage=${selectedLanguage}");
   return Locale(storedLanguage!);
