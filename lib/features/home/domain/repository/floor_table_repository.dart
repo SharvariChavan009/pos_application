@@ -54,6 +54,8 @@ class FloorTableBloc extends Bloc<FloorTableEvent, FloorTableState> {
         "max_capacity": event.maxCapacity,
         "extra_capacity": event.extraCapacity,
         "floor": event.floor,
+        "x_cord": event.xCord,
+        "y_cord": event.yCord
       };
 
       String? bearerToken = "Bearer $_dataToken";

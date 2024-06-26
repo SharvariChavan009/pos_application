@@ -17,6 +17,8 @@ class FloorTable {
   final String createdAt;
   final String updatedAt;
   final String shareUrl;
+  final String? xCord;
+  final String? yCord;
 
   FloorTable({
     required this.id,
@@ -33,6 +35,8 @@ class FloorTable {
     required this.createdAt,
     required this.updatedAt,
     required this.shareUrl,
+     this.xCord,
+     this.yCord,
   });
 
   factory FloorTable.fromJson(Map<String, dynamic> json) {
@@ -51,6 +55,8 @@ class FloorTable {
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
       shareUrl: json['share_url'],
+      xCord: json['x_cord'],
+      yCord: json['y_cord'],
     );
   }
 }

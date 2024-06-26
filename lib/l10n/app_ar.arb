@@ -112,6 +112,7 @@
   "doyouwanttoactivatethismenu" : "هل تريد تفعيل هذه القائمة؟",
   "doyouwanttodeactivatethismenu" : "هل تريد إلغاء تنشيط هذه القائمة؟",
 
-  "empoweringYourCulinaryJourney" : "تمكين رحلتك الطهوية"
+  "empoweringYourCulinaryJourney" : "تمكين رحلتك الطهوية",
+  "noNewTable": "لا يوجد جدول جديد"
 
 }

@@ -9,6 +9,8 @@ import 'package:pos_application/features/payment/domain/repository/payment_list_
 import 'package:pos_application/features/payment/presentation/bloc/payment_list_event.dart';
 import '../../../../orders/domain/repository/order_list_repository.dart';
 import '../../../../orders/presentation/bloc/order_list/order_list_event.dart';
+import '../../../domain/repository/floor_table_repository.dart';
+import '../../bloc/floor_table_event.dart';
 import '../../bloc/menu_name_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
@@ -83,6 +85,7 @@ class SidebarPageState extends State<SidebarPage> {
         onPressed: () {
           BlocProvider.of<MenuNameBloc>(context).add(
               MenuNameSelected(context: context, menuName: "Staff Attendance"));
+          BlocProvider.of<OrderListBloc>(context).add(OrderListShowEvent());
         },
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text("Face"))),

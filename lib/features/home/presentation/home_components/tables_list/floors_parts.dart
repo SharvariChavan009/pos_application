@@ -40,7 +40,9 @@ class _FloorScreenState extends State<FloorScreen>
         createdAt: "2024-04-24T10:16:08.000000Z",
         updatedAt: "2024-04-24T10:16:08.000000Z",
         shareUrl:
-            "http://localhost:8000/customers/tables/1/orders?signature=3bd23454f284faa2e39e5fb4ea19e849803b11fbde025f55a1cded9133c391f5")
+            "http://localhost:8000/customers/tables/1/orders?signature=3bd23454f284faa2e39e5fb4ea19e849803b11fbde025f55a1cded9133c391f5",
+      xCord: '0.0',
+    yCord: '0.0'),
   ];
   @override
   Widget build(BuildContext context) {

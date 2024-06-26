@@ -58,46 +58,48 @@ class _AllTableStatusState extends State<AllTableStatus> {
             ],
           ),
           const Spacer(),
-          Container(
-            width: 120,
-            margin: const EdgeInsets.only(right: 30),
-            decoration: BoxDecoration(
-              color: AppColors.secondaryColor.withOpacity(.1),
-              border: Border.all(
-                color: AppColors.secondaryColor.withOpacity(.8),
-                width: 2,
-              ),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: BlocBuilder<SetSelectedFloorTableBloc, SetSelectedFloorTableState>(
-              builder: (context, state) {
-                String? floorname = "";
-                if(state is SetSelectedFloorTableSuccess){
-                  floorname = state.floorTable;
-                }
-                return CustomButton(
-                  onPressed: () {
-                    if (floorname!.isEmpty) {
-                      OverlayManager.showSnackbar(
-                        context,
-                        type: ContentType.failure,
-                        title: optionName!.addTable,
-                        message: optionName!.tableSelectionMessage,
-                      );
-                    } else {
-                      MainBodyTable.currentState?.addTable(context);
-                    }
-                  },
-                  text: optionName!.addTable,
-                  activeButtonColor: AppColors.secondaryColor,
-                  backgroundColor: AppColors.darkColor,
-                  textStyle: const TextStyle(
-                      color: AppColors.whiteColor,
-                      fontFamily: CustomLabels.primaryFont),
-                );
-              },
-            ),
-          ),
+         Visibility(
+           visible: false,
+             child: Container(
+           width: 120,
+           margin: const EdgeInsets.only(right: 30),
+           decoration: BoxDecoration(
+             color: AppColors.secondaryColor.withOpacity(.1),
+             border: Border.all(
+               color: AppColors.secondaryColor.withOpacity(.8),
+               width: 2,
+             ),
+             borderRadius: BorderRadius.circular(8),
+           ),
+           child: BlocBuilder<SetSelectedFloorTableBloc, SetSelectedFloorTableState>(
+             builder: (context, state) {
+               String? floorname = "";
+               if(state is SetSelectedFloorTableSuccess){
+                 floorname = state.floorTable;
+               }
+               return CustomButton(
+                 onPressed: () {
+                   if (floorname!.isEmpty) {
+                     OverlayManager.showSnackbar(
+                       context,
+                       type: ContentType.failure,
+                       title: optionName!.addTable,
+                       message: optionName!.tableSelectionMessage,
+                     );
+                   } else {
+                     // MainBodyTable.currentState?.addTable(context);
+                   }
+                 },
+                 text: optionName!.addTable,
+                 activeButtonColor: AppColors.secondaryColor,
+                 backgroundColor: AppColors.darkColor,
+                 textStyle: const TextStyle(
+                     color: AppColors.whiteColor,
+                     fontFamily: CustomLabels.primaryFont),
+               );
+             },
+           ),
+         ))
         ],
       );
     });
