@@ -11,6 +11,7 @@ import 'package:pos_application/features/orders/presentation/orders/order_list.d
 import 'package:pos_application/features/payment/presentation/payment_list.dart';
 import 'package:pos_application/features/setting/presentation/menu_setting/menu_body/menu_list_body.dart';
 import 'package:pos_application/features/setting/presentation/setting_screen.dart';
+import 'package:pos_application/features/staff_attendance/presentation/staff_attendance.dart';
 
 
 Widget buildContentColumn(context, TabController tabController) {
@@ -50,7 +51,8 @@ Widget buildContentColumn(context, TabController tabController) {
                     ],
                   ),
                 );
-                case "Orders": return SizedBox(
+                case "Orders":
+                  return SizedBox(
                   height: DeviceUtils.getDeviceDimension(context).height,
                   child: Column(
                     children: [
@@ -114,14 +116,27 @@ Widget buildContentColumn(context, TabController tabController) {
                     ],
                   ),
                 );
-                case "Setting Table" || "Setting add Table":
+                case "Setting Table" ||"Setting new Table":
                   return SizedBox(
                     height: DeviceUtils.getDeviceDimension(context).height,
                     child: Column(
                       children: [
                         headerPart(context),
-                        (name == "Setting add Table")?middleBodySettingTable(tabController,true):middleBodySettingTable(tabController,false),
+                        (name == "Setting new Table") ? middleBodySettingTable(tabController,true) : middleBodySettingTable(tabController, false),
                         bottomPart(),
+                      ],
+                    ),
+                  );
+                case "Staff Attendance":
+                  return SizedBox(
+                    height: DeviceUtils.getDeviceDimension(context).height,
+                    child: Column(
+                      children: [
+                        headerPart(context),
+                        const Expanded(
+                          flex: 11,
+                          child: StaffAttendancePage(),
+                        ),
                       ],
                     ),
                   );

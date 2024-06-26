@@ -32,6 +32,7 @@ import '../bloc/menu_name_event.dart';
 import '../bloc/table_bloc/set_selected_floor_table_bloc.dart';
 import '../bloc/table_bloc/set_selected_floor_table_state.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 Widget headerPart(context) {
   return Expanded(
@@ -259,39 +260,7 @@ Widget middleBody(TabController tabController) {
   );
 }
 
-// Widget middleBodySettingTable(TabController tabController) {
-//   return Expanded(
-//     flex: 10,
-//     child: Container(
-//       margin: const EdgeInsets.all(10),
-//       decoration: const BoxDecoration(
-//         color: AppColors.lightGray,
-//         borderRadius: BorderRadius.all(
-//           Radius.circular(10),
-//         ),
-//       ),
-//       child: Column(
-//         children: [
-//           Expanded(
-//             flex: 1,
-//             child: FloorScreen(
-//               tabController: tabController,
-//             ),
-//           ),
-//           Expanded(
-//             flex: 1,
-//             child: settingTableButton(),
-//           ),
-//           Expanded(
-//               flex: 11,
-//               child: MyHomePage())
-//         ],
-//       ),
-//     ),
-//   );
-// }
-
-Widget middleBodySettingTable(TabController tabController , bool? isNewTable) {
+Widget middleBodySettingTable(TabController tabController,bool? isNewTable) {
   return Expanded(
     flex: 10,
     child: LayoutBuilder(
@@ -318,13 +287,10 @@ Widget middleBodySettingTable(TabController tabController , bool? isNewTable) {
               ),
               Expanded(
                 flex: 11,
-                child: isNewTable! ? TableDragPage(
+                child: TableDragPage(
                   containerWidth: constraints.maxWidth,
                   containerHeight: constraints.maxHeight,
-                ):Container(
-                  child: const Center(
-                    child: Text("No New Table"),
-                  ),
+                  isNewTable: isNewTable!,
                 ),
               ),
             ],
@@ -393,17 +359,17 @@ Widget settingTableButton() {
                   OverlayManager.showSnackbar(
                     context,
                     type: ContentType.failure,
-                    title: "Add a Table",
-                    message: "optionName!.tableSelectionMessage",
+                    title: AppLocalizations.of(context)!.addaTable,
+                    message: AppLocalizations.of(context)!.tableSelectionMessage,
                   );
                 } else {
+                 //need to add
                   BlocProvider.of<MenuNameBloc>(context).add(
                       MenuNameSelected(
-                          context: context, menuName: "Setting add Table"));
-                  // MainBodyTable.currentState?.addTable(context);
+                          context: context, menuName: "Setting new Table"));
                 }
               },
-              text: "Add a Table",
+              text: AppLocalizations.of(context)!.addaTable,
               activeButtonColor: AppColors.secondaryColor,
               backgroundColor: AppColors.darkColor,
               textStyle: const TextStyle(

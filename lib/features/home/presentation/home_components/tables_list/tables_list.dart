@@ -1,4 +1,4 @@
-import 'dart:html';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,7 +52,7 @@ class MainBodyTableState extends State<MainBodyTable> {
   int servingTables = 0;
 
 
-  void addTable(BuildContext context) {
+  void addTable(BuildContext context,double dx,double dy) {
     var optionName = AppLocalizations.of(context);
     TextEditingController txtTableName = TextEditingController();
     TextEditingController txtMaxCapacity = TextEditingController();
@@ -155,8 +155,7 @@ class MainBodyTableState extends State<MainBodyTable> {
                             floorName: txtTableName.text,
                             minCapacity: 1,
                             maxCapacity: int.parse(txtMaxCapacity.text),
-                            extraCapacity: 0));
-
+                            extraCapacity: 0, xCord: '$dx', yCord: '$dy'));
                     Navigator.pop(context, 'OK');
                   },
                 ),
@@ -219,59 +218,118 @@ class MainBodyTableState extends State<MainBodyTable> {
                 }
                 print("floorTables tbales else =${tables.length}");
               }
-              return ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: false,
-                itemCount: tables.length,
-                itemBuilder: (context, rowIndex) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: tables[rowIndex].map((table) {
-                      return GestureDetector(
-                        onTap: () {
-                          if (!table.isSelected) {
-                            BlocProvider.of<AddMenuToCartBloc>(context)
-                                .add(GetCartSummary(table.id));
-                          }
-                          BlocProvider.of<SetTableBloc>(context)
-                              .add(TableSetPressedEvent(table.id));
-                          BlocProvider.of<FloorTableStatus>(context)
-                              .selectTable(table.id, table.floor);
-                          BlocProvider.of<MenuListBloc>(context).add(
-                              MenuListButtonPressed());
-                        },
-                        child: Container(
-                          height: 90,
-                          width: 120,
-                          margin: const EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(table.isSelected
-                                  ? AppImage.available
-                                  : AppImage.reserved),
-                              fit: BoxFit.fitWidth,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Stack(
-                            children: [
-                              Center(
-                                child: Text(
-                                  table.name,
-                                  style: const TextStyle(
-                                      color: AppColors.darkColor,
-                                      fontSize: 20),
+              // return ListView.builder(
+              //   scrollDirection: Axis.vertical,
+              //   shrinkWrap: false,
+              //   itemCount: tables.length,
+              //   itemBuilder: (context, rowIndex) {
+              //     return Row(
+              //       mainAxisAlignment: MainAxisAlignment.center,
+              //       children: tables[rowIndex].map((table) {
+              //         return GestureDetector(
+              //           onTap: () {
+              //             if (!table.isSelected) {
+              //               BlocProvider.of<AddMenuToCartBloc>(context)
+              //                   .add(GetCartSummary(table.id));
+              //             }
+              //             BlocProvider.of<SetTableBloc>(context)
+              //                 .add(TableSetPressedEvent(table.id));
+              //             BlocProvider.of<FloorTableStatus>(context)
+              //                 .selectTable(table.id, table.floor);
+              //             BlocProvider.of<MenuListBloc>(context).add(
+              //                 MenuListButtonPressed());
+              //           },
+              //           child: Container(
+              //             height: 90,
+              //             width: 120,
+              //             margin: const EdgeInsets.all(20),
+              //             decoration: BoxDecoration(
+              //               image: DecorationImage(
+              //                 image: AssetImage(table.isSelected
+              //                     ? AppImage.available
+              //                     : AppImage.reserved),
+              //                 fit: BoxFit.fitWidth,
+              //               ),
+              //               borderRadius: BorderRadius.circular(8),
+              //             ),
+              //             child: Stack(
+              //               children: [
+              //                 Center(
+              //                   child: Text(
+              //                     table.name,
+              //                     style: const TextStyle(
+              //                         color: AppColors.darkColor,
+              //                         fontSize: 20),
+              //                   ),
+              //                 ),
+              //               ],
+              //             ),
+              //           ),
+              //         );
+              //       }).toList(),
+              //     );
+              //   },
+              // );
+              return  Center(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    // Flatten the nested list of tables
+                    List<FloorTable> flatTables = tables.expand((tableList) => tableList).toList();
+
+                    return Stack(
+                      children: flatTables.map((table) {
+                        return Positioned(
+                          left: table.xCord == null ? 0.0 :double.parse(table.xCord!),
+                          top: table.yCord == null ? 0.0 :double.parse(table.yCord!),
+                          child: GestureDetector(
+                            onTap: () {
+                              if (!table.isSelected) {
+                                BlocProvider.of<AddMenuToCartBloc>(context)
+                                    .add(GetCartSummary(table.id));
+                              }
+                              BlocProvider.of<SetTableBloc>(context)
+                                  .add(TableSetPressedEvent(table.id));
+                              BlocProvider.of<FloorTableStatus>(context)
+                                  .selectTable(table.id, table.floor);
+                              BlocProvider.of<MenuListBloc>(context).add(
+                                  MenuListButtonPressed());
+                            },
+                            child: Container(
+                              height: 90,
+                              width: 120,
+                              margin: const EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage(table.isSelected
+                                      ? AppImage.available
+                                      : AppImage.reserved),
+                                  fit: BoxFit.fitWidth,
                                 ),
+                                borderRadius: BorderRadius.circular(8),
                               ),
-                            ],
+                              child: Stack(
+                                children: [
+                                  Center(
+                                    child: Text(
+                                      table.name,
+                                      style: const TextStyle(
+                                          color: AppColors.darkColor,
+                                          fontSize: 20),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
-                      );
-                    }).toList(),
-                  );
-                },
+                        );
+                      }).toList(),
+                    );
+                  },
+                ),
               );
-            },
+          }
+
+
           );
         });
   }

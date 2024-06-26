@@ -14,8 +14,11 @@ class FloorTableAddButtonPressed extends FloorTableEvent{
   final int maxCapacity;
   final int extraCapacity;
   final String floor;
+  final String xCord;
+  final String yCord;
 
-  FloorTableAddButtonPressed({required this.floorName, required this.minCapacity, required this.maxCapacity, required this.extraCapacity, required this.floor});
+  FloorTableAddButtonPressed({required this.floorName, required this.minCapacity, required this.maxCapacity, required this.extraCapacity, required this.floor,
+  required this.xCord , required this.yCord});
 }
 
 
