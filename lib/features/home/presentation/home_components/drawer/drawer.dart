@@ -11,7 +11,7 @@ import '../../../../orders/domain/repository/order_list_repository.dart';
 import '../../../../orders/presentation/bloc/order_list/order_list_event.dart';
 import '../../bloc/menu_name_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
-import 'package:flutter_gen/gen_l10n/app_localization.dart';
+
 
 
 class SidebarPage extends StatefulWidget {
@@ -28,14 +28,14 @@ class SidebarPageState extends State<SidebarPage> {
   @override
   void initState() {
     super.initState();
-    _items = _generateItems;
-    // print("AppLocalizations.of(context)!.home=${AppLocalizations.of(context)!.home}");
+     // _items = _generateItems;
+
   }
 
   List<CollapsibleItem> get _generateItems {
     return [
       CollapsibleItem(
-        text: "Home",
+        text:AppLocalizations.of(context)!.home,
         iconImage: AllIcons.home,
         isSelected: true,
         onPressed: () {
@@ -46,7 +46,7 @@ class SidebarPageState extends State<SidebarPage> {
             .showSnackBar(const SnackBar(content: Text("Face"))),
       ),
       CollapsibleItem(
-        text: 'Menu',
+        text: AppLocalizations.of(context)!.menu,
         iconImage: AllIcons.menu,
         onPressed: () {
           BlocProvider.of<MenuNameBloc>(context)
@@ -56,7 +56,7 @@ class SidebarPageState extends State<SidebarPage> {
             .showSnackBar(const SnackBar(content: Text("Face"))),
       ),
       CollapsibleItem(
-        text: 'Orders',
+        text: AppLocalizations.of(context)!.orders,
         iconImage: AllIcons.order,
         onPressed: () {
           BlocProvider.of<MenuNameBloc>(context)
@@ -67,7 +67,7 @@ class SidebarPageState extends State<SidebarPage> {
             .showSnackBar(const SnackBar(content: Text("Face"))),
       ),
       CollapsibleItem(
-        text: 'Payment',
+        text: AppLocalizations.of(context)!.payments,
         iconImage: AllIcons.payment,
         onPressed: () {
           BlocProvider.of<MenuNameBloc>(context)
@@ -77,18 +77,8 @@ class SidebarPageState extends State<SidebarPage> {
         onHold: () => ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text("Face"))),
       ),
-      // CollapsibleItem(
-      //   text: 'Users',
-      //   iconImage: AllIcons.olOrder,
-      //   onPressed: () {
-      //     BlocProvider.of<MenuNameBloc>(context).add(
-      //         MenuNameSelected(context: context, menuName: "Online Orders"));
-      //   },
-      //   onHold: () => ScaffoldMessenger.of(context)
-      //       .showSnackBar(const SnackBar(content: Text("Face"))),
-      // ),
       CollapsibleItem(
-        text: 'Staff Attendance',
+        text: AppLocalizations.of(context)!.staffAttendance,
         iconImage: AllIcons.table_check,
         onPressed: () {
           BlocProvider.of<MenuNameBloc>(context).add(
@@ -98,7 +88,7 @@ class SidebarPageState extends State<SidebarPage> {
             .showSnackBar(const SnackBar(content: Text("Face"))),
       ),
       CollapsibleItem(
-        text: 'Settings',
+        text: AppLocalizations.of(context)!.title,
         iconImage: AllIcons.setting,
         onPressed: () {
           BlocProvider.of<MenuNameBloc>(context)
@@ -118,6 +108,7 @@ class SidebarPageState extends State<SidebarPage> {
         child: Stack(
           children: [
             CollapsibleSidebar(
+              toggleTitle: AppLocalizations.of(context)!.collapse,
               height: MediaQuery.of(context).size.height,
               itemPadding: 10,
               screenPadding: 0,
@@ -127,7 +118,7 @@ class SidebarPageState extends State<SidebarPage> {
               customContentPaddingLeft: 0,
               curve: Curves.fastOutSlowIn,
               isCollapsed: MediaQuery.of(context).size.width <= 1000,
-              items: _items,
+              items: _generateItems,
               onHoverPointer: MaterialStateMouseCursor.clickable,
               avatarImg: _avatarImg,
               showTitle: false,

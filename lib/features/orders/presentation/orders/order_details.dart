@@ -564,7 +564,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                               maxLines: 1,
                                             ),
                                             AutoSizeText(
-                                              "Quantity : ${viewOrder!.orderItems![index].quantity}",
+                                              "${optionName!.quantity} : ${viewOrder!.orderItems![index].quantity}",
                                               textAlign: TextAlign.center,
                                               minFontSize: 10,
                                               maxFontSize: 16,
@@ -581,7 +581,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                               maxLines: 1,
                                             ),
                                             AutoSizeText(
-                                              "Total : ${currency}${(viewOrder!.orderItems![index].quantity)! * (viewOrder!.orderItems![index].orderable!.price!)}",
+                                              "${optionName!.total} : ${currency}${(viewOrder!.orderItems![index].quantity)! * (viewOrder!.orderItems![index].orderable!.price!)}",
                                               textAlign: TextAlign.center,
                                               minFontSize: 10,
                                               maxFontSize: 16,

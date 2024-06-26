@@ -165,11 +165,17 @@ class SettingScreenState extends State<SettingScreen> {
                   _buildMenuItem(
                     iconPath: AllIcons.tables,
                     title: optionName.tables,
-                    trailing: const Icon(
+                    trailing: InkWell(
+                      onTap: (){
+                        BlocProvider.of<MenuNameBloc>(context).add(
+                            MenuNameSelected(
+                                context: context, menuName: "Setting Table"));
+                      },
+                        child: const Icon(
                       Icons.arrow_forward_ios_sharp,
                       color: AppColors.iconColor,
                       size: 18,
-                    ),
+                    )),
                   ),
                   _buildMenuItem(
                     iconPath: AllIcons.lang,
@@ -211,7 +217,7 @@ class SettingScreenState extends State<SettingScreen> {
                         ),
                         const PopupMenuItem(
                           value: Language.arabic,
-                          child: Text('arabic'),
+                          child: Text('Arabic'),
                         ),
 
                       ]
