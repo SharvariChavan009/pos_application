@@ -8,7 +8,7 @@ class Order {
   final int? diners;
   final String? code;
   final Summary? summary;
-  final Customer? customer;
+  final List<Customer>? customer;
   final dynamic address;
   final dynamic shipping;
   final Meta? meta;
@@ -47,20 +47,52 @@ class Order {
       floorTableId: json['floor_table_id'],
       diners: json['diners'],
       code: json['code'],
-      summary: Summary.fromJson(json['summary']),
-      customer: Customer.fromJson(json['customer']),
+      summary: json['summary'] != null ? Summary.fromJson(json['summary']) : null,
+      customer: json['customer'] != null
+          ? (json['customer'] as List).map((item) {
+        if (item is Map<String, dynamic>) {
+          return Customer.fromJson(item);
+        } else if (item is String) {
+          return Customer(name: item);
+        } else {
+          throw TypeError(); // Handle unexpected item types
+        }
+      }).toList()
+          : null,
       address: json['address'],
       shipping: json['shipping'],
-      meta: Meta.fromJson(json['meta']),
+      meta: json['meta'] != null ? Meta.fromJson(json['meta']) : null,
       status: json['status'],
       tenantUnitId: json['tenant_unit_id'],
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
-      floorTable: FloorTable.fromJson(json['floor_table']),
-      user: User.fromJson(json['user']),
+      floorTable: json['floor_table'] != null ? FloorTable.fromJson(json['floor_table']) : null,
+      user: json['user'] != null ? User.fromJson(json['user']) : null,
     );
   }
 }
+
+class Customer {
+  final String? name;
+  final double? amount;
+  final int? is_modified;
+
+  Customer({
+    this.name,
+    this.amount,
+    this.is_modified,
+  });
+
+  factory Customer.fromJson(Map<String, dynamic> json) {
+    return Customer(
+      name: json['name'],
+      amount: json['amount'],
+      is_modified: json['is_modified'],
+    );
+  }
+}
+
+
 
 class Summary {
   final Tax tax;
@@ -189,25 +221,6 @@ class FloorTable {
   }
 }
 
-class Customer {
-  final String? name;
-  final String? email;
-  final String? phone;
-
-  Customer({
-    this.name,
-    this.email,
-    this.phone,
-  });
-
-  factory Customer.fromJson(Map<String, dynamic> json) {
-    return Customer(
-      name: json['name'],
-      email: json['email'],
-      phone: json['phone'],
-    );
-  }
-}
 class Meta {
   final String? type;
 

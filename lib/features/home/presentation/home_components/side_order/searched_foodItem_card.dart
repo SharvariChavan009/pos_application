@@ -114,7 +114,7 @@ class _SearchedFoodItemCartState extends State<SearchedFoodItemCart> {
                                   fit: BoxFit.fitWidth,
                                   clipBehavior: Clip.antiAliasWithSaveLayer,
                                   child: AutoSizeText(
-                                    "${currency}${(double.parse(tempFoodItems[index].price) * foodItems[index].minQty).toStringAsFixed(2)}",
+                                    "${currency}${(double.parse(tempFoodItems[index].price.toString()) * foodItems[index].minQty).toStringAsFixed(2)}",
                                     textAlign: TextAlign.center,
                                     minFontSize: 10,
                                     maxFontSize: 16,
@@ -140,7 +140,7 @@ class _SearchedFoodItemCartState extends State<SearchedFoodItemCart> {
                                   child: FittedBox(
                                     fit: BoxFit.fitWidth,
                                     child: AutoSizeText(
-                                      "${currency}${(double.parse(tempFoodItems[index].price) * foodItems[index].minQty).toStringAsFixed(2)}",
+                                      "${currency}${(double.parse(tempFoodItems[index].price.toString()) * foodItems[index].minQty).toStringAsFixed(2)}",
                                       textAlign: TextAlign.center,
                                       minFontSize: 10,
                                       maxFontSize: 16,

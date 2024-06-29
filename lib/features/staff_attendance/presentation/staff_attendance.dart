@@ -361,7 +361,7 @@ class OrderDataSource extends DataTableSource {
               ))
       ),
       DataCell(Text(
-        order.customer!.name!.isEmpty ? "customer name": order.customer!.name!,
+        order.customer!.first.name!.isEmpty ? "customer name": order.customer!.first.name!,
         style: const TextStyle(
             fontFamily: CustomLabels.primaryFont, color: AppColors.darkColor),
       )),

@@ -8,7 +8,7 @@ class OrderDetailsData {
   final int? diners;
   final String? code;
   final Summary? summary;
-  final Customer? customer;
+  final List<Customer>? customer;
   final String? address;
   final String? shipping;
   final dynamic meta;
@@ -54,7 +54,17 @@ class OrderDetailsData {
       diners: json['diners'],
       code: json['code'],
       summary: json['summary'] != null ? Summary.fromJson(json['summary']) : null,
-      customer: json['customer'] != null ? Customer.fromJson(json['customer']) : null,
+      customer: json['customer'] != null
+    ? (json['customer'] as List).map((item) {
+      if (item is Map<String, dynamic>) {
+        return Customer.fromJson(item);
+      } else if (item is String) {
+        return Customer(name: item);
+      } else {
+        throw TypeError(); // Handle unexpected item types
+      }
+    }).toList()
+        : null,
       address: json['address'],
       shipping: json['shipping'],
       meta: json['meta'],
@@ -78,20 +88,20 @@ class OrderDetailsData {
 
 class Customer {
   final String? name;
-  final String? email;
-  final String? phone;
+  final int? amount;
+  final int? is_modified;
 
   Customer({
     this.name,
-    this.email,
-    this.phone,
+    this.amount,
+    this.is_modified,
   });
 
   factory Customer.fromJson(Map<String, dynamic> json) {
     return Customer(
       name: json['name'],
-      email: json['email'],
-      phone: json['phone'],
+      amount: json['amount'],
+      is_modified: json['is_modified'],
     );
   }
 }

@@ -42,7 +42,7 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListDisplayState> {
           final data = response.data['data'] as List;
           final orders = data.map((json) => Order.fromJson(json)).toList();
 
-          print(orders);
+          print(orders.length);
           emit(OrderListSuccessState(orders));
         } else {
           emit(OrderListFailureState());
@@ -143,6 +143,7 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListDisplayState> {
             data: {
               "amount": event.amount,
               "provider": type,
+              "user":"Guest_1"
             },
             options: Options(
               headers: {
@@ -153,6 +154,7 @@ class OrderListBloc extends Bloc<OrderListEvent, OrderListDisplayState> {
         );
         if (response.statusCode == 201) {
           print(response.data);
+
          emit(OrderPaymentSuccessState());
         } else {
           emit(OrderPaymentFailureState());
