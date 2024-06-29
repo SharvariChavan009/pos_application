@@ -348,7 +348,8 @@ class OrderDataSource extends DataTableSource {
       ))
       ),
       DataCell(Text(
-        order.customer!.name!.isEmpty ? "customer name": order.customer!.name!,
+        order.customer! == null ? "Customer":order.customer!.first.name!,
+
         style: const TextStyle(
             fontFamily: CustomLabels.primaryFont, color: AppColors.darkColor),
       )),
@@ -363,7 +364,7 @@ class OrderDataSource extends DataTableSource {
       DataCell(
           Center(
             child:Text(
-              order.user!.name!,
+              order.user == null ? "user" : order.user!.name!,
               style: const TextStyle(
                   fontFamily: CustomLabels.primaryFont,
                   color: AppColors.darkColor,

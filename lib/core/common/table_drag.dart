@@ -284,7 +284,33 @@ class _TableDragPageState extends State<TableDragPage> {
                     .selectTable(table.id, table.floor);
                 BlocProvider.of<MenuListBloc>(context).add(MenuListButtonPressed());
               },
-              child: Container(
+              child: LongPressDraggable(
+                feedback: Container(
+                  height: 90,
+                  width: 120,
+                  margin: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(table.isSelected
+                          ? AppImage.available
+                          : AppImage.reserved),
+                      fit: BoxFit.fitWidth,
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Stack(
+                    children: [
+                      Center(
+                        child: Text(
+                          table.name,
+                          style: const TextStyle(
+                              color: AppColors.darkColor, fontSize: 20),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                child:Container(
                 height: 90,
                 width: 120,
                 margin: const EdgeInsets.all(20),
@@ -309,7 +335,31 @@ class _TableDragPageState extends State<TableDragPage> {
                   ],
                 ),
               ),
-            ),
+                onDragEnd: (details){
+                  setState(() {
+                    // Get the local position within the container
+                    RenderBox renderBox = context.findRenderObject() as RenderBox;
+                    Offset localPosition = renderBox.globalToLocal(details.offset);
+
+                    // Ensure the new offset is within the bounds of the container
+                    double newX = localPosition.dx;
+                    double newY = localPosition.dy;
+
+                    // Adjustments to ensure the draggable widget remains within bounds
+                    if (newX < 0) newX = 0;
+                    if (newY < 0) newY = 0;
+                    if (newX > widget.containerWidth - 50)
+                      newX = widget.containerWidth - 50; // Assuming image width is 50
+                    if (newY > widget.containerHeight - 50)
+                      newY = widget.containerHeight - 50; // Assuming image height is 50
+
+                    _offset = Offset(newX, newY);
+                    // MainBodyTable.currentState?.addTable(context, newX, newY);
+                    // isAdded = false;
+                    print("updated cordds=${newX},${newY}");
+                  });
+                },
+            )),
           );
         }).toList();
 

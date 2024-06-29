@@ -28,13 +28,13 @@ class PlaceOrderBloc extends Bloc<PlaceOrderEvent, PlaceOrderState> {
         final response = await _dio.post(
           url,
           data: {
-              "key": cartKey,
-              "floor_table_id": event.tableId,
-              "customer" : {
-                "name" : "Swapnil Nandgave",
-                "email": "swap@example.com",
-                "phone": "7057121459"
-              }
+            "key": cartKey,
+            "floor_table_id": event.tableId,
+            "customer":
+              {"name": "Swapnil Kondekar",
+                "amount": 121.0,
+                "is_modified": 0}
+
           },
           options: Options(
             headers: {'Content-Type': 'application/json',

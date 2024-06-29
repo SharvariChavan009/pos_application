@@ -3,18 +3,18 @@ class MenuItem {
   final int id;
   final String name;
   final String description;
-  final String price;
+  final int price;
   final int minQty;
   final int priority;
   final String type;
   final bool active;
   final String? resc;
   final String? meta;
-  final String? taxClassId;
+  final int? taxClassId;
   final String? deletedAt;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final int appliedPrice;
+  final int? appliedPrice;
   final List<String> tagNames;
   final List<String> images;
   final List<TenantUnit> tenantUnits;
@@ -49,7 +49,7 @@ class MenuItem {
       id: json['id'],
       name: json['name'],
       description: json['description'],
-      price: "${json['price']}",
+      price: json['price'],
       minQty: json['min_qty'],
       priority: json['priority'],
       type: json['type'],

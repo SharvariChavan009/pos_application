@@ -407,7 +407,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                             color: AppColors.secondaryColor),
                                       ),
                                        Text(
-                                        viewOrder!.customer!.name!.isEmpty ? "customer":'${viewOrder!.customer!.name}',
+                                        viewOrder!.customer!.isEmpty ? "customer":'${viewOrder!.customer!.first.name}',
                                         style: const TextStyle(
                                             fontSize: 14,
                                             fontWeight:

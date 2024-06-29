@@ -37,9 +37,7 @@ class MenuListBloc  extends Bloc<MenuListEvent,MenuListState>{
         if (response.statusCode == 200) {
           final dynamic responseData = response.data;
           final List<dynamic> menuData = responseData['data'];
-          List<MenuItem> floors = menuData
-              .map((json) => MenuItem.fromJson(json))
-              .toList();
+          List<MenuItem> floors = menuData.map((json) => MenuItem.fromJson(json)).toList();
 
               emit(MenuListStateSuccess(floors));
         } else {
